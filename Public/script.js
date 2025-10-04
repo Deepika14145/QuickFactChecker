@@ -1,17 +1,15 @@
-// accessibility-enhanced script.js
-(function () {
+// ==============================
+// Quick Fact Checker - Clean JavaScript
+// ==============================
+
+(function() {
   'use strict';
 
-  // ======================
-  // CONFIG & CONSTANTS
-  // ======================
+  // Configuration
   const CONFIG = {
     MAX_CHARACTERS: 1000,
     MAX_HISTORY_ITEMS: 5,
-    API_TIMEOUT_MIN: 2000,
-    API_TIMEOUT_MAX: 3000,
-    CONFIDENCE_MIN: 0.65,
-    CONFIDENCE_RANGE: 0.30,
+    API_TIMEOUT: 3000,
     STORAGE_KEY: 'fact-check-history',
     THEME_STORAGE_KEY: 'theme'
   };
@@ -21,25 +19,14 @@
     COPIED: "Result copied to clipboard!",
     COPY_FAILED: "Failed to copy result",
     SHARED: "Result shared successfully!",
-    SHARE_FAILED: "Failed to share result",
-    LINK_COPIED: "Share link copied to clipboard!",
     ANALYSIS_ERROR: "Error analyzing text. Please try again.",
-    RETRY_SUCCESS: "Retrying analysis...",
     CHARACTER_COUNT: (count) => `${count} character${count !== 1 ? 's' : ''}`,
-    RESULT_TRUE: "This text is likely TRUE",
-    RESULT_FALSE: "This text is likely FAKE",
-    ANALYSIS_COMPLETED: (text) => `Analysis completed for: "${text.substring(0, 100)}${text.length > 100 ? '...' : ''}"`,
-    HISTORY_RESULT_TRUE: "TRUE",
-    HISTORY_RESULT_FALSE: "FAKE",
-    SHARE_TEXT: (result, text) => `Quick Fact Checker result: ${result} - "${text.substring(0, 100)}..."`
   };
 
-  // DOM Elements (grab once)
+  // DOM Elements
   const elements = {
     form: document.getElementById('prediction-form'),
     submitBtn: document.getElementById('submit-btn'),
-    btnContent: document.querySelector('.btn-content'),
-    loadingSpinner: document.querySelector('.loading-spinner'),
     predictionResult: document.getElementById('prediction-result'),
     themeToggle: document.getElementById('theme-toggle'),
     themeIcon: document.querySelector('.theme-icon'),
@@ -56,454 +43,458 @@
     shareBtn: document.getElementById('share-btn'),
     retryBtn: document.getElementById('retry-btn'),
     toast: document.getElementById('toast'),
-    confettiCanvas: document.getElementById('confetti-canvas'),
-
-    // Dashboard elements
-    modelSelect: document.getElementById('model-select'),
-    datasetSelect: document.getElementById('dataset-select'),
-    metricSelect: document.getElementById('metric-select'),
-    summaryText: document.getElementById('summary-text'),
-    chartCanvas: document.getElementById('dashboard-chart')
+    resultTitle: document.getElementById('result-title'),
+    resultMessage: document.getElementById('result-message'),
+    confidenceBar: document.getElementById('confidence-bar'),
+    confidenceFill: document.getElementById('confidence-fill'),
+    confidenceText: document.getElementById('confidence-text'),
+    mobileMenuBtn: document.getElementById('mobile-menu-btn'),
+    mobileMenu: document.getElementById('mobile-menu'),
+    homeLogo: document.getElementById('home-logo')
   };
 
-  // Hidden screen-reader live region
-  let srLive = document.getElementById('sr-live-region');
-  if (!srLive) {
-    srLive = document.createElement('div');
-    srLive.id = 'sr-live-region';
-    srLive.setAttribute('aria-live', 'polite');
-    srLive.setAttribute('aria-atomic', 'true');
-    srLive.className = 'visually-hidden';
-    document.body.appendChild(srLive);
-  }
-
   // State
-  let currentResult = null;
   let history = JSON.parse(localStorage.getItem(CONFIG.STORAGE_KEY) || '[]');
   let historyExpanded = false;
-  let resizeTimeout = null;
 
-  // Dashboard state
-  let dashboardData = [];
-  let chartInstance = null;
-
-  // Add "Skip to content" link
-  (function ensureSkipLink() {
-    if (!document.querySelector('.skip-to-content')) {
-      const a = document.createElement('a');
-      a.href = '#main-content';
-      a.className = 'skip-to-content';
-      a.textContent = 'Skip to content';
-      a.setAttribute('aria-label', 'Skip to main content');
-      document.body.insertBefore(a, document.body.firstChild);
-    }
-  })();
-
-  // Initialize
-  init();
-
+  // ==============================
+  // INITIALIZATION
+  // ==============================
   function init() {
+    // Set theme
     const savedTheme = localStorage.getItem(CONFIG.THEME_STORAGE_KEY) || 'light';
     if (savedTheme === 'dark') document.body.classList.add('dark');
     updateThemeIcon(savedTheme);
 
+    // Bind events
     bindEvents();
+    
+    // Initial setup
     updateCharCount();
     updateHistoryDisplay();
-    setupConfettiCanvas();
-
-    if ('serviceWorker' in navigator) {
-      try {
-        navigator.serviceWorker.register('/sw.js').catch(() => {});
-      } catch (e) {}
-    }
-
-    // Initialize Dashboard if present
-    if (elements.chartCanvas) {
-      loadDashboard();
-    }
+    
+    console.log('Quick Fact Checker initialized');
   }
 
   function bindEvents() {
-    elements.themeToggle && elements.themeToggle.addEventListener('click', toggleTheme);
-    elements.form && elements.form.addEventListener('submit', handleFormSubmit);
+    // Theme toggle
+    elements.themeToggle?.addEventListener('click', toggleTheme);
 
+    // Form submission
+    elements.form?.addEventListener('submit', handleFormSubmit);
+
+    // Text input
     if (elements.textInput) {
       elements.textInput.addEventListener('input', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-          adjustTextareaHeight();
-          updateCharCount();
-          toggleClearButton();
-        }, 100);
+        updateCharCount();
+        toggleClearButton();
       });
     }
 
-    elements.clearBtn && elements.clearBtn.addEventListener('click', clearInput);
+    // Clear button
+    elements.clearBtn?.addEventListener('click', clearInput);
 
-    elements.sampleBtns && elements.sampleBtns.forEach(btn => {
+    // Sample buttons
+    elements.sampleBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         elements.textInput.value = btn.dataset.sample;
-        adjustTextareaHeight();
         updateCharCount();
         toggleClearButton();
         elements.textInput.focus();
-        elements.textInput.setSelectionRange(0, elements.textInput.value.length);
       });
     });
 
-    if (elements.historyHeader) {
-      elements.historyHeader.addEventListener('click', toggleHistory);
-      elements.historyHeader.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          toggleHistory();
-        }
-      });
-    }
+    // History toggle
+    elements.historyHeader?.addEventListener('click', toggleHistory);
 
-    elements.copyBtn && elements.copyBtn.addEventListener('click', copyResult);
-    elements.shareBtn && elements.shareBtn.addEventListener('click', shareResult);
-    elements.retryBtn && elements.retryBtn.addEventListener('click', retryAnalysis);
-
-    document.addEventListener('keydown', handleGlobalKeys);
-
-    // Dashboard dropdown events
-    if (elements.modelSelect && elements.metricSelect) {
-      elements.modelSelect.addEventListener('change', updateDashboard);
-      elements.datasetSelect && elements.datasetSelect.addEventListener('change', updateDashboard);
-      elements.metricSelect.addEventListener('change', updateDashboard);
-    }
-  }
-
-  // ======================
-  // DASHBOARD FUNCTIONS
-  // ======================
-  async function loadDashboard() {
-    try {
-      const res = await fetch('/dashboard_data');
-      dashboardData = await res.json();
-
-      // Populate model dropdown
-      if (elements.modelSelect) {
-        elements.modelSelect.innerHTML = dashboardData.map(m =>
-          `<option value="${m.model}">${m.model}</option>`
-        ).join('');
-      }
-
-      updateDashboard();
-    } catch (err) {
-      console.error('Error loading dashboard:', err);
-      if (elements.summaryText) elements.summaryText.textContent = "⚠️ Failed to load dashboard data.";
-    }
-  }
-
-  function updateDashboard() {
-    if (!dashboardData.length || !elements.metricSelect) return;
-
-    const selectedMetric = elements.metricSelect.value || 'accuracy';
-    const selectedModels = Array.from(elements.modelSelect.selectedOptions).map(opt => opt.value);
-
-    // Filter models if selected
-    let filtered = selectedModels.length ? dashboardData.filter(m => selectedModels.includes(m.model)) : dashboardData;
-
-    const labels = filtered.map(m => m.model);
-    const values = filtered.map(m => m[selectedMetric]);
-
-    // Update chart
-    const ctx = elements.chartCanvas.getContext('2d');
-    if (chartInstance) chartInstance.destroy();
-    chartInstance = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels,
-        datasets: [{
-          label: selectedMetric.toUpperCase(),
-          data: values
-        }]
-      },
-      options: {
-        responsive: true,
-        scales: { y: { beginAtZero: true, max: 1 } }
-      }
+    // Action buttons
+    elements.copyBtn?.addEventListener('click', copyResult);
+    elements.shareBtn?.addEventListener('click', shareResult);
+    elements.retryBtn?.addEventListener('click', retryAnalysis);
+    
+    // Mobile menu toggle
+    elements.mobileMenuBtn?.addEventListener('click', toggleMobileMenu);
+    
+    // Close mobile menu when clicking on links
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
     });
+    
+    // Home logo click handler
+    elements.homeLogo?.addEventListener('click', handleHomeLogoClick);
+  }
 
-    // Update summary
-    if (elements.summaryText) {
-      if (!values.length) {
-        elements.summaryText.textContent = "Select a model to see insights...";
-      } else {
-        const bestIdx = values.indexOf(Math.max(...values));
-        elements.summaryText.textContent = `${labels[bestIdx]} performs best on ${selectedMetric.toUpperCase()} (${values[bestIdx].toFixed(3)}).`;
-      }
+  // ==============================
+  // THEME FUNCTIONS
+  // ==============================
+  function toggleTheme() {
+    const isDark = document.body.classList.toggle('dark');
+    const newTheme = isDark ? 'dark' : 'light';
+    localStorage.setItem(CONFIG.THEME_STORAGE_KEY, newTheme);
+    updateThemeIcon(newTheme);
+    showToast(`Switched to ${newTheme} mode`);
+  }
+
+  function updateThemeIcon(theme) {
+    if (!elements.themeIcon) return;
+    
+    if (theme === 'dark') {
+      // Moon icon
+      elements.themeIcon.innerHTML = `
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      `;
+    } else {
+      // Sun icon
+      elements.themeIcon.innerHTML = `
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2"/>
+        <path d="M12 20v2"/>
+        <path d="m4.93 4.93 1.41 1.41"/>
+        <path d="m17.66 17.66 1.41 1.41"/>
+        <path d="M2 12h2"/>
+        <path d="M20 12h2"/>
+        <path d="m6.34 17.66-1.41 1.41"/>
+        <path d="m19.07 4.93-1.41 1.41"/>
+      `;
     }
   }
 
-  // ======================
-  // (existing fact-checker code remains unchanged below…)
-  // ======================
-  // ... [keep all your fact-checker functions exactly as in your script.js above]
-  // (toggleTheme, adjustTextareaHeight, handleFormSubmit, analyzeText, retryAnalysis, showResult, history, copy/share, utilities, confetti, etc.)
-
-  // Safe HTML escape utility
-  function escapeHtml(unsafe) {
-    if (!unsafe) return '';
-    return unsafe
-      .replaceAll('&', '&amp;')
-      .replaceAll('<', '&lt;')
-      .replaceAll('>', '&gt;')
-      .replaceAll('"', '&quot;')
-      .replaceAll("'", '&#039;');
-  }
-
-  setTimeout(() => announceSR('Quick Fact Checker ready. Press Alt S to focus input. Alt Enter to submit. Alt H to toggle history.'), 500);
-
-})(); // End IIFE
-// -------------------------------
-// Quick Fact Checker Frontend Logic
-// -------------------------------
-
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("prediction-form");
-  const textInput = document.getElementById("text-input");
-  const charCountText = document.getElementById("char-count-text");
-  const clearBtn = document.getElementById("clear-btn");
-  const submitBtn = document.getElementById("submit-btn");
-  const resultContainer = document.getElementById("prediction-result");
-  const resultTitle = document.getElementById("result-title");
-  const resultMessage = document.getElementById("result-message");
-  const confidenceBar = document.getElementById("confidence-bar");
-  const confidenceFill = document.getElementById("confidence-fill");
-  const confidenceText = document.getElementById("confidence-text");
-  const retryBtn = document.getElementById("retry-btn");
-  const copyBtn = document.getElementById("copy-btn");
-  const shareBtn = document.getElementById("share-btn");
-  const historyCard = document.getElementById("history-card");
-  const historyItems = document.getElementById("history-items");
-  const historyCount = document.getElementById("history-count");
-  const historyHeader = document.getElementById("history-header");
-  const historyToggle = document.getElementById("history-toggle");
-  const toast = document.getElementById("toast");
-  const confettiCanvas = document.getElementById("confetti-canvas");
-  const themeToggle = document.getElementById("theme-toggle");
-
-  let historyData = [];
-  let isHistoryExpanded = false;
-
-  // -------------------------------
-  // Character Counter
-  // -------------------------------
-  textInput.addEventListener("input", () => {
-    charCountText.textContent = `${textInput.value.length} characters`;
-  });
-
-  // Clear button
-  clearBtn.addEventListener("click", () => {
-    textInput.value = "";
-    charCountText.textContent = "0 characters";
-  });
-
-  // -------------------------------
-  // Sample Buttons
-  // -------------------------------
-  document.querySelectorAll(".sample-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      textInput.value = btn.dataset.sample;
-      charCountText.textContent = `${textInput.value.length} characters`;
-    });
-  });
-
-  // -------------------------------
-  // Form Submit
-  // -------------------------------
-  form.addEventListener("submit", async (e) => {
+  // ==============================
+  // FORM HANDLING
+  // ==============================
+  async function handleFormSubmit(e) {
     e.preventDefault();
-    const text = textInput.value.trim();
+    const text = elements.textInput.value.trim();
+    
     if (!text) {
-      showToast("⚠️ Please enter some text before submitting.");
+      showToast(STRINGS.EMPTY_INPUT);
       return;
     }
 
     setLoading(true);
+    showResult();
 
     try {
-      const response = await fetch("/predict", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text }),
+      const response = await fetch('/predict', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text })
       });
 
       const result = await response.json();
 
       if (result.error) {
-        resultTitle.textContent = "Error";
-        resultMessage.textContent = result.error;
+        displayResult('Error', result.error, 'error');
       } else {
-        resultTitle.textContent = "Analysis Result";
-        resultMessage.textContent = result.message || `Prediction: ${result.prediction}`;
-        addToHistory(result.message || result.prediction);
-        launchConfetti();
+        const message = result.analysis || result.message || `Prediction: ${result.prediction}`;
+        const resultType = result.prediction === 1 ? 'success' : 'error';
+        displayResult('Analysis Result', message, resultType, result.confidence);
+        addToHistory(text, message);
+        if (result.prediction === 1) launchConfetti();
       }
-    } catch (err) {
-      resultTitle.textContent = "Error";
-      resultMessage.textContent = "Something went wrong. Try again later.";
+    } catch (error) {
+      displayResult('Error', STRINGS.ANALYSIS_ERROR, 'error');
+      console.error('Request failed:', error);
     } finally {
       setLoading(false);
     }
-  });
+  }
 
   function setLoading(isLoading) {
+    if (!elements.submitBtn) return;
+    
+    elements.submitBtn.disabled = isLoading;
+    
     if (isLoading) {
-      submitBtn.disabled = true;
-      resultMessage.textContent = "Processing your text...";
-      confidenceBar.style.display = "none";
-      confidenceText.style.display = "none";
+      elements.submitBtn.innerHTML = `
+        <span class="loading-spinner"></span>
+        Processing...
+      `;
     } else {
-      submitBtn.disabled = false;
+      elements.submitBtn.innerHTML = `
+        <span class="btn-content">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+               viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+          </svg>
+          Analyze Text
+        </span>
+      `;
     }
   }
 
-  // -------------------------------
-  // History Handling
-  // -------------------------------
-  function addToHistory(result) {
-    historyData.unshift(result);
-    if (historyData.length > 5) historyData.pop();
-
-    historyCount.textContent = historyData.length;
-    historyItems.innerHTML = historyData.map((r) => `<div class="history-item">${r}</div>`).join("");
-    historyCard.style.display = "block";
+  function showResult() {
+    if (!elements.predictionResult) return;
+    elements.predictionResult.style.display = 'flex';
+    elements.predictionResult.classList.add('show');
   }
 
-  historyHeader.addEventListener("click", () => {
-    isHistoryExpanded = !isHistoryExpanded;
-    historyItems.style.display = isHistoryExpanded ? "block" : "none";
-    historyHeader.setAttribute("aria-expanded", isHistoryExpanded);
-    historyToggle.style.transform = isHistoryExpanded ? "rotate(180deg)" : "rotate(0deg)";
-  });
+  function displayResult(title, message, type, confidence = null) {
+    if (elements.resultTitle) elements.resultTitle.textContent = title;
+    if (elements.resultMessage) elements.resultMessage.textContent = message;
+    
+    if (elements.predictionResult) {
+      elements.predictionResult.className = `prediction-result show ${type}`;
+    }
 
-  // -------------------------------
-  // Copy & Share
-  // -------------------------------
-  copyBtn.addEventListener("click", async () => {
-    await navigator.clipboard.writeText(resultMessage.textContent);
-    showToast("📋 Result copied!");
-  });
+    // Show confidence bar and percentage
+    if (confidence && elements.confidenceBar && elements.confidenceFill && elements.confidenceText) {
+      const percentage = Math.round(confidence * 100);
+      
+      // Show confidence elements
+      elements.confidenceBar.style.display = 'block';
+      elements.confidenceText.style.display = 'block';
+      
+      // Update confidence bar
+      elements.confidenceFill.style.width = `${percentage}%`;
+      
+      // Update confidence text
+      elements.confidenceText.textContent = `Confidence: ${percentage}%`;
+      
+      // Add animation delay
+      setTimeout(() => {
+        elements.confidenceFill.style.width = `${percentage}%`;
+      }, 100);
+    } else {
+      // Hide confidence elements if no confidence provided
+      if (elements.confidenceBar) elements.confidenceBar.style.display = 'none';
+      if (elements.confidenceText) elements.confidenceText.style.display = 'none';
+    }
+  }
 
-  shareBtn.addEventListener("click", async () => {
+  // ==============================
+  // UTILITY FUNCTIONS
+  // ==============================
+  function updateCharCount() {
+    if (!elements.textInput || !elements.charCountText) return;
+    const length = elements.textInput.value.length;
+    elements.charCountText.textContent = STRINGS.CHARACTER_COUNT(length);
+  }
+
+  function toggleClearButton() {
+    if (!elements.clearBtn || !elements.textInput) return;
+    elements.clearBtn.style.display = elements.textInput.value.length > 0 ? 'inline' : 'none';
+  }
+
+  function clearInput() {
+    if (!elements.textInput) return;
+    elements.textInput.value = '';
+    updateCharCount();
+    toggleClearButton();
+    elements.textInput.focus();
+  }
+
+  // ==============================
+  // HISTORY FUNCTIONS
+  // ==============================
+  function addToHistory(text, result) {
+    const historyItem = {
+      id: Date.now(),
+      text: text.substring(0, 100) + (text.length > 100 ? '...' : ''),
+      result: result,
+      date: new Date().toLocaleDateString()
+    };
+
+    history.unshift(historyItem);
+    if (history.length > CONFIG.MAX_HISTORY_ITEMS) {
+      history = history.slice(0, CONFIG.MAX_HISTORY_ITEMS);
+    }
+
+    localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(history));
+    updateHistoryDisplay();
+  }
+
+  function updateHistoryDisplay() {
+    if (!elements.historyCount || !elements.historyCard) return;
+    
+    elements.historyCount.textContent = history.length;
+    elements.historyCard.style.display = history.length > 0 ? 'block' : 'none';
+
+    if (elements.historyItems && history.length > 0) {
+      elements.historyItems.innerHTML = history.map(item => `
+        <div class="history-item">
+          <div class="history-item-header">
+            <div class="history-result">${item.result}</div>
+            <div class="history-date">${item.date}</div>
+          </div>
+          <div class="history-text">${item.text}</div>
+        </div>
+      `).join('');
+    }
+  }
+
+  function toggleHistory() {
+    if (!elements.historyItems || !elements.historyToggle) return;
+    
+    historyExpanded = !historyExpanded;
+    elements.historyItems.style.display = historyExpanded ? 'block' : 'none';
+    elements.historyToggle.style.transform = historyExpanded ? 'rotate(180deg)' : 'rotate(0deg)';
+    
+    if (elements.historyHeader) {
+      elements.historyHeader.setAttribute('aria-expanded', historyExpanded);
+    }
+  }
+
+  // ==============================
+  // ACTION FUNCTIONS
+  // ==============================
+  async function copyResult() {
+    if (!elements.resultMessage) return;
+    
+    try {
+      await navigator.clipboard.writeText(elements.resultMessage.textContent);
+      showToast(STRINGS.COPIED);
+    } catch (error) {
+      showToast(STRINGS.COPY_FAILED);
+      console.error('Copy failed:', error);
+    }
+  }
+
+  async function shareResult() {
+    if (!elements.resultMessage) return;
+    
+    const text = elements.resultMessage.textContent;
+    
     if (navigator.share) {
       try {
         await navigator.share({
-          title: "Fact Checker Result",
-          text: resultMessage.textContent,
+          title: 'Fact Checker Result',
+          text: text
         });
-      } catch (err) {
-        console.log("Share cancelled");
+        showToast(STRINGS.SHARED);
+      } catch (error) {
+        console.log('Share cancelled or failed:', error);
       }
     } else {
-      showToast("Sharing not supported on this device.");
+      // Fallback: copy to clipboard
+      await copyResult();
     }
-  });
-
-  retryBtn.addEventListener("click", () => {
-    form.dispatchEvent(new Event("submit"));
-  });
-
-  // -------------------------------
-  // Toast Notifications
-  // -------------------------------
-  function showToast(msg) {
-    toast.textContent = msg;
-    toast.style.display = "block";
-    setTimeout(() => (toast.style.display = "none"), 3000);
   }
 
-  // -------------------------------
-  // Confetti 🎉
-  // -------------------------------
+  function retryAnalysis() {
+    if (elements.form) {
+      elements.form.dispatchEvent(new Event('submit'));
+    }
+  }
+
+  // ==============================
+  // UI FEEDBACK
+  // ==============================
+  function showToast(message) {
+    if (!elements.toast) return;
+    
+    elements.toast.textContent = message;
+    elements.toast.classList.add('show');
+    
+    setTimeout(() => {
+      elements.toast.classList.remove('show');
+    }, 3000);
+  }
+
   function launchConfetti() {
-    confettiCanvas.style.display = "block";
-    setTimeout(() => (confettiCanvas.style.display = "none"), 3000);
+    // Simple confetti effect - you can enhance this
+    console.log('🎉 Confetti!');
+    showToast('🎉 Analysis completed!');
   }
 
-  // -------------------------------
-  // Theme Toggle
-  // -------------------------------
-  themeToggle.addEventListener("click", () => {
-    document.body.classList.toggle("dark");
-  });
-
-  // -------------------------------
-  // Service Worker
-  // -------------------------------
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("/sw.js").catch(console.error);
-  }
-
-  // -------------------------------
-  // 🆕 Model Performance Dashboard
-  // -------------------------------
-  let dashboardChart;
-
-  async function loadDashboardData() {
-    const resp = await fetch("/dashboard_data");
-    return await resp.json();
-  }
-
-  function renderDashboardChart(data, metric) {
-    const ctx = document.getElementById("dashboard-chart").getContext("2d");
-    if (dashboardChart) dashboardChart.destroy();
-
-    const labels = data.map((d) => d.model);
-    const values = data.map((d) => d[metric] || 0);
-
-    dashboardChart = new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels,
-        datasets: [{ label: metric, data: values, backgroundColor: "#6b5bff" }],
-      },
-      options: { responsive: true, plugins: { legend: { display: false } } },
-    });
-  }
-
-  function updateDashboardInsights(data, metric) {
-    if (data.length === 0) {
-      document.getElementById("summary-text").innerText = "No models selected.";
-      return;
+  // ==============================
+  // MOBILE MENU FUNCTIONS
+  // ==============================
+  function toggleMobileMenu() {
+    if (!elements.mobileMenu) return;
+    
+    const isOpen = elements.mobileMenu.classList.contains('show');
+    
+    if (isOpen) {
+      closeMobileMenu();
+    } else {
+      openMobileMenu();
     }
-    const best = [...data].sort((a, b) => (b[metric] || 0) - (a[metric] || 0))[0];
-    document.getElementById("summary-text").innerText = `${best.model} performs best on ${metric} (${(best[metric] || 0).toFixed(3)}).`;
   }
 
-  async function updateDashboard() {
-    const allData = await loadDashboardData();
-    const selectedModels = Array.from(document.getElementById("model-select").selectedOptions).map((o) => o.value);
-    const metric = document.getElementById("metric-select").value;
-
-    let filtered = allData.filter((d) => selectedModels.includes(d.model));
-    renderDashboardChart(filtered, metric);
-    updateDashboardInsights(filtered, metric);
+  function openMobileMenu() {
+    if (!elements.mobileMenu || !elements.mobileMenuBtn) return;
+    
+    elements.mobileMenu.classList.add('show');
+    elements.mobileMenuBtn.classList.add('active');
+    
+    // Animate hamburger to X
+    const spans = elements.mobileMenuBtn.querySelectorAll('span');
+    if (spans.length >= 3) {
+      spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+      spans[1].style.opacity = '0';
+      spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+    }
   }
 
-  // Attach dashboard events
-  const modelSelect = document.getElementById("model-select");
-  const metricSelect = document.getElementById("metric-select");
-  const datasetSelect = document.getElementById("dataset-select");
-
-  if (modelSelect && metricSelect && datasetSelect) {
-    modelSelect.addEventListener("change", updateDashboard);
-    metricSelect.addEventListener("change", updateDashboard);
-    datasetSelect.addEventListener("change", updateDashboard);
-
-    // Initial load
-    (async function () {
-      const data = await loadDashboardData();
-      for (let i = 0; i < modelSelect.options.length; i++) {
-        modelSelect.options[i].selected = true;
-      }
-      renderDashboardChart(data, "accuracy");
-      updateDashboardInsights(data, "accuracy");
-    })();
+  function closeMobileMenu() {
+    if (!elements.mobileMenu || !elements.mobileMenuBtn) return;
+    
+    elements.mobileMenu.classList.remove('show');
+    elements.mobileMenuBtn.classList.remove('active');
+    
+    // Animate X back to hamburger
+    const spans = elements.mobileMenuBtn.querySelectorAll('span');
+    if (spans.length >= 3) {
+      spans[0].style.transform = 'none';
+      spans[1].style.opacity = '1';
+      spans[2].style.transform = 'none';
+    }
   }
-});
+
+  // ==============================
+  // HOME LOGO FUNCTION
+  // ==============================
+  function handleHomeLogoClick(e) {
+    e.preventDefault();
+    
+    // Reset the form and hide results
+    if (elements.textInput) {
+      elements.textInput.value = '';
+      updateCharCount();
+      toggleClearButton();
+    }
+    
+    // Hide prediction result
+    if (elements.predictionResult) {
+      elements.predictionResult.style.display = 'none';
+      elements.predictionResult.classList.remove('show', 'success', 'error', 'warning');
+    }
+    
+    // Hide confidence elements
+    if (elements.confidenceBar) elements.confidenceBar.style.display = 'none';
+    if (elements.confidenceText) elements.confidenceText.style.display = 'none';
+    
+    // Hide history if expanded
+    if (elements.historyItems && elements.historyToggle) {
+      elements.historyItems.style.display = 'none';
+      elements.historyToggle.classList.remove('expanded');
+      historyExpanded = false;
+    }
+    
+    // Close mobile menu if open
+    closeMobileMenu();
+    
+    // Focus on text input
+    if (elements.textInput) {
+      elements.textInput.focus();
+    }
+    
+    // Smooth scroll to top
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+    
+    // Show toast
+    showToast('🏠 Welcome back to home!');
+  }
+
+  // ==============================
+  // INITIALIZE
+  // ==============================
+  document.addEventListener('DOMContentLoaded', init);
+
+})();

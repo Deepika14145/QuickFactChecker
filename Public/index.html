@@ -17,78 +17,109 @@
   <meta name="twitter:image" content="https://yoursite.com/logo-preview.png" />
 
   <!-- PWA -->
-  <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#4f46e5" />
 
-  <!-- Flask static URL for CSS -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <!-- Direct CSS link -->
+  <link rel="stylesheet" href="style.css" />
 
   <title>Enhanced Quick Fact Checker with Modern UI/UX</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!-- Chart.js -->
-
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <div class="container">
-    <!-- Header -->
-
-  <!-- Chart.js CDN -->
-
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-  <div class="container">
-
-    <!-- Header -->
-
-    <div class="header">
-      <!-- Flash messages -->
-      {% with messages = get_flashed_messages() %}
-        {% if messages %}
-          <ul style="color: red; font-weight: bold;">
-            {% for message in messages %}
-              <li>{{ message }}</li>
-            {% endfor %}
-          </ul>
-        {% endif %}
-      {% endwith %}
-
-      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-          stroke-linecap="round" stroke-linejoin="round" class="theme-icon">
-          <circle cx="12" cy="12" r="4"/>
-          <path d="M12 2v2"/>
-          <path d="M12 20v2"/>
-          <path d="m4.93 4.93 1.41 1.41"/>
-          <path d="m17.66 17.66 1.41 1.41"/>
-          <path d="M2 12h2"/>
-          <path d="M20 12h2"/>
-          <path d="m6.34 17.66-1.41 1.41"/>
-          <path d="m19.07 4.93-1.41 1.41"/>
-        </svg>
-      </button>
-
-      <div class="logo-container">
-        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
-          viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-          <polyline points="14,2 14,8 20,8"/>
-          <line x1="16" y1="13" x2="8" y2="13"/>
-          <line x1="16" y1="17" x2="8" y2="17"/>
-          <polyline points="10,9 9,9 8,9"/>
-        </svg>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-left">
+        <a href="/" class="nav-logo" id="home-logo">
+          <div class="logo-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14,2 14,8 20,8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10,9 9,9 8,9"/>
+            </svg>
+          </div>
+          <span class="logo-text">Quick Fact Checker</span>
+        </a>
       </div>
-      <h1>Quick Fact Checker</h1>
-      <p class="subtitle">Verify the authenticity of news articles and claims with AI-powered analysis</p>
+      
+      <div class="nav-center">
+        <ul class="nav-links">
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+          <li><a href="#blog" class="nav-link">Blog</a></li>
+          <li>  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" class="theme-icon">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2"/>
+            <path d="M12 20v2"/>
+            <path d="m4.93 4.93 1.41 1.41"/>
+            <path d="m17.66 17.66 1.41 1.41"/>
+            <path d="M2 12h2"/>
+            <path d="M20 12h2"/>
+            <path d="m6.34 17.66-1.41 1.41"/>
+            <path d="m19.07 4.93-1.41 1.41"/>
+          </svg>
+        </button></li>
+        </ul>
+      </div>
+      
+      <div class="nav-right">
+        <!-- <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" class="theme-icon">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2"/>
+            <path d="M12 20v2"/>
+            <path d="m4.93 4.93 1.41 1.41"/>
+            <path d="m17.66 17.66 1.41 1.41"/>
+            <path d="M2 12h2"/>
+            <path d="M20 12h2"/>
+            <path d="m6.34 17.66-1.41 1.41"/>
+            <path d="m19.07 4.93-1.41 1.41"/>
+          </svg>
+        </button> -->
+        <button class="login-btn">Log In</button>
+      </div>
+      
+      <!-- Mobile menu button -->
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle mobile menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobile-menu">
+      <ul class="mobile-nav-links">
+        <li><a href="#about" class="mobile-nav-link">About</a></li>
+        <li><a href="#how-it-works" class="mobile-nav-link">How It Works</a></li>
+        <li><a href="#blog" class="mobile-nav-link">Blog</a></li>
+        <li><button class="mobile-login-btn">Log In</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <!-- Hero Header -->
+    <div class="hero-header">
+      <h1 class="hero-title">Quick Fact Checker</h1>
+      <p class="hero-subtitle">Verify the authenticity of news articles and claims with AI-powered analysis</p>
     </div>
 
     <!-- Main Fact Checker Card -->
     <div class="main-card">
-      <form id="prediction-form" method="POST" action="{{ url_for('predict') }}" novalidate>
+      <form id="prediction-form" method="POST" action="#" novalidate>
         <div class="form-group">
           <label for="text-input">Enter text to analyze</label>
           <div class="textarea-container">
@@ -98,167 +129,17 @@
             <div class="char-count" id="char-count">
               <span id="char-count-text">0 characters</span>
               <button type="button" class="clear-btn" id="clear-btn" aria-label="Clear text">✖️</button>
-
-
-    <div class="container">
-        <div class="header">
-            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                     class="theme-icon">
-                    <circle cx="12" cy="12" r="4"/>
-                    <path d="M12 2v2"/>
-                    <path d="M12 20v2"/>
-                    <path d="m4.93 4.93 1.41 1.41"/>
-                    <path d="m17.66 17.66 1.41 1.41"/>
-                    <path d="M2 12h2"/>
-                    <path d="M20 12h2"/>
-                    <path d="m6.34 17.66-1.41 1.41"/>
-                    <path d="m19.07 4.93-1.41 1.41"/>
-                </svg>
-            </button>
-            <div class="logo-container">
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
-                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                    <polyline points="14,2 14,8 20,8"/>
-                    <line x1="16" y1="13" x2="8" y2="13"/>
-                    <line x1="16" y1="17" x2="8" y2="17"/>
-                    <polyline points="10,9 9,9 8,9"/>
-                </svg>
-
-
             </div>
           </div>
         </div>
 
-        <div class="main-card">
-            <form id="prediction-form" novalidate>
-                <div class="form-group">
-                    <label for="text-input">Enter text to analyze</label>
-                    <div class="textarea-container">
-                        <textarea 
-                            id="text-input" 
-                            name="text" 
-                            placeholder="Paste your article, news story, or claim here for fact-checking..."
-                            aria-describedby="char-count"
-                            required
-                        ></textarea>
-                        <div class="char-count" id="char-count">
-                            <span id="char-count-text">0 characters</span>
-                            <button type="button" class="clear-btn" id="clear-btn" aria-label="Clear text">✖️</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="sample-inputs">
-                    <p>Try these examples:</p>
-                    <div class="sample-buttons">
-                        <button type="button" class="sample-btn" data-sample="Scientists have discovered a new planet that is completely made of diamonds and is only 10 light years away from Earth.">Example 1</button>
-                        <button type="button" class="sample-btn" data-sample="A recent study published in Nature shows that drinking 8 glasses of water daily significantly improves cognitive function in adults.">Example 2</button>
-                        <button type="button" class="sample-btn" data-sample="Local government announces new infrastructure project to improve city transportation with $50 million budget allocation.">Example 3</button>
-                    </div>
-                </div>
-                <button type="submit" id="submit-btn" class="btn-primary" aria-label="Analyze text">
-                    <span class="btn-content">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="11" cy="11" r="8"/>
-                            <path d="m21 21-4.35-4.35"/>
-                        </svg>
-                        Analyze Text
-                    </span>
-                    <span class="loading-spinner" aria-hidden="true"></span>
-                </button>
-            </form>
-            <div id="prediction-result" class="prediction-result" role="status" aria-live="polite" aria-atomic="true">
-                <div class="result-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                         class="result-icon-svg"></svg>
-                </div>
-                <div class="result-content">
-                    <div class="result-title" id="result-title">Analysis Result</div>
-                    <div id="result-message">Processing your text...</div>
-                    <div class="confidence-bar" id="confidence-bar" style="display: none;">
-                        <div class="confidence-fill" id="confidence-fill"></div>
-                    </div>
-                    <div id="confidence-text" style="display: none;"></div>
-                    <div class="result-actions">
-                        <button class="action-btn" id="copy-btn" aria-label="Copy result">Copy</button>
-                        <button class="action-btn" id="share-btn" aria-label="Share result">Share</button>
-                    </div>
-                    <button class="retry-btn" id="retry-btn" style="display: none;" aria-label="Retry analysis">Retry</button>
-                </div>
-            </div>
-        </div>
-        <div class="history-card" id="history-card" style="display: none;">
-            <div class="history-header" id="history-header" role="button" aria-expanded="false" tabindex="0">
-                <div class="history-title">
-                    Recent Checks (<span id="history-count">0</span>)
-                </div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                     class="history-toggle" id="history-toggle">
-                    <polyline points="6,9 12,15 18,9"/>
-                </svg>
-            </div>
-            <div class="history-items" id="history-items" aria-live="polite"></div>
-
-
-        
-    <!-- 🆕 Model Performance Dashboard -->
-    <div class="dashboard-card">
-      <div class="summary-box" id="summary-box">
-        <h3>Summary Insights</h3>
-        <p id="summary-text">Select a model to see insights...</p>
-      </div>
-      <div style="display: flex; align-items: center; gap: 50px;" class="dashboard-filters">
-        <div>
-        <label for="model-select">Choose Models:</label>
-        <select id="model-select" multiple>
-          <option value="logreg">Logistic Regression</option>
-          <option value="rf">Random Forest</option>
-          <option value="lstm">LSTM</option>
-        </select>
-        </div>
-        <div>
-        <label for="dataset-select">Dataset:</label>
-        <select id="dataset-select">
-          <option value="train">Train</option>
-          <option value="test" selected>Test</option>
-          <option value="valid">Validation</option>
-        </select>
-
-        </div>
-        <div>
-        <label for="metric-select">Metric:</label>
-        <select id="metric-select">
-          <option value="accuracy">Accuracy</option>
-          <option value="precision">Precision</option>
-          <option value="recall">Recall</option>
-          <option value="f1">F1-Score</option>
-        </select>
-        </div>
-      </div>
-    </div>
-
-    <div class="toast" id="toast" role="alert" aria-live="assertive" aria-atomic="true"></div>
-    <canvas id="confetti-canvas" style="position: fixed; pointer-events: none; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; display: none;"></canvas>
-    <script src="script.js"></script>
-
-
-      <!-- example section -->
+        <!-- Example section -->
         <div class="sample-inputs">
           <p>Try these examples:</p>
           <div class="sample-buttons">
             <button type="button" class="sample-btn" data-sample="Holding your breath for more than 15 seconds is a valid self-test for COVID-19. If you can do it without coughing, you don't have the virus.">💉 COVID-19 Climate Vaccine Claim</button>
             <button type="button" class="sample-btn" data-sample="An AI system called AlphaFold successfully predicted the 3D structures of over 200 million proteins, a breakthrough that could dramatically accelerate biological research.">🤖 AI Capabilities</button>
-            <button type="button" class="sample-btn" data-sample="With more than 968 million eligible voters in its 2024 general election, India remains the world's largest democracy by population.">🗣️ Political Speech Fact</button>
+            <button type="button" class="sample-btn" data-sample="With more than 968 million eligible voters in its 2024 general election, India remains the world's largest democracy by population.">🗳️ Political Speech Fact</button>
           </div>
         </div>
 
@@ -315,10 +196,7 @@
             </button>
           </div>
           <button class="retry-btn" id="retry-btn" style="display: none;" aria-label="Retry analysis">🔄 Retry</button>
-
         </div>
-
-        <div class="history-items" id="history-items" aria-live="polite"></div>
       </div>
 
       <!-- History Section -->
@@ -331,32 +209,19 @@
             <polyline points="6,9 12,15 18,9"/>
           </svg>
         </div>
-
-        </div>
-
         <div class="history-items" id="history-items" aria-live="polite"></div>
       </div>
     </div>
 
-    <!-- 🆕 Model Performance Dashboard -->
+    <!-- Model Performance Dashboard -->
     <div class="dashboard-card">
       <h2>Model Performance Dashboard</h2>
       <div class="dashboard-filters">
         <label for="model-select">Choose Models:</label>
         <select id="model-select" multiple>
-
-          <option value="Logistic Regression">Logistic Regression</option>
-          <option value="Random Forest">Random Forest</option>
-          <option value="LSTM">LSTM</option>
-
           <option value="logreg">Logistic Regression</option>
           <option value="rf">Random Forest</option>
           <option value="lstm">LSTM</option>
-
-
-          <option value="Logistic Regression">Logistic Regression</option>
-          <option value="Random Forest">Random Forest</option>
-          <option value="LSTM">LSTM</option>
         </select>
 
         <label for="dataset-select">Dataset:</label>
@@ -377,34 +242,108 @@
 
       <div class="chart-box">
         <canvas id="dashboard-chart" height="300"></canvas>
+      </div>
 
       <div class="charts">
         <canvas id="confusion-matrix-chart"></canvas>
         <canvas id="roc-curve-chart"></canvas>
-
-
       </div>
 
       <div class="summary-box" id="summary-box">
         <h3>Summary Insights</h3>
         <p id="summary-text">Select a model to see insights...</p>
-
       </div>
     </div>
   </div>
-  <div class="charts">
-        <canvas id="confusion-matrix-chart"></canvas>
-        <canvas id="roc-curve-chart"></canvas>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <!-- Footer Logo & Description -->
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="footer-logo-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14,2 14,8 20,8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10,9 9,9 8,9"/>
+              </svg>
+            </div>
+            <span class="footer-logo-text">Quick Fact Checker</span>
+          </div>
+          <p class="footer-description">AI-powered analysis to combat misinformation</p>
+        </div>
+
+        <!-- Footer Links -->
+        <div class="footer-links">
+          <div class="footer-column">
+            <h4 class="footer-title">Company</h4>
+            <ul class="footer-list">
+              <li><a href="#about" class="footer-link">About Us</a></li>
+              <li><a href="#contact" class="footer-link">Contact</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-column">
+            <h4 class="footer-title">Resources</h4>
+            <ul class="footer-list">
+              <li><a href="#terms" class="footer-link">Terms of Service</a></li>
+              <li><a href="#blog" class="footer-link">Blog</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-column">
+            <h4 class="footer-title">Legal</h4>
+            <ul class="footer-list">
+              <li><a href="#privacy" class="footer-link">Privacy Policy</a></li>
+              <li><a href="#disclaimer" class="footer-link">Disclaimer</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Social Links -->
+        <div class="footer-social">
+          <a href="#twitter" class="social-link" aria-label="Twitter">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
+            </svg>
+          </a>
+          <a href="#linkedin" class="social-link" aria-label="LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+              <circle cx="4" cy="4" r="2"/>
+            </svg>
+          </a>
+          <a href="#github" class="social-link" aria-label="GitHub">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <p class="copyright">© 2025 Quick Fact Checker. All Combat Reserved.</p>
+        <div class="footer-heart">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+        </div>
+      </div>
     </div>
+  </footer>
+
   <!-- Toast + Confetti -->
   <div class="toast" id="toast" role="alert" aria-live="assertive" aria-atomic="true"></div>
   <canvas id="confetti-canvas" style="position: fixed; pointer-events: none; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; display: none;"></canvas>
 
   <!-- Scripts -->
-  <script src="script.js"></script
-    
-  <!-- Flask static URL for JS -->
-  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-
+  <script src="script.js"></script>
 </body>
 </html>
