@@ -160,6 +160,19 @@ For queries, feedback, or guidance regarding this project, you can contact the *
  
 Original Repository: [QuickFactChecker](https://github.com/Deepika14145/QuickFactChecker.git)  
 
+## Contributor
+
+A heartfelt thank you to all the contributors who have dedicated their time and effort to make this project a success.  
+Your contributions—whether it’s code, design, testing, or documentation—are truly appreciated! 🚀
+
+#### Thanks to all the wonderful contributors 💖
+
+<a href="https://github.com/Deepika14145/QuickFactChecker/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Deepika14145/QuickFactChecker" />
+</a>
+
+
+See full list of contribution from contributor [Contributor Graph](https://github.com/Deepika14145/QuickFactChecker/graphs/contributors)
 
 
 ## 📄 **License**
