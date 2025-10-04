@@ -1,0 +1,9 @@
+2025-09-30 22:34:13,785 - INFO - Processing: punkt
+2025-09-30 22:34:13,786 - INFO - 
+2025-09-30 22:34:13,786 - INFO - Processing: stopwords
+2025-09-30 22:34:13,787 - INFO - 
+2025-09-30 22:34:13,787 - INFO - Processing: wordnet
+2025-09-30 22:34:14,365 - INFO - 
+2025-09-30 22:34:14,365 - INFO - Processing: omw-1.4
+2025-09-30 22:34:14,424 - INFO - 
+2025-09-30 22:34:14,426 - INFO - If you still encounter 'LookupError', ensure NLTK is installed correctly and your Python environment is active.

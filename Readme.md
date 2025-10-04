@@ -1,9 +1,9 @@
 # 📰 QuickFactChecker – Fake News Detection
 
-## � Live Demo
+## 🚀 Live Demo
 **Try it now:** [https://quickfactchecker.onrender.com/](https://quickfactchecker.onrender.com/)
 
-## �📌 Project Overview
+## 📌 Project Overview
 QuickFactChecker is a **machine learning–based web app** that helps detect whether a news article is **real** or **fake**.
 It uses different models (e.g., Naive Bayes, LSTM) trained on the **LIAR dataset** to evaluate credibility and assist users in identifying potentially misleading information.
 
@@ -94,7 +94,7 @@ To reproduce these results, run:
 scripts/fake_news_logreg_rf.py
 ```
 
-## Usage
+## ▶️ Usage
 
 1. Run the following command to start the application:
    ```bash
@@ -123,7 +123,7 @@ jupyter notebook liar-data-analysis.ipynb
  ```
 ## 🤝 Contributing
 
-Contributions are welcome! Follow these steps:
+Contributions are welcome! Whether you’re fixing typos, improving docs, or adding new features — every PR helps. Follow these steps:
 
 1. Fork the repository
 2. Create a new branch (git checkout -b feature-name)
@@ -134,7 +134,7 @@ Contributions are welcome! Follow these steps:
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) and follow our [Code of Conduct](CODE_OF_CONDUCT.md).
 
-## � Deployment
+## 📦 Deployment
 
 The application is deployed on **Render** and accessible at: [https://quickfactchecker.onrender.com/](https://quickfactchecker.onrender.com/)
 
@@ -151,11 +151,11 @@ The application is deployed on **Render** and accessible at: [https://quickfactc
 - **Platform**: Render
 - **CI/CD**: GitHub integration
 
-## �📧 Contact  
+## 📧 Contact  
 
 For queries, feedback, or guidance regarding this project, you can contact the **mentor** assigned to the issue:  
 
-- 📩 **GitHub**: [Deepika14145](https://github.com/Deepika14145)(owner of this repository)
+- 📩 **GitHub** (Owner): [Deepika14145](https://github.com/Deepika14145)
 - 💬 **By commit/PR comments**: Please tag the mentor in your commit or pull request discussion for direct feedback.  
  
 Original Repository: [QuickFactChecker](https://github.com/Deepika14145/QuickFactChecker.git)  
@@ -167,6 +167,6 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 --- 
 
-If you find this project useful, please give it a ⭐️! Your support is appreciated.!
+If you find this project useful, please give it a ⭐️! Your support is appreciated!
 
 Feel free to contribute or suggest new features!🙏
