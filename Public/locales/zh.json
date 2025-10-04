@@ -1,0 +1,95 @@
+{
+  "meta": {
+    "title": "AI驱动的高级快速事实检查器，现代UI",
+    "description": "免费AI工具用于验证新闻文章和声明。",
+    "og_title": "快速事实检查器",
+    "og_description": "使用AI驱动的分析验证新闻真实性。"
+  },
+  "header": {
+    "title": "快速事实检查器",
+    "subtitle": "使用AI驱动的分析验证新闻文章和声明",
+    "theme_toggle": "切换主题"
+  },
+  "form": {
+    "label": "输入文本进行分析",
+    "placeholder": "在此处粘贴您的文章、新闻报道或声明进行事实检查...",
+    "submit": "分析文本",
+    "analyzing": "分析中...",
+    "clear": "清除文本",
+    "character_count": "{count} 字符",
+    "character_limit": "字符限制: {limit}",
+    "examples": "尝试这些示例:",
+    "example1": "示例 1",
+    "example2": "示例 2",
+    "example3": "示例 3"
+  },
+  "results": {
+    "title": "分析结果",
+    "processing": "正在处理您的文本...",
+    "true": "此文本可能为真",
+    "false": "此文本可能为假",
+    "confidence": "置信度: {percentage}%",
+    "copy": "复制结果",
+    "share": "分享",
+    "retry": "重试",
+    "copied": "结果已复制到剪贴板!",
+    "copy_failed": "复制结果失败",
+    "shared": "结果分享成功!",
+    "share_failed": "分享结果失败",
+    "link_copied": "分享链接已复制到剪贴板!"
+  },
+  "history": {
+    "title": "最近检查 ({count})",
+    "empty": "没有最近的检查",
+    "clear_all": "清除所有"
+  },
+  "dashboard": {
+    "title": "模型性能仪表板",
+    "model_label": "模型选择:",
+    "dataset_label": "数据集:",
+    "metric_label": "指标:",
+    "datasets": {
+      "train": "训练",
+      "test": "测试",
+      "valid": "验证"
+    },
+    "metrics": {
+      "accuracy": "准确率",
+      "precision": "精确率",
+      "recall": "召回率",
+      "f1": "F1分数"
+    },
+    "models": {
+      "logreg": "逻辑回归",
+      "rf": "随机森林",
+      "lstm": "LSTM"
+    },
+    "summary": "洞察总结",
+    "summary_default": "选择一个模型查看洞察..."
+  },
+  "errors": {
+    "empty_input": "请输入文本进行分析。",
+    "analysis_error": "分析文本时出错。请重试。",
+    "network_error": "网络错误。请检查您的连接。",
+    "server_error": "服务器错误。请稍后重试。"
+  },
+  "accessibility": {
+    "analysis_completed": "分析完成: \"{text}\"",
+    "skip_to_content": "跳到内容",
+    "main_content": "主要内容"
+  },
+  "languages": {
+    "en": "English",
+    "es": "Español",
+    "fr": "Français",
+    "de": "Deutsch",
+    "pt": "Português",
+    "it": "Italiano",
+    "ru": "Русский",
+    "ja": "日本語",
+    "ko": "한국어",
+    "zh": "中文",
+    "ar": "العربية",
+    "hi": "हिन्दी"
+  }
+}

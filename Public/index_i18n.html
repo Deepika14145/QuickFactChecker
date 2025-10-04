@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Enhanced Quick Fact Checker with Modern UI</title>
+    <meta name="description" content="Free AI tool to verify news articles and claims.">
+    <meta name="keywords" content="fact check, news verification, AI, fake news detection">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Quick Fact Checker">
+    <meta property="og:description" content="Verify news with AI-powered analysis.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Quick Fact Checker">
+    <meta name="twitter:description" content="Verify news authenticity with AI-powered analysis.">
+    <meta name="twitter:image" content="">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#4f46e5">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/i18n.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Preload important resources -->
+    <link rel="preload" href="script.js" as="script">
+    <link rel="preload" href="js/i18n.js" as="script">
+</head>
+<body class="lang-en">
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link" data-i18n="accessibility.skip_to_content">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <h1 data-i18n="header.title">Quick Fact Checker</h1>
+                <p class="subtitle" data-i18n="header.subtitle">Verify news articles and claims with AI-powered analysis</p>
+            </div>
+            <div class="navbar-controls">
+                <!-- Language selector will be inserted here by JavaScript -->
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" data-i18n="header.theme_toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1" x2="12" y2="3"/>
+                        <line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1" y1="12" x2="3" y2="12"/>
+                        <line x1="21" y1="12" x2="23" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="container" data-i18n="accessibility.main_content">
+        <!-- Fact Checking Form -->
+        <div class="fact-check-card">
+            <form id="fact-check-form" class="fact-check-form">
+                <div class="form-group">
+                    <label for="text-input" class="form-label" data-i18n="form.label">Enter text to analyze</label>
+                    <div class="textarea-container">
+                        <textarea
+                            id="text-input"
+                            class="form-control"
+                            placeholder="Paste your article, news story, or claim here for fact-checking..."
+                            maxlength="5000"
+                            rows="6"
+                            required
+                            aria-describedby="char-count"
+                            data-i18n="form.placeholder"
+                        ></textarea>
+                        <div class="textarea-footer">
+                            <span id="char-count" class="character-count">
+                                <span id="char-count-number">0</span> <span data-i18n="form.character_count">characters</span>
+                            </span>
+                            <button type="button" class="clear-btn" id="clear-btn" aria-label="Clear text" data-i18n="form.clear">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="18" y1="6" x2="6" y2="18"/>
+                                    <line x1="6" y1="6" x2="18" y2="18"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sample Examples -->
+                <div class="sample-inputs">
+                    <p data-i18n="form.examples">Try these examples:</p>
+                    <div class="sample-buttons">
+                        <button type="button" class="sample-btn" data-sample="Scientists have discovered a new planet that is completely made of diamonds and is only 10 light years away from Earth." data-i18n="form.example1">Example 1</button>
+                        <button type="button" class="sample-btn" data-sample="A recent study published in Nature shows that drinking 8 glasses of water daily significantly improves cognitive function in adults." data-i18n="form.example2">Example 2</button>
+                        <button type="button" class="sample-btn" data-sample="Local government announces new infrastructure project to improve city transportation with $50 million budget allocation." data-i18n="form.example3">Example 3</button>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" id="submit-btn" class="btn-primary" aria-label="Analyze text">
+                    <span class="btn-content">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="m21 21-4.35-4.35"/>
+                        </svg>
+                        <span data-i18n="form.submit">Analyze Text</span>
+                    </span>
+                    <span class="loading-spinner" aria-hidden="true">
+                        <span data-i18n="form.analyzing">Analyzing...</span>
+                    </span>
+                </button>
+            </form>
+
+            <!-- Results Section -->
+            <div id="prediction-result" class="prediction-result" role="status" aria-live="polite" aria-atomic="true">
+                <div class="result-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="result-icon-svg">
+                        <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+                        <path d="m9 12 2 2 4-4"/>
+                    </svg>
+                </div>
+                <div class="result-content">
+                    <div class="result-title" id="result-title" data-i18n="results.title">Analysis Result</div>
+                    <div id="result-message" data-i18n="results.processing">Processing your text...</div>
+                    <div class="confidence-bar" id="confidence-bar" style="display: none;">
+                        <div class="confidence-fill" id="confidence-fill"></div>
+                    </div>
+                    <div id="confidence-text" style="display: none;"></div>
+                    <div class="result-actions">
+                        <button class="action-btn" id="copy-btn" aria-label="Copy result">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+                                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+                            </svg>
+                            <span data-i18n="results.copy">Copy Result</span>
+                        </button>
+                        <button class="action-btn" id="share-btn" aria-label="Share result">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
+                                <polyline points="16,6 12,2 8,6"/>
+                                <line x1="12" y1="2" x2="12" y2="15"/>
+                            </svg>
+                            <span data-i18n="results.share">Share Result</span>
+                        </button>
+                    </div>
+                    <button class="retry-btn" id="retry-btn" style="display: none;" aria-label="Retry analysis">
+                        🔄 <span data-i18n="results.retry">Retry</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- History Section -->
+        <div class="history-card" id="history-card" style="display: none;">
+            <div class="history-header" id="history-header" role="button" aria-expanded="false" tabindex="0">
+                <div class="history-title">
+                    <span data-i18n="history.title">Recent Checks</span> (<span id="history-count">0</span>)
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="history-toggle" id="history-toggle">
+                    <polyline points="6,9 12,15 18,9"/>
+                </svg>
+            </div>
+            <div class="history-items" id="history-items" aria-live="polite"></div>
+            <button class="clear-history-btn" id="clear-history-btn" style="display: none;">
+                <span data-i18n="history.clear_all">Clear All</span>
+            </button>
+        </div>
+
+        <!-- Model Performance Dashboard -->
+        <div class="dashboard-card">
+            <h2 data-i18n="dashboard.title">Model Performance Dashboard</h2>
+            
+            <div class="dashboard-filters">
+                <div class="filter-group">
+                    <label for="model-select" data-i18n="dashboard.model_label">Choose Models:</label>
+                    <select id="model-select" multiple>
+                        <option value="logreg" data-i18n="dashboard.models.logreg">Logistic Regression</option>
+                        <option value="rf" data-i18n="dashboard.models.rf">Random Forest</option>
+                        <option value="lstm" data-i18n="dashboard.models.lstm">LSTM</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="dataset-select" data-i18n="dashboard.dataset_label">Dataset:</label>
+                    <select id="dataset-select">
+                        <option value="train" data-i18n="dashboard.datasets.train">Train</option>
+                        <option value="test" selected data-i18n="dashboard.datasets.test">Test</option>
+                        <option value="valid" data-i18n="dashboard.datasets.valid">Validation</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="metric-select" data-i18n="dashboard.metric_label">Metric:</label>
+                    <select id="metric-select">
+                        <option value="accuracy" data-i18n="dashboard.metrics.accuracy">Accuracy</option>
+                        <option value="precision" data-i18n="dashboard.metrics.precision">Precision</option>
+                        <option value="recall" data-i18n="dashboard.metrics.recall">Recall</option>
+                        <option value="f1" data-i18n="dashboard.metrics.f1">F1-Score</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="dashboard-chart" height="300"></canvas>
+            </div>
+
+            <div class="summary-box" id="summary-box">
+                <h3 data-i18n="dashboard.summary">Summary Insights</h3>
+                <p id="summary-text" data-i18n="dashboard.summary_default">Select a model to see insights...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast Notifications -->
+    <div class="toast" id="toast" role="alert" aria-live="assertive" aria-atomic="true"></div>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confetti-canvas" style="position: fixed; pointer-events: none; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; display: none;"></canvas>
+
+    <!-- Scripts -->
+    <script src="js/i18n.js"></script>
+    <script src="script.js"></script>
+
+    <!-- Initialize internationalization -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize i18n
+            if (window.i18n) {
+                window.i18n.init();
+            }
+        });
+    </script>
+</body>
+</html>
