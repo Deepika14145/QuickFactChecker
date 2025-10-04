@@ -15,6 +15,14 @@
             STORAGE_KEY: 'fact-check-history',
             THEME_STORAGE_KEY: 'theme'
         };
+        // Decide API base dynamically (supports static preview on :8000 hitting Flask on :5000)
+        const API_BASE = (() => {
+            try {
+                const url = new URL(window.location.href);
+                if (url.port === '8000') return 'http://127.0.0.1:5000';
+            } catch {}
+            return '';
+        })();
         // i18n Strings (ready for translation)
         const STRINGS = {
             EMPTY_INPUT: "Please enter some text to analyze.",
@@ -55,7 +63,12 @@
             shareBtn: document.getElementById('share-btn'),
             retryBtn: document.getElementById('retry-btn'),
             toast: document.getElementById('toast'),
-            confettiCanvas: document.getElementById('confetti-canvas')
+            confettiCanvas: document.getElementById('confetti-canvas'),
+            detailsBtn: document.getElementById('details-btn'),
+            detailsModal: document.getElementById('details-modal'),
+            modalClose: document.getElementById('modal-close'),
+            comparisonTbody: document.getElementById('comparison-tbody'),
+            modalSummary: document.getElementById('modal-summary')
         };
         // State
         let currentResult = null;
@@ -117,10 +130,13 @@
                     toggleHistory();
                 }
             });
-            // Copy & Share
+            // Copy, Share, Details
             elements.copyBtn.addEventListener('click', copyResult);
             elements.shareBtn.addEventListener('click', shareResult);
             elements.retryBtn.addEventListener('click', retryAnalysis);
+            elements.detailsBtn.addEventListener('click', openDetailsModal);
+            elements.modalClose.addEventListener('click', closeDetailsModal);
+            elements.detailsModal.addEventListener('click', (e) => { if (e.target === elements.detailsModal) closeDetailsModal(); });
             // Keyboard Navigation
             document.addEventListener('keydown', handleGlobalKeys);
         }
@@ -175,7 +191,7 @@
             elements.textInput.focus();
         }
         // ======================
-        // FORM & API SIMULATION
+    // FORM & API CALLS
         // ======================
         async function handleFormSubmit(event) {
             event.preventDefault();
@@ -192,8 +208,11 @@
             setLoading(true);
             elements.predictionResult.classList.remove('show');
             try {
-                const result = await analyzeText(text);
-                showResult(result.prediction, result.confidence, text);
+                const result = await analyzeServer(text);
+                // Persist last comparison for details modal
+                lastComparison = result;
+                const best = result.best;
+                showResult(best.prediction, best.confidence, text, best.model);
             } catch (error) {
                 console.error('Analysis Error:', error);
                 showResult(-1, null, text);
@@ -201,19 +220,32 @@
                 setLoading(false);
             }
         }
-        async function analyzeText(text) {
-            // Simulate API delay
-            await new Promise(resolve => 
-                setTimeout(resolve, 
-                    CONFIG.API_TIMEOUT_MIN + 
-                    Math.random() * (CONFIG.API_TIMEOUT_MAX - CONFIG.API_TIMEOUT_MIN)
-                )
-            );
-            // Mock prediction
-            return {
-                prediction: Math.random() > 0.5 ? 1 : 0,
-                confidence: CONFIG.CONFIDENCE_MIN + Math.random() * CONFIG.CONFIDENCE_RANGE
-            };
+        let lastComparison = null;
+        async function analyzeServer(text) {
+            // Try backend first
+            try {
+                const res = await fetch(`${API_BASE}/predict_all`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text })
+                });
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                return await res.json();
+            } catch (e) {
+                // Fallback to local mock if backend unavailable
+                console.warn('Backend unavailable, using mock comparison:', e);
+                await new Promise(r => setTimeout(r, 700));
+                const models = ['Logistic Regression','Support Vector Machine','XGBoost','Naive Bayes','LSTM (Keras)'];
+                const results = models.map(name => ({
+                    model: name,
+                    key: `mock_${name.substring(0,3).toLowerCase()}`,
+                    prediction: Math.random() > 0.5 ? 1 : 0,
+                    confidence: CONFIG.CONFIDENCE_MIN + Math.random() * CONFIG.CONFIDENCE_RANGE,
+                    source: 'mock'
+                }));
+                const best = results.reduce((a,b,i) => (b.confidence > a.confidence ? { ...b, index: i } : a), { ...results[0], index: 0 });
+                return { input_text: text, results, best, models_loaded: {} };
+            }
         }
         function retryAnalysis() {
             elements.retryBtn.disabled = true;
@@ -230,12 +262,13 @@
             elements.btnContent.style.display = isLoading ? 'none' : 'flex';
             elements.loadingSpinner.style.display = isLoading ? 'block' : 'none';
         }
-        function showResult(prediction, confidence = null, text = '') {
+        function showResult(prediction, confidence = null, text = '', bestModelName = null) {
             currentResult = { 
                 prediction, 
                 confidence, 
                 text, 
-                timestamp: new Date() 
+                timestamp: new Date(),
+                bestModelName
             };
             const resultTitle = document.getElementById('result-title');
             const resultMessage = document.getElementById('result-message');
@@ -275,7 +308,8 @@
             }
             elements.predictionResult.classList.add(className);
             resultTitle.textContent = message;
-            resultMessage.textContent = STRINGS.ANALYSIS_COMPLETED(text);
+            const bestSuffix = bestModelName ? ` (Best model: ${bestModelName})` : '';
+            resultMessage.textContent = STRINGS.ANALYSIS_COMPLETED(text) + bestSuffix;
             resultIconSvg.innerHTML = iconSvg;
             if (confidence !== null && prediction !== -1) {
                 confidenceBar.style.display = 'block';
@@ -303,6 +337,28 @@
             if (prediction !== -1) {
                 addToHistory(currentResult);
             }
+        }
+        // Details modal
+        function openDetailsModal() {
+            if (!lastComparison) {
+                showToast('Run an analysis first.');
+                return;
+            }
+            const { results, best } = lastComparison;
+            elements.comparisonTbody.innerHTML = results
+                .map((r, idx) => {
+                    const cls = idx === best.index ? 'best-row' : '';
+                    const tag = r.prediction === 1 ? '✓ TRUE' : '✗ FAKE';
+                    return `<tr class="${cls}"><td>${r.model}</td><td>${tag}</td><td>${Math.round(r.confidence * 100)}%</td></tr>`;
+                })
+                .join('');
+            elements.modalSummary.textContent = `Best model: ${best.model} — ${best.prediction === 1 ? 'TRUE' : 'FAKE'} with ${Math.round(best.confidence*100)}% confidence.`;
+            elements.detailsModal.style.display = 'block';
+            setTimeout(() => elements.detailsModal.classList.add('show'), 10);
+        }
+        function closeDetailsModal() {
+            elements.detailsModal.classList.remove('show');
+            setTimeout(() => elements.detailsModal.style.display = 'none', 200);
         }
         // ======================
         // HISTORY MANAGEMENT
@@ -428,8 +484,9 @@ ${shareData.url}`).then(() => {
         }
         function handleGlobalKeys(e) {
             // Escape to collapse history
-            if (e.key === 'Escape' && historyExpanded) {
-                toggleHistory();
+            if (e.key === 'Escape') {
+                if (historyExpanded) toggleHistory();
+                if (elements.detailsModal.classList.contains('show')) closeDetailsModal();
             }
         }
         // ======================

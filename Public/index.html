@@ -15,9 +15,9 @@
     <meta name="twitter:description" content="Verify news authenticity with AI-powered analysis.">
     <meta name="twitter:image" content="https://yoursite.com/logo-preview.png">
     <!-- PWA -->
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="/static/manifest.json">
     <meta name="theme-color" content="#4f46e5">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/static/style.css">
     <title>Enhanced Quick Fact Checker with Modern UI/UX</title>
 </head>
 <body>
@@ -125,6 +125,14 @@
                             </svg>
                             Share
                         </button>
+                        <button class="action-btn" id="details-btn" aria-label="More detailed analysis">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 3h18v4H3z"/>
+                                <path d="M3 10h18v11H3z"/>
+                                <path d="M7 14h2v4H7zM11 14h2v4h-2zM15 14h2v4h-2z"/>
+                            </svg>
+                            More detailed analysis
+                        </button>
                     </div>
                     <button class="retry-btn" id="retry-btn" style="display: none;" aria-label="Retry analysis">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -158,6 +166,30 @@
     <div class="toast" id="toast" role="alert" aria-live="assertive" aria-atomic="true"></div>
     <!-- Confetti Canvas (hidden by default) -->
     <canvas id="confetti-canvas" style="position: fixed; pointer-events: none; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; display: none;"></canvas>
-    <script src="script.js"></script>
+    <!-- Details Modal -->
+    <div id="details-modal" class="modal-overlay" style="display:none;">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <div class="modal-header">
+                <h2 id="modal-title">Model comparison</h2>
+                <button id="modal-close" class="modal-close" aria-label="Close">✖</button>
+            </div>
+            <div class="modal-body">
+                <div id="modal-summary" class="modal-summary"></div>
+                <div class="table-wrapper">
+                    <table class="comparison-table" aria-describedby="modal-title">
+                        <thead>
+                            <tr>
+                                <th>Model</th>
+                                <th>Prediction</th>
+                                <th>Confidence</th>
+                            </tr>
+                        </thead>
+                        <tbody id="comparison-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/script.js"></script>
 </body>
 </html>

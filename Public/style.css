@@ -605,4 +605,41 @@
         .retry-btn:hover {
             background: rgba(255,255,255,0.3);
         }
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        .modal-overlay.show { opacity: 1; }
+        .modal {
+            width: min(800px, 90vw);
+            background: var(--card-light);
+            color: var(--text-primary-light);
+            border-radius: 1rem;
+            box-shadow: var(--shadow-light);
+            border: 1px solid rgba(255,255,255,0.2);
+            overflow: hidden;
+            transform: translateY(10px);
+            animation: slideIn 0.2s ease forwards;
+        }
+        body.dark .modal { background: var(--card-dark); color: var(--text-primary-dark); box-shadow: var(--shadow-dark); border-color: rgba(255,255,255,0.1); }
+        @keyframes slideIn { to { transform: translateY(0); } }
+        .modal-header { display:flex; align-items:center; justify-content:space-between; padding: 1rem 1.25rem; border-bottom: 1px solid var(--border-light); }
+        body.dark .modal-header { border-color: var(--border-dark); }
+        .modal-body { padding: 1rem 1.25rem 1.5rem; }
+        .modal-close { background:none; border:none; font-size:1rem; cursor:pointer; color: inherit; }
+        .modal-summary { margin-bottom: 0.75rem; font-weight: 600; }
+        .table-wrapper { overflow-x:auto; }
+        .comparison-table { width:100%; border-collapse: collapse; }
+        .comparison-table th, .comparison-table td { text-align:left; padding: 0.75rem; border-bottom: 1px solid var(--border-light); }
+        body.dark .comparison-table th, body.dark .comparison-table td { border-color: var(--border-dark); }
+        .comparison-table thead th { background: rgba(79,70,229,0.08); }
+        .best-row { background: rgba(16,185,129,0.12); font-weight: 600; }
     
