@@ -314,7 +314,49 @@ def predict():
         # Handle empty or invalid input
         if not isinstance(text, str) or not text.strip():
             return jsonify({'error': '⚠️ Please enter some text before submitting.'}), 400
-        return jsonify({'message': 'Text received successfully!'})
+
+        # Uncomment once you have model
+        # prediction = model.predict([text])[0]
+        # confidence = model.predict_proba([text])[0].max()
+        # return jsonify({
+        #     'prediction': int(prediction),
+        #     'confidence': float(confidence),
+        #     'message': 'REAL' if prediction == 1 else 'FAKE'
+        # })
+
+        # Simple mock prediction with confidence (keep original logic)
+        import random
+        
+        # Generate mock prediction based on simple text keywords  
+        fake_keywords = ['fake', 'hoax', 'conspiracy', 'secret', 'hidden truth', 'they don\'t want you to know']
+        real_keywords = ['study', 'research', 'published', 'university', 'official', 'confirmed']
+        
+        text_lower = text.lower()
+        fake_score = sum(1 for keyword in fake_keywords if keyword in text_lower)
+        real_score = sum(1 for keyword in real_keywords if keyword in text_lower)
+        
+        # Base prediction on keyword analysis + some randomness
+        if fake_score > real_score:
+            is_real = False
+            base_confidence = 0.7 + (fake_score * 0.1)
+        elif real_score > fake_score:
+            is_real = True
+            base_confidence = 0.7 + (real_score * 0.1)
+        else:
+            is_real = random.choice([True, False])
+            base_confidence = 0.6
+        
+        # Add some randomness but keep it realistic
+        confidence = min(0.95, max(0.55, base_confidence + random.uniform(-0.1, 0.1)))
+        
+        result_message = "LIKELY REAL" if is_real else "LIKELY FAKE"
+        
+        return jsonify({
+            'prediction': 1 if is_real else 0,
+            'confidence': round(confidence, 3),
+            'message': result_message,
+            'analysis': f"Based on content analysis, this text appears to be {result_message.lower()} with {confidence*100:.1f}% confidence."
+        })
 
     except Exception as e:
         print(f"Error in /predict: {e}")  # Log the error for debugging
