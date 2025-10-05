@@ -1,0 +1,296 @@
+/* Language-specific styles and internationalization support */
+
+/* Language Selector */
+.language-selector {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.language-select {
+    padding: 0.5rem;
+    border: 1px solid var(--border-color, #e2e8f0);
+    border-radius: 0.375rem;
+    background-color: var(--bg-color, white);
+    color: var(--text-color, #1a202c);
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.language-select:hover {
+    border-color: var(--primary-color, #3b82f6);
+}
+
+.language-select:focus {
+    outline: none;
+    border-color: var(--primary-color, #3b82f6);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Dark mode language selector */
+.dark .language-select {
+    background-color: var(--dark-bg-secondary, #374151);
+    border-color: var(--dark-border, #4b5563);
+    color: var(--dark-text, #f3f4f6);
+}
+
+.dark .language-select:hover {
+    border-color: var(--primary-color, #3b82f6);
+}
+
+/* RTL (Right-to-Left) Support */
+[dir="rtl"] {
+    text-align: right;
+}
+
+[dir="rtl"] .container {
+    direction: rtl;
+}
+
+[dir="rtl"] .language-selector {
+    margin-left: 0;
+    margin-right: 1rem;
+}
+
+[dir="rtl"] .form-group {
+    text-align: right;
+}
+
+[dir="rtl"] .btn {
+    direction: rtl;
+}
+
+[dir="rtl"] .navbar {
+    direction: rtl;
+}
+
+[dir="rtl"] .navbar .nav-links {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .result-card {
+    text-align: right;
+}
+
+[dir="rtl"] .progress-bar {
+    direction: rtl;
+}
+
+/* Language-specific font adjustments */
+.lang-ar {
+    font-family: 'Noto Sans Arabic', 'Arial', sans-serif;
+}
+
+.lang-hi {
+    font-family: 'Noto Sans Devanagari', 'Arial', sans-serif;
+}
+
+.lang-zh {
+    font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+.lang-ja {
+    font-family: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+}
+
+.lang-ar, .lang-hi, .lang-zh, .lang-ja {
+    line-height: 1.6;
+}
+
+/* Font size adjustments for different languages */
+.lang-zh .form-control,
+.lang-ja .form-control {
+    font-size: 0.95rem;
+}
+
+.lang-ar .form-control,
+.lang-hi .form-control {
+    font-size: 1rem;
+}
+
+/* Button spacing adjustments for longer text in some languages */
+.lang-de .btn,
+.lang-ar .btn {
+    padding: 0.75rem 1.25rem;
+    min-width: auto;
+}
+
+/* Responsive language selector */
+@media (max-width: 768px) {
+    .language-selector {
+        margin: 0.5rem 0;
+        order: 2;
+    }
+    
+    .language-select {
+        width: 100%;
+        max-width: 150px;
+    }
+    
+    .navbar {
+        flex-wrap: wrap;
+    }
+    
+    /* RTL mobile adjustments */
+    [dir="rtl"] .navbar {
+        flex-direction: row-reverse;
+        flex-wrap: wrap;
+    }
+    
+    [dir="rtl"] .language-selector {
+        margin: 0.5rem 0;
+        order: 2;
+    }
+}
+
+/* Language-specific character count styles */
+.lang-ar .character-count,
+.lang-hi .character-count {
+    font-size: 0.875rem;
+}
+
+.lang-zh .character-count,
+.lang-ja .character-count {
+    font-size: 0.8rem;
+}
+
+/* Loading spinner RTL support */
+[dir="rtl"] .loading-spinner {
+    animation: spin-rtl 1s linear infinite;
+}
+
+@keyframes spin-rtl {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-360deg); }
+}
+
+/* Result card RTL adjustments */
+[dir="rtl"] .result-card .confidence-bar {
+    direction: ltr; /* Keep progress bars LTR for consistency */
+}
+
+[dir="rtl"] .result-card .btn-group {
+    flex-direction: row-reverse;
+}
+
+/* Dashboard RTL support */
+[dir="rtl"] .dashboard-controls {
+    text-align: right;
+}
+
+[dir="rtl"] .dashboard-controls select {
+    text-align: right;
+    direction: rtl;
+}
+
+[dir="rtl"] .chart-container {
+    direction: ltr; /* Keep charts LTR for data consistency */
+}
+
+/* History section RTL */
+[dir="rtl"] .history-item {
+    text-align: right;
+}
+
+[dir="rtl"] .history-item .timestamp {
+    float: left;
+}
+
+/* Accessibility improvements for different languages */
+.lang-ar *:focus,
+.lang-hi *:focus {
+    outline-offset: 3px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .language-select {
+        border-width: 2px;
+    }
+    
+    .language-select:focus {
+        box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* Print styles */
+@media print {
+    .language-selector {
+        display: none;
+    }
+    
+    [dir="rtl"] {
+        direction: rtl;
+    }
+}
+
+/* Animation support for language transitions */
+.i18n-fade-enter {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.i18n-fade-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.i18n-fade-exit {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.i18n-fade-exit-active {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Language-specific form validation messages */
+.lang-ar .form-error,
+.lang-hi .form-error {
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+/* Tooltip adjustments for RTL */
+[dir="rtl"] .tooltip {
+    direction: rtl;
+}
+
+[dir="rtl"] .tooltip-arrow {
+    transform: scaleX(-1);
+}
+
+/* Language switcher animations */
+.language-select {
+    transition: all 0.2s ease;
+}
+
+.language-select:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Language-specific placeholder styles */
+.lang-ar .form-control::placeholder {
+    opacity: 0.7;
+}
+
+.lang-hi .form-control::placeholder {
+    opacity: 0.8;
+}
+
+/* Support for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .language-select,
+    .i18n-fade-enter-active,
+    .i18n-fade-exit-active {
+        transition: none;
+    }
+    
+    .language-select:hover {
+        transform: none;
+    }
+}

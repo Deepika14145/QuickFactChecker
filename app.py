@@ -1,11 +1,16 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, g
 from flask_cors import CORS
 import os
+import json
 from dotenv import load_dotenv
 load_dotenv()   # loads variables from .env into os.environ
 
 app = Flask(__name__, static_folder='Public', template_folder='Public', static_url_path='')
 CORS(app)  # Enable CORS for all domains
+
+# Supported languages
+SUPPORTED_LANGUAGES = ['en', 'es', 'fr', 'de', 'ar', 'hi', 'zh', 'ja', 'pt']
+DEFAULT_LANGUAGE = 'en'
 
 # ------------------------------
 
@@ -17,9 +22,77 @@ CORS(app)  # Enable CORS for all domains
 # model = joblib.load(model_path)
 # ------------------------------
 
+def get_user_language():
+    """Detect user's preferred language from Accept-Language header or query parameter"""
+    # Check for explicit language parameter
+    lang = request.args.get('lang', '').lower()
+    if lang in SUPPORTED_LANGUAGES:
+        return lang
+    
+    # Check Accept-Language header
+    if request.headers.get('Accept-Language'):
+        for lang_code in request.headers.get('Accept-Language', '').split(','):
+            lang = lang_code.split(';')[0].strip().split('-')[0].lower()
+            if lang in SUPPORTED_LANGUAGES:
+                return lang
+    
+    return DEFAULT_LANGUAGE
+
 @app.route('/')
 def index():
-    return render_template('index.html')
+    """Main route with language detection"""
+    user_lang = get_user_language()
+    g.language = user_lang
+    return render_template('index_i18n.html')
+
+@app.route('/api/translations/<lang_code>')
+def get_translations(lang_code):
+    """API endpoint to fetch translation files"""
+    if lang_code not in SUPPORTED_LANGUAGES:
+        return jsonify({'error': 'Unsupported language'}), 400
+    
+    try:
+        translations_path = os.path.join('Public', 'locales', f'{lang_code}.json')
+        if os.path.exists(translations_path):
+            with open(translations_path, 'r', encoding='utf-8') as f:
+                translations = json.load(f)
+            return jsonify(translations)
+        else:
+            return jsonify({'error': 'Translation file not found'}), 404
+    except Exception as e:
+        print(f"Error loading translations for {lang_code}: {e}")
+        return jsonify({'error': 'Failed to load translations'}), 500
+
+@app.route('/api/languages')
+def get_supported_languages():
+    """API endpoint to get list of supported languages"""
+    language_info = {}
+    for lang in SUPPORTED_LANGUAGES:
+        try:
+            translations_path = os.path.join('Public', 'locales', f'{lang}.json')
+            if os.path.exists(translations_path):
+                with open(translations_path, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                    language_info[lang] = {
+                        'name': data.get('languages', {}).get(lang, lang.upper()),
+                        'available': True
+                    }
+            else:
+                language_info[lang] = {
+                    'name': lang.upper(),
+                    'available': False
+                }
+        except Exception:
+            language_info[lang] = {
+                'name': lang.upper(),
+                'available': False
+            }
+    
+    return jsonify({
+        'supported': SUPPORTED_LANGUAGES,
+        'default': DEFAULT_LANGUAGE,
+        'languages': language_info
+    })
 
 @app.route('/predict', methods=['POST'])
 def predict():
