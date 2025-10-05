@@ -1,6 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Free AI-powered tool to verify news articles and claims.">
+  <link rel="canonical" href="https://yoursite.com/fact-checker" />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="Quick Fact Checker">
+  <meta property="og:description" content="Verify news authenticity with AI-powered analysis.">
+  <meta property="og:image" content="https://yoursite.com/logo-preview.png">
+  <meta property="og:url" content="https://yoursite.com/fact-checker">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Quick Fact Checker">
+  <meta name="twitter:description" content="Verify news authenticity with AI-powered analysis.">
+  <meta name="twitter:image" content="https://yoursite.com/logo-preview.png">
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#4f46e5">
+
+  <link rel="stylesheet" href="style.css">
+  <title>Enhanced Quick Fact Checker with Modern UI/UX</title>
+
+  <!-- Chart.js -->
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Free AI-powered tool to verify news articles and claims." />
@@ -102,6 +127,64 @@
 
     <div class="container">
         <div class="header">
+
+            {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul style="color: red; font-weight: bold;">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+{% endwith %}
+
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
+          stroke-linecap="round" stroke-linejoin="round" class="theme-icon">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2"/>
+          <path d="M12 20v2"/>
+          <path d="m4.93 4.93 1.41 1.41"/>
+          <path d="m17.66 17.66 1.41 1.41"/>
+          <path d="M2 12h2"/>
+          <path d="M20 12h2"/>
+          <path d="m6.34 17.66-1.41 1.41"/>
+          <path d="m19.07 4.93-1.41 1.41"/>
+        </svg>
+      </button>
+
+      <div class="logo-container">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" 
+          viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14,2 14,8 20,8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+          <polyline points="10,9 9,9 8,9"/>
+        </svg>
+      </div>
+      <h1>Quick Fact Checker</h1>
+      <p class="subtitle">Verify the authenticity of news articles and claims with AI-powered analysis</p>
+    </div>
+
+    <!-- Main Fact Checker Card -->
+    <div class="main-card">
+      <form id="prediction-form" novalidate>
+        <div class="form-group">
+          <label for="text-input">Enter text to analyze</label>
+          <div class="textarea-container">
+            <textarea id="text-input" name="text" 
+              placeholder="Paste your article, news story, or claim here for fact-checking..." 
+              aria-describedby="char-count" required></textarea>
+            <div class="char-count" id="char-count">
+              <span id="char-count-text">0 characters</span>
+              <button type="button" class="clear-btn" id="clear-btn" aria-label="Clear text">✖️</button>
+
+{% endwith %}
+
             <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                      viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -133,6 +216,87 @@
             </div>
           </div>
         </div>
+
+
+
+        <div class="sample-inputs">
+          <p>Try these examples:</p>
+          <div class="sample-buttons">
+            <button type="button" class="sample-btn" data-sample="Scientists have discovered a new planet that is completely made of diamonds and is only 10 light years away from Earth.">Example 1</button>
+            <button type="button" class="sample-btn" data-sample="A recent study published in Nature shows that drinking 8 glasses of water daily significantly improves cognitive function in adults.">Example 2</button>
+            <button type="button" class="sample-btn" data-sample="Local government announces new infrastructure project to improve city transportation with $50 million budget allocation.">Example 3</button>
+          </div>
+        </div>
+
+        <button type="submit" id="submit-btn" class="btn-primary" aria-label="Analyze text">
+          <span class="btn-content">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" 
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="m21 21-4.35-4.35"/>
+            </svg> Analyze Text
+          </span>
+          <span class="loading-spinner" aria-hidden="true"></span>
+        </button>
+      </form>
+
+      <!-- Prediction Result -->
+      <div id="prediction-result" class="prediction-result" role="status" aria-live="polite" aria-atomic="true">
+        <div class="result-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
+            stroke-linecap="round" stroke-linejoin="round" class="result-icon-svg">
+            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <div class="result-content">
+          <div class="result-title" id="result-title">Analysis Result</div>
+          <div id="result-message">Processing your text...</div>
+          <div class="confidence-bar" id="confidence-bar" style="display: none;">
+            <div class="confidence-fill" id="confidence-fill"></div>
+          </div>
+          <div id="confidence-text" style="display: none;"></div>
+          <div class="result-actions">
+            <button class="action-btn" id="copy-btn" aria-label="Copy result">📋 Copy Result</button>
+            <button class="action-btn" id="share-btn" aria-label="Share result">🔗 Share</button>
+          </div>
+          <button class="retry-btn" id="retry-btn" style="display: none;" aria-label="Retry analysis">🔄 Retry</button>
+        </div>
+      </div>
+
+      <!-- History Section -->
+      <div class="history-card" id="history-card" style="display: none;">
+        <div class="history-header" id="history-header" role="button" aria-expanded="false" tabindex="0">
+          <div class="history-title">Recent Checks (<span id="history-count">0</span>)</div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" 
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
+            stroke-linecap="round" stroke-linejoin="round" class="history-toggle" id="history-toggle">
+            <polyline points="6,9 12,15 18,9"/>
+          </svg>
+        </div>
+        <div class="history-items" id="history-items" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <!-- 🆕 Model Performance Dashboard -->
+    <div class="dashboard-card">
+      <h2>Model Performance Dashboard</h2>
+      <div class="dashboard-filters">
+        <label for="model-select">Choose Models:</label>
+        <select id="model-select" multiple>
+          <option value="Logistic Regression">Logistic Regression</option>
+          <option value="Random Forest">Random Forest</option>
+          <option value="LSTM">LSTM</option>
+        </select>
+
+        <label for="dataset-select">Dataset:</label>
+        <select id="dataset-select">
+          <option value="train">Train</option>
+          <option value="test" selected>Test</option>
+          <option value="valid">Validation</option>
+        </select>
 
         <div class="main-card">
             <form id="prediction-form" novalidate>
@@ -236,6 +400,7 @@
 
         </div>
         <div>
+
         <label for="metric-select">Metric:</label>
         <select id="metric-select">
           <option value="accuracy">Accuracy</option>
@@ -243,6 +408,20 @@
           <option value="recall">Recall</option>
           <option value="f1">F1-Score</option>
         </select>
+
+      </div>
+
+      <div class="chart-box">
+        <canvas id="dashboard-chart" height="300"></canvas>
+      </div>
+
+      <div class="summary-box" id="summary-box">
+        <h3>Summary Insights</h3>
+        <p id="summary-text">Select a model to see insights...</p>
+      </div>
+    </div>
+  </div>
+
         </div>
       </div>
     </div>
@@ -395,12 +574,15 @@
   <div class="charts">
         <canvas id="confusion-matrix-chart"></canvas>
         <canvas id="roc-curve-chart"></canvas>
-    </div>
+
   <!-- Toast + Confetti -->
   <div class="toast" id="toast" role="alert" aria-live="assertive" aria-atomic="true"></div>
   <canvas id="confetti-canvas" style="position: fixed; pointer-events: none; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; display: none;"></canvas>
 
   <!-- Scripts -->
+
+  <script src="script.js"></script>
+
   <script src="script.js"></script
     
   <!-- Flask static URL for JS -->
