@@ -1,10 +1,12 @@
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder
+from sklearn.pipeline import Pipeline
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, precision_score, f1_score, confusion_matrix
+from sklearn.metrics import accuracy_score, precision_score, f1_score, confusion_matrix, classification_report
 import matplotlib.pyplot as plt
 import seaborn as sns
 import os
@@ -69,14 +71,22 @@ df.columns = [
 X = df["statement"]
 y = df["label"]
 
+
+# ✅ Encode labels (string → integers)
+le = LabelEncoder()
+y = le.fit_transform(y)
+
+# Split dataset (stratified to keep class distribution)
+
 # -------------------------
 # TF-IDF + sklearn setup
 # -------------------------
 vectorizer = TfidfVectorizer(max_features=5000, stop_words="english")
 X_vec = vectorizer.fit_transform(X)
 
+
 X_train, X_test, y_train, y_test = train_test_split(
-    X_vec, y, test_size=0.2, random_state=42
+    X, y, test_size=0.2, random_state=42, stratify=y
 )
 
 # -------------------------
@@ -100,18 +110,42 @@ def train_and_evaluate(model, name, results):
         plt.savefig(RESULTS_DIR / f"{name.lower().replace(' ', '_')}_confusion.png")
         plt.close()
 
+        # Print classification report for detailed metrics
+        print(f"\n📊 Classification Report for {name}:\n")
+        print(classification_report(y_test, y_pred, target_names=le.classes_))
+
     except Exception as e:
         print(f"⚠️ Error training {name}: {type(e).__name__}: {e}")
         results[name] = {"accuracy": 0.0, "precision": 0.0, "f1": 0.0}
 
 # -------------------------
+
+# Define models with Pipelines
+# -------------------------
+models = {
+    "Naive Bayes": Pipeline([
+        ("tfidf", TfidfVectorizer(max_features=5000, stop_words="english")),
+        ("clf", MultinomialNB())
+    ]),
+    "Logistic Regression": Pipeline([
+        ("tfidf", TfidfVectorizer(max_features=5000, stop_words="english")),
+        ("clf", LogisticRegression(max_iter=1000))
+    ]),
+    "Random Forest": Pipeline([
+        ("tfidf", TfidfVectorizer(max_features=5000, stop_words="english")),
+        ("clf", RandomForestClassifier(n_estimators=100, random_state=42))
+    ])
+}
+
+# -------------------------
+# Train models
+=======
 # Train sklearn models
+
 # -------------------------
 results = {}
-
-train_and_evaluate(MultinomialNB(), "Naive Bayes", results)
-train_and_evaluate(LogisticRegression(max_iter=1000), "Logistic Regression", results)
-train_and_evaluate(RandomForestClassifier(n_estimators=100, random_state=42), "Random Forest", results)
+for name, model in models.items():
+    train_and_evaluate(model, name, results)
 
 # -------------------------
 # Hugging Face Transformer API
@@ -171,12 +205,18 @@ except Exception as e:
 # Plot comparison
 # -------------------------
 try:
-    models = list(results.keys())
-    accuracies = [results[m]["accuracy"] for m in models]
+    models_list = list(results.keys())
+    accuracies = [results[m]["accuracy"] for m in models_list]
+
+
+    plt.figure(figsize=(8, 5))
+    plt.bar(models_list, accuracies, color=['skyblue', 'lightgreen', 'salmon'])
+    plt.ylim(0, 1.0)
 
     plt.figure(figsize=(9, 5))
     plt.bar(models, accuracies, color=['skyblue', 'lightgreen', 'salmon', 'violet'])
     plt.ylim(0, 1)
+
     plt.xlabel("Models")
     plt.ylabel("Accuracy")
     plt.title("Model Accuracy Comparison")

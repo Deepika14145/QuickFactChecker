@@ -8,6 +8,24 @@ QuickFactChecker is a **machine learning–based web app** that helps detect whe
 It uses different models (e.g., Naive Bayes, LSTM) trained on the **LIAR dataset** to evaluate credibility and assist users in identifying potentially misleading information.
 
 ---
+## 🌟GSSoc 
+![GSSoC Logo](https://github.com/dimpal-yadav/QuickFactChecker/blob/add-gssoc-banner/GSSoC.png)
+🌟 **Exciting News...**
+
+🚀 This project is now an official part of GirlScript Summer of Code – GSSoC'25! 💻 We're thrilled to welcome contributors from all over India and beyond to collaborate, build, and grow *QuickFactChecker!* Let’s make learning and career development smarter – together! 🌟
+
+👩‍💻 GSSoC is one of India’s **largest 3-month-long open-source programs** that encourages developers of all levels to contribute to real-world projects 🌍 while learning, collaborating, and growing together. 🌱
+
+🌈 With **mentorship, community support**, and **collaborative coding**, it's the perfect platform for developers to:
+
+- ✨ Improve their skills
+- 🤝 Contribute to impactful projects
+- 🏆 Get recognized for their work
+- 📜 Receive certificates and swag!
+
+🎉 **I can’t wait to welcome new contributors** from GSSoC 2025 to this QuickFactChecker project family! Let's build, learn, and grow together — one commit at a time. 🔥
+
+---
 
 ## ✨ Features
 - ✅ Fake news classification using ML models (**Naive Bayes**, **Logistic Regression**, **Random Forest**, and **LSTM**).
@@ -160,6 +178,19 @@ For queries, feedback, or guidance regarding this project, you can contact the *
  
 Original Repository: [QuickFactChecker](https://github.com/Deepika14145/QuickFactChecker.git)  
 
+## Contributor
+
+A heartfelt thank you to all the contributors who have dedicated their time and effort to make this project a success.  
+Your contributions—whether it’s code, design, testing, or documentation—are truly appreciated! 🚀
+
+#### Thanks to all the wonderful contributors 💖
+
+<a href="https://github.com/Deepika14145/QuickFactChecker/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Deepika14145/QuickFactChecker" />
+</a>
+
+
+See full list of contribution from contributor [Contributor Graph](https://github.com/Deepika14145/QuickFactChecker/graphs/contributors)
 
 
 ## 📄 **License**
