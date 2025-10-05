@@ -1,6 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free AI-powered tool to verify news articles and claims.">
+    <link rel="canonical" href="https://yoursite.com/fact-checker" />
+    <!-- Open Graph / Social -->
+    <meta property="og:title" content="Quick Fact Checker">
+    <meta property="og:description" content="Verify news authenticity with AI-powered analysis.">
+    <meta property="og:image" content="https://yoursite.com/logo-preview.png">
+    <meta property="og:url" content="https://yoursite.com/fact-checker">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Quick Fact Checker">
+    <meta name="twitter:description" content="Verify news authenticity with AI-powered analysis.">
+    <meta name="twitter:image" content="https://yoursite.com/logo-preview.png">
+    <!-- PWA -->
+    <link rel="manifest" href="/static/manifest.json">
+    <meta name="theme-color" content="#4f46e5">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Enhanced Quick Fact Checker with Modern UI/UX</title>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Free AI-powered tool to verify news articles and claims.">
+  <link rel="canonical" href="https://yoursite.com/fact-checker" />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="Quick Fact Checker">
+  <meta property="og:description" content="Verify news authenticity with AI-powered analysis.">
+  <meta property="og:image" content="https://yoursite.com/logo-preview.png">
+  <meta property="og:url" content="https://yoursite.com/fact-checker">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Quick Fact Checker">
+  <meta name="twitter:description" content="Verify news authenticity with AI-powered analysis.">
+  <meta name="twitter:image" content="https://yoursite.com/logo-preview.png">
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#4f46e5">
+
+  <link rel="stylesheet" href="style.css">
+  <title>Enhanced Quick Fact Checker with Modern UI/UX</title>
+
+  <!-- Chart.js -->
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Free AI-powered tool to verify news articles and claims." />
@@ -27,6 +70,7 @@
 
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 <body>
   <!-- Navigation Bar -->
@@ -123,15 +167,55 @@
         <div class="form-group">
           <label for="text-input">Enter text to analyze</label>
           <div class="textarea-container">
-            <textarea id="text-input" name="text"
-              placeholder="Paste your article, news story, or claim here for fact-checking..."
+            <textarea id="text-input" name="text" 
+              placeholder="Paste your article, news story, or claim here for fact-checking..." 
               aria-describedby="char-count" required></textarea>
             <div class="char-count" id="char-count">
               <span id="char-count-text">0 characters</span>
               <button type="button" class="clear-btn" id="clear-btn" aria-label="Clear text">✖️</button>
             </div>
           </div>
+          <div id="confidence-text" style="display: none;"></div>
+          <div class="result-actions">
+            <button class="action-btn" id="copy-btn" aria-label="Copy result">📋 Copy Result</button>
+            <button class="action-btn" id="share-btn" aria-label="Share result">🔗 Share</button>
+          </div>
+          <button class="retry-btn" id="retry-btn" style="display: none;" aria-label="Retry analysis">🔄 Retry</button>
         </div>
+      </div>
+
+      <!-- History Section -->
+      <div class="history-card" id="history-card" style="display: none;">
+        <div class="history-header" id="history-header" role="button" aria-expanded="false" tabindex="0">
+          <div class="history-title">Recent Checks (<span id="history-count">0</span>)</div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" 
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
+            stroke-linecap="round" stroke-linejoin="round" class="history-toggle" id="history-toggle">
+            <polyline points="6,9 12,15 18,9"/>
+          </svg>
+        </div>
+        <div class="history-items" id="history-items" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <!-- 🆕 Model Performance Dashboard -->
+    <div class="dashboard-card">
+      <h2>Model Performance Dashboard</h2>
+      <div class="dashboard-filters">
+        <label for="model-select">Choose Models:</label>
+        <select id="model-select" multiple>
+          <option value="Logistic Regression">Logistic Regression</option>
+          <option value="Random Forest">Random Forest</option>
+          <option value="LSTM">LSTM</option>
+        </select>
+
+        <label for="dataset-select">Dataset:</label>
+        <select id="dataset-select">
+          <option value="train">Train</option>
+          <option value="test" selected>Test</option>
+          <option value="valid">Validation</option>
+        </select>
+
 
         <!-- Example section -->
         <div class="sample-inputs">
@@ -198,16 +282,9 @@
           <button class="retry-btn" id="retry-btn" style="display: none;" aria-label="Retry analysis">🔄 Retry</button>
         </div>
       </div>
+    </div>
+  </div>
 
-      <!-- History Section -->
-      <div class="history-card" id="history-card" style="display: none;">
-        <div class="history-header" id="history-header" role="button" aria-expanded="false" tabindex="0">
-          <div class="history-title">Recent Checks (<span id="history-count">0</span>)</div>
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" 
-            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
-            stroke-linecap="round" stroke-linejoin="round" class="history-toggle" id="history-toggle">
-            <polyline points="6,9 12,15 18,9"/>
-          </svg>
         </div>
         <div class="history-items" id="history-items" aria-live="polite"></div>
       </div>
@@ -346,4 +423,4 @@
   <!-- Scripts -->
   <script src="script.js"></script>
 </body>
-</html>
+</html>  
