@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free AI-powered tool to verify news articles and claims.">
+    <link rel="canonical" href="https://yoursite.com/fact-checker" />
+    <!-- Open Graph / Social -->
+    <meta property="og:title" content="Quick Fact Checker">
+    <meta property="og:description" content="Verify news authenticity with AI-powered analysis.">
+    <meta property="og:image" content="https://yoursite.com/logo-preview.png">
+    <meta property="og:url" content="https://yoursite.com/fact-checker">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Quick Fact Checker">
+    <meta name="twitter:description" content="Verify news authenticity with AI-powered analysis.">
+    <meta name="twitter:image" content="https://yoursite.com/logo-preview.png">
+    <!-- PWA -->
+    <link rel="manifest" href="/static/manifest.json">
+    <meta name="theme-color" content="#4f46e5">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Enhanced Quick Fact Checker with Modern UI/UX</title>
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -62,83 +80,24 @@
   <!-- Chart.js CDN -->
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 <body>
-  <div class="container">
-
-    <!-- Header -->
-
-    <div class="header">
-      <!-- Flash messages -->
-      {% with messages = get_flashed_messages() %}
-        {% if messages %}
-          <ul style="color: red; font-weight: bold;">
-            {% for message in messages %}
-              <li>{{ message }}</li>
-            {% endfor %}
-          </ul>
-        {% endif %}
-      {% endwith %}
-
-      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-          stroke-linecap="round" stroke-linejoin="round" class="theme-icon">
-          <circle cx="12" cy="12" r="4"/>
-          <path d="M12 2v2"/>
-          <path d="M12 20v2"/>
-          <path d="m4.93 4.93 1.41 1.41"/>
-          <path d="m17.66 17.66 1.41 1.41"/>
-          <path d="M2 12h2"/>
-          <path d="M20 12h2"/>
-          <path d="m6.34 17.66-1.41 1.41"/>
-          <path d="m19.07 4.93-1.41 1.41"/>
-        </svg>
-      </button>
-
-      <div class="logo-container">
-        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
-          viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-          <polyline points="14,2 14,8 20,8"/>
-          <line x1="16" y1="13" x2="8" y2="13"/>
-          <line x1="16" y1="17" x2="8" y2="17"/>
-          <polyline points="10,9 9,9 8,9"/>
-        </svg>
-      </div>
-      <h1>Quick Fact Checker</h1>
-      <p class="subtitle">Verify the authenticity of news articles and claims with AI-powered analysis</p>
-    </div>
-
-    <!-- Main Fact Checker Card -->
-    <div class="main-card">
-      <form id="prediction-form" method="POST" action="{{ url_for('predict') }}" novalidate>
-        <div class="form-group">
-          <label for="text-input">Enter text to analyze</label>
-          <div class="textarea-container">
-            <textarea id="text-input" name="text"
-              placeholder="Paste your article, news story, or claim here for fact-checking..."
-              aria-describedby="char-count" required></textarea>
-            <div class="char-count" id="char-count">
-              <span id="char-count-text">0 characters</span>
-              <button type="button" class="clear-btn" id="clear-btn" aria-label="Clear text">✖️</button>
-
-
     <div class="container">
         <div class="header">
 
-            {% with messages = get_flashed_messages() %}
-  {% if messages %}
+<!--             {% with messages = get_flashed_messages() %} -->
+<!--   {% if messages %} -->
     <ul style="color: red; font-weight: bold;">
-      {% for message in messages %}
+<!--       {% for message in messages %} -->
         <li>{{ message }}</li>
-      {% endfor %}
+<!--       {% endfor %} -->
     </ul>
-  {% endif %}
+<!--   {% endif %} -->
 
-{% endwith %}
 
+<!-- {% endwith %}
+ -->
       <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
           viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
@@ -183,13 +142,9 @@
               <span id="char-count-text">0 characters</span>
               <button type="button" class="clear-btn" id="clear-btn" aria-label="Clear text">✖️</button>
 
-{% endwith %}
 
             <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                     class="theme-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon">
                     <circle cx="12" cy="12" r="4"/>
                     <path d="M12 2v2"/>
                     <path d="M12 20v2"/>
@@ -202,20 +157,18 @@
                 </svg>
             </button>
             <div class="logo-container">
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
-                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                     <polyline points="14,2 14,8 20,8"/>
                     <line x1="16" y1="13" x2="8" y2="13"/>
                     <line x1="16" y1="17" x2="8" y2="17"/>
                     <polyline points="10,9 9,9 8,9"/>
                 </svg>
-
-
             </div>
-          </div>
+            <h1>Quick Fact Checker</h1>
+            <p class="subtitle">Verify the authenticity of news articles and claims with AI-powered analysis</p>
         </div>
+
 
 
 
@@ -298,6 +251,7 @@
           <option value="valid">Validation</option>
         </select>
 
+
         <div class="main-card">
             <form id="prediction-form" novalidate>
                 <div class="form-group">
@@ -326,9 +280,7 @@
                 </div>
                 <button type="submit" id="submit-btn" class="btn-primary" aria-label="Analyze text">
                     <span class="btn-content">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="11" cy="11" r="8"/>
                             <path d="m21 21-4.35-4.35"/>
                         </svg>
@@ -339,10 +291,10 @@
             </form>
             <div id="prediction-result" class="prediction-result" role="status" aria-live="polite" aria-atomic="true">
                 <div class="result-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                         class="result-icon-svg"></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="result-icon-svg">
+                        <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+                        <path d="m9 12 2 2 4-4"/>
+                    </svg>
                 </div>
                 <div class="result-content">
                     <div class="result-title" id="result-title">Analysis Result</div>
@@ -352,26 +304,58 @@
                     </div>
                     <div id="confidence-text" style="display: none;"></div>
                     <div class="result-actions">
-                        <button class="action-btn" id="copy-btn" aria-label="Copy result">Copy</button>
-                        <button class="action-btn" id="share-btn" aria-label="Share result">Share</button>
+                        <button class="action-btn" id="copy-btn" aria-label="Copy result">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+                                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+                            </svg>
+                            Copy Result
+                        </button>
+                        <button class="action-btn" id="share-btn" aria-label="Share result">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
+                                <polyline points="16,6 12,2 8,6"/>
+                                <line x1="12" y1="2" x2="12" y2="15"/>
+                            </svg>
+                            Share
+                        </button>
+                        <button class="action-btn" id="details-btn" aria-label="More detailed analysis">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 3h18v4H3z"/>
+                                <path d="M3 10h18v11H3z"/>
+                                <path d="M7 14h2v4H7zM11 14h2v4h-2zM15 14h2v4h-2z"/>
+                            </svg>
+                            More detailed analysis
+                        </button>
                     </div>
-                    <button class="retry-btn" id="retry-btn" style="display: none;" aria-label="Retry analysis">Retry</button>
+                    <button class="retry-btn" id="retry-btn" style="display: none;" aria-label="Retry analysis">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 2v6h-6"/>
+                            <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+                            <path d="M3 22v-6h6"/>
+                            <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+                        </svg>
+                        Retry
+                    </button>
                 </div>
             </div>
         </div>
         <div class="history-card" id="history-card" style="display: none;">
             <div class="history-header" id="history-header" role="button" aria-expanded="false" tabindex="0">
                 <div class="history-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                        <path d="M3 3v5h5"/>
+                        <path d="M12 7v5l4 2"/>
+                    </svg>
                     Recent Checks (<span id="history-count">0</span>)
                 </div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                     class="history-toggle" id="history-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="history-toggle" id="history-toggle">
                     <polyline points="6,9 12,15 18,9"/>
                 </svg>
             </div>
             <div class="history-items" id="history-items" aria-live="polite"></div>
+
 
 
         
@@ -423,95 +407,36 @@
   </div>
 
         </div>
-      </div>
     </div>
-
     <div class="toast" id="toast" role="alert" aria-live="assertive" aria-atomic="true"></div>
+    <!-- Confetti Canvas (hidden by default) -->
     <canvas id="confetti-canvas" style="position: fixed; pointer-events: none; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; display: none;"></canvas>
-    <script src="script.js"></script>
-
-
-      <!-- example section -->
-        <div class="sample-inputs">
-          <p>Try these examples:</p>
-          <div class="sample-buttons">
-            <button type="button" class="sample-btn" data-sample="Holding your breath for more than 15 seconds is a valid self-test for COVID-19. If you can do it without coughing, you don't have the virus.">💉 COVID-19 Climate Vaccine Claim</button>
-            <button type="button" class="sample-btn" data-sample="An AI system called AlphaFold successfully predicted the 3D structures of over 200 million proteins, a breakthrough that could dramatically accelerate biological research.">🤖 AI Capabilities</button>
-            <button type="button" class="sample-btn" data-sample="With more than 968 million eligible voters in its 2024 general election, India remains the world's largest democracy by population.">🗣️ Political Speech Fact</button>
-          </div>
+    <!-- Details Modal -->
+    <div id="details-modal" class="modal-overlay" style="display:none;">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <div class="modal-header">
+                <h2 id="modal-title">Model comparison</h2>
+                <button id="modal-close" class="modal-close" aria-label="Close">✖</button>
+            </div>
+            <div class="modal-body">
+                <div id="modal-summary" class="modal-summary"></div>
+                <div class="table-wrapper">
+                    <table class="comparison-table" aria-describedby="modal-title">
+                        <thead>
+                            <tr>
+                                <th>Model</th>
+                                <th>Prediction</th>
+                                <th>Confidence</th>
+                            </tr>
+                        </thead>
+                        <tbody id="comparison-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
         </div>
+    </div>
+    <script src="/static/script.js"></script>
 
-        <button type="submit" id="submit-btn" class="btn-primary" aria-label="Analyze text">
-          <span class="btn-content">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-              viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="11" cy="11" r="8"/>
-              <path d="m21 21-4.35-4.35"/>
-            </svg>
-            Analyze Text
-          </span>
-          <span class="loading-spinner" aria-hidden="true"></span>
-        </button>
-      </form>
-
-      <!-- Prediction Result -->
-      <div id="prediction-result" class="prediction-result" role="status" aria-live="polite" aria-atomic="true">
-        <div class="result-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round" class="result-icon-svg">
-            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
-            <path d="m9 12 2 2 4-4"/>
-          </svg>
-        </div>
-        <div class="result-content">
-          <div class="result-title" id="result-title">Analysis Result</div>
-          <div id="result-message">Processing your text...</div>
-          <div class="confidence-bar" id="confidence-bar" style="display: none;">
-            <div class="confidence-fill" id="confidence-fill"></div>
-          </div>
-          <div id="confidence-text" style="display: none;"></div>
-          <div class="result-actions">
-            <button class="action-btn" id="copy-btn" aria-label="Copy result">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
-                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
-              </svg>
-              Copy Result
-            </button>
-            <button class="action-btn" id="share-btn" aria-label="Share result">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
-                <polyline points="16,6 12,2 8,6"/>
-                <line x1="12" y1="2" x2="12" y2="15"/>
-              </svg>
-              Share Result
-            </button>
-          </div>
-          <button class="retry-btn" id="retry-btn" style="display: none;" aria-label="Retry analysis">🔄 Retry</button>
-
-        </div>
-
-        <div class="history-items" id="history-items" aria-live="polite"></div>
-      </div>
-
-      <!-- History Section -->
-      <div class="history-card" id="history-card" style="display: none;">
-        <div class="history-header" id="history-header" role="button" aria-expanded="false" tabindex="0">
-          <div class="history-title">Recent Checks (<span id="history-count">0</span>)</div>
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" 
-            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
-            stroke-linecap="round" stroke-linejoin="round" class="history-toggle" id="history-toggle">
-            <polyline points="6,9 12,15 18,9"/>
-          </svg>
-        </div>
-
-        </div>
 
         <div class="history-items" id="history-items" aria-live="polite"></div>
       </div>
@@ -589,4 +514,4 @@
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 </body>
-</html>
+</html>  
