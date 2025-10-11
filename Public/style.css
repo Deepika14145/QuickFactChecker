@@ -1308,3 +1308,15 @@ body.dark .summary-box p { color: var(--text-secondary-dark); }
     height: 250px;
   }
 }
+
+/* Force prediction result below inputs */
+.main-card {
+    display: flex;
+    flex-direction: column; /* stack items vertically */
+    gap: 1.5rem; /* space between inputs, button, and result */
+}
+
+.prediction-result {
+    transform: none !important; /* remove overlapping translation */
+    margin-top: 0; /* spacing handled by gap */
+}
