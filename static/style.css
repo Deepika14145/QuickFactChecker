@@ -247,7 +247,7 @@ body.dark .theme-toggle:hover {
 
 .login-btn {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: white;
+    color: black;
     border: none;
     padding: 0.75rem 1.5rem;
     border-radius: 25px;
@@ -595,8 +595,9 @@ body.dark .logo-container {
 }
 
 h1 {
+    
     font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 700;
+    font-weight: 800;
     margin-bottom: 0.5rem;
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     -webkit-background-clip: text;
@@ -632,8 +633,8 @@ body.dark .main-card {
 .form-group { margin-bottom: 2rem; }
 label {
     display: block;
-    font-size: 0.875rem;
-    font-weight: 600;
+    font-size: 1.600rem;
+    font-weight: 800;
     margin-bottom: 0.75rem;
     color: var(--text-primary-light);
 }
@@ -1388,3 +1389,17 @@ body.dark .summary-box p { color: var(--text-secondary-dark); }
 }
 
 
+
+
+
+/* Force prediction result below inputs */
+.main-card {
+    display: flex;
+    flex-direction: column; /* stack items vertically */
+    gap: 1.5rem; /* space between inputs, button, and result */
+}
+
+.prediction-result {
+    transform: none !important; /* remove overlapping translation */
+    margin-top: 0; /* spacing handled by gap */
+}
