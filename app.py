@@ -23,9 +23,9 @@ pad_sequences = None  # type: ignore
 # Serve files from the Public folder
 # static_url_path='' means static files are served from root ('/style.css', '/script.js')
 # Serve static from /static to prevent it from shadowing API routes like /predict_all
-app = Flask(__name__, static_folder='Public', template_folder='Public', static_url_path='/static')
+app = Flask(__name__)
 CORS(app)  # Enable CORS for all do
-s
+
 
 # Supported languages
 SUPPORTED_LANGUAGES = ['en', 'es', 'fr', 'de', 'ar', 'hi', 'zh', 'ja', 'pt']
@@ -55,6 +55,14 @@ def get_user_language():
     return DEFAULT_LANGUAGE
 
 @app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
+
 def index():
     """Main route with language detection"""
     user_lang = get_user_language()
@@ -398,4 +406,4 @@ def predict_all():
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=False)
+    app.run(host='0.0.0.0', port=port, debug=True)

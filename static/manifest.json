@@ -1,0 +1,12 @@
+{
+  "name": "Quick Fact Checker",
+  "short_name": "FactChecker",
+  "description": "Free AI-powered tool to verify news articles and claims in real-time.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4f46e5",
+  "orientation": "portrait",
+  "icons": [
+  ]
+}

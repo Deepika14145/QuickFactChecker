@@ -17,7 +17,7 @@
     <!-- PWA -->
     <link rel="manifest" href="/static/manifest.json">
     <meta name="theme-color" content="#4f46e5">
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Enhanced Quick Fact Checker with Modern UI/UX</title>
 
   <meta charset="UTF-8">
@@ -39,7 +39,7 @@
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#4f46e5">
 
-  <link rel="stylesheet" href="style.css">
+ <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <title>Enhanced Quick Fact Checker with Modern UI/UX</title>
 
   <!-- Chart.js -->
@@ -63,13 +63,14 @@
   <meta name="theme-color" content="#4f46e5" />
 
   <!-- Direct CSS link -->
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
 
   <title>Enhanced Quick Fact Checker with Modern UI/UX</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </head>
 <body>
@@ -95,9 +96,10 @@
       
       <div class="nav-center">
         <ul class="nav-links">
-          <li><a href="#about" class="nav-link">About</a></li>
-          <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
-          <li><a href="#blog" class="nav-link">Blog</a></li>
+          <li><a href="/#about" class="nav-link">About</a></li>
+          <li><a href="/#how-it-works" class="nav-link">How It Works</a></li>
+          <li><a href="/#blog" class="nav-link">Blog</a></li>
+          <a href="/dashboard" class="nav-dashboard">Dashboard</a>
           <li>  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -179,8 +181,22 @@
           <div class="result-actions">
             <button class="action-btn" id="copy-btn" aria-label="Copy result">📋 Copy Result</button>
             <button class="action-btn" id="share-btn" aria-label="Share result">🔗 Share</button>
-          </div>
-          <button class="retry-btn" id="retry-btn" style="display: none;" aria-label="Retry analysis">🔄 Retry</button>
+            
+            <div class="model-dataset-inline">
+              <label for="model-select">🧠Model:</label>
+              <select id="model-select">
+                <option value="Logistic Regression">Logistic Regression</option>
+                <option value="Random Forest">Random Forest</option>
+                <option value="LSTM">LSTM</option>
+              </select>
+
+              <label for="dataset-select">🗄️Dataset:</label>
+              <select id="dataset-select">
+                <option value="train">Train</option>
+                <option value="test" selected>Test</option>
+                <option value="valid">Validation</option>
+              </select>
+            </div>
         </div>
       </div>
 
@@ -197,24 +213,6 @@
         <div class="history-items" id="history-items" aria-live="polite"></div>
       </div>
     </div>
-
-    <!-- 🆕 Model Performance Dashboard -->
-    <div class="dashboard-card">
-      <h2>Model Performance Dashboard</h2>
-      <div class="dashboard-filters">
-        <label for="model-select">Choose Models:</label>
-        <select id="model-select" multiple>
-          <option value="Logistic Regression">Logistic Regression</option>
-          <option value="Random Forest">Random Forest</option>
-          <option value="LSTM">LSTM</option>
-        </select>
-
-        <label for="dataset-select">Dataset:</label>
-        <select id="dataset-select">
-          <option value="train">Train</option>
-          <option value="test" selected>Test</option>
-          <option value="valid">Validation</option>
-        </select>
 
 
         <!-- Example section -->
@@ -289,50 +287,51 @@
         <div class="history-items" id="history-items" aria-live="polite"></div>
       </div>
     </div>
-
-    <!-- Model Performance Dashboard -->
+    <!---Dashboard section-->
     <div class="dashboard-card">
-      <h2>Model Performance Dashboard</h2>
-      <div class="dashboard-filters">
-        <label for="model-select">Choose Models:</label>
-        <select id="model-select" multiple>
-          <option value="logreg">Logistic Regression</option>
-          <option value="rf">Random Forest</option>
-          <option value="lstm">LSTM</option>
-        </select>
+            <h2 data-i18n="dashboard.title">Model Performance Dashboard</h2>
+            
+            <div class="dashboard-filters">
+                <div class="filter-group">
+                    <label for="model-select" data-i18n="dashboard.model_label">Choose Models:</label>
+                    <select id="model-select" multiple>
+                        <option value="logreg" data-i18n="dashboard.models.logreg">Logistic Regression</option>
+                        <option value="rf" data-i18n="dashboard.models.rf">Random Forest</option>
+                        <option value="lstm" data-i18n="dashboard.models.lstm">LSTM</option>
+                    </select>
+                </div>
 
-        <label for="dataset-select">Dataset:</label>
-        <select id="dataset-select">
-          <option value="train">Train</option>
-          <option value="test" selected>Test</option>
-          <option value="valid">Validation</option>
-        </select>
+                <div class="filter-group">
+                    <label for="dataset-select" data-i18n="dashboard.dataset_label">Dataset:</label>
+                    <select id="dataset-select">
+                        <option value="train" data-i18n="dashboard.datasets.train">Train</option>
+                        <option value="test" selected data-i18n="dashboard.datasets.test">Test</option>
+                        <option value="valid" data-i18n="dashboard.datasets.valid">Validation</option>
+                    </select>
+                </div>
 
-        <label for="metric-select">Metric:</label>
-        <select id="metric-select">
-          <option value="accuracy">Accuracy</option>
-          <option value="precision">Precision</option>
-          <option value="recall">Recall</option>
-          <option value="f1">F1-Score</option>
-        </select>
-      </div>
+                <div class="filter-group">
+                    <label for="metric-select" data-i18n="dashboard.metric_label">Metric:</label>
+                    <select id="metric-select">
+                        <option value="accuracy" data-i18n="dashboard.metrics.accuracy">Accuracy</option>
+                        <option value="precision" data-i18n="dashboard.metrics.precision">Precision</option>
+                        <option value="recall" data-i18n="dashboard.metrics.recall">Recall</option>
+                        <option value="f1" data-i18n="dashboard.metrics.f1">F1-Score</option>
+                    </select>
+                </div>
+            </div>
 
-      <div class="chart-box">
-        <canvas id="dashboard-chart" height="300"></canvas>
-      </div>
+            <div class="chart-container">
+                <canvas id="dashboard-chart" height="300"></canvas>
+            </div>
 
-      <div class="charts">
-        <canvas id="confusion-matrix-chart"></canvas>
-        <canvas id="roc-curve-chart"></canvas>
-      </div>
-
-      <div class="summary-box" id="summary-box">
-        <h3>Summary Insights</h3>
-        <p id="summary-text">Select a model to see insights...</p>
-      </div>
-    </div>
-  </div>
-
+            <div class="summary-box" id="summary-box">
+                <h3 data-i18n="dashboard.summary">Summary Insights</h3>
+                <p id="summary-text" data-i18n="dashboard.summary_default">Select a model to see insights...</p>
+            </div>
+        </div>
+    </main>
+    
   <!-- Footer -->
   <footer class="footer">
     <div class="footer-container">
