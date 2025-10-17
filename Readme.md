@@ -38,35 +38,68 @@ It uses different models (e.g., Naive Bayes, LSTM) trained on the **LIAR dataset
 ---
 
 ## 📂 Project Structure
-```bash
-dataset/liar
-   ├── README.md   ##Dataset description
-   ├── train.tsv   ##Training data
-   ├── test.tsv    ##Testing data
-   ├── valid.tsv   ##Validation data
 
-module/
-   ├── dataset.ipynb
-   ├── fake-news-detection-using-lstm.ipynb
-   ├── fake-news-detection-using-nb.ipynb
-   ├── liar-data-analysis.ipynb
+```
+QuickFactChecker/
+├── .github/                              # GitHub-related configurations
+│   ├── ISSUE_TEMPLATE/                   # Templates for creating GitHub issues
+│   ├── workflows/                        # GitHub Actions workflows (CI/CD automation)
+│   └── pull_request_template.md          # Template for new pull requests
+│
+├── .venv/                                # Virtual environment for Python dependencies
+│   └── Lib/site-packages/                # Installed Python packages
+│
+├── Public/                               # Public assets (frontend files)
+│   ├── css/                              # Stylesheets
+│   ├── js/                               # JavaScript files
+│   ├── locales/                          # Language translation files (i18n support)
+│   ├── index.html                        # Main HTML file
+│   ├── index_i18n.html                   # Multilingual HTML file
+│   ├── script.js                         # Main frontend script
+│   └── style.css                         # Main stylesheet
+│
+├── app.py                                # Flask application entry point
+├── install_i18n.py                       # Script to set up internationalization (i18n)
+│
+├── module/                               # Custom Python modules
+│
+├── dataset/                              # Datasets and analysis notebooks
+│   ├── liar/                             # LIAR dataset folder
+│   ├── dataset.ipynb                     # General dataset exploration notebook
+│   ├── fake-news-detection-ml-comparison.ipynb  # Comparison of ML models
+│   ├── fake-news-detection-using-lr.ipynb       # Logistic Regression implementation
+│   ├── fake-news-detection-using-lstm.ipynb     # LSTM model notebook
+│   ├── fake-news-detection-using-nb.ipynb       # Naive Bayes model notebook
+│   ├── fake-news-detection-using-svm.ipynb      # SVM model notebook
+│   ├── fake-news-detection-using-xgboost.ipynb  # XGBoost model notebook
+│   └── liar-data-analysis.ipynb                 # Data analysis for LIAR dataset
+│
+├── results/                             # Folder for storing results, graphs, and metrics
+│
+├── scripts/                             # Additional scripts used in the project
+│
+├── tests/                               # Unit and integration tests
+│   ├── test_app.py                      # Tests for main app
+│   ├── tests_app.py                     # Additional test scripts
+│   └── tests_dummy.py                   # Dummy test file
+│
+├── utils/                               # Utility modules
+│   └── fetch_url.py                     # Helper function to fetch and preprocess URLs
+│
+├── CODE_OF_CONDUCT.md                   # Community guidelines
+├── CONTRIBUTING.md                      # Contribution guidelines
+├── LICENSE                              # License information
+├── LOGO.svg                             # Project logo
+├── GSSoC.png                            # GSSoC banner image
+├── MULTILINGUAL_SUPPORT.md              # Guide for adding multiple language support
+├── Readme.md                            # Main project documentation
+├── debug.log                            # Debugging log file
+├── .env                                 # Environment variables
+├── .gitignore                           # Files to be ignored by Git
+├── .gitattributes                       # Git configuration for line endings
+├── .coverage                            # Code coverage report
+└── files.txt                            # Miscellaneous file list
 
-templates/
-   ├── index.html
-
-scripts/
-   ├── setup_nltk.py          
-   └── fake_news_logreg_rf.py     ## Train & evaluate Naive Bayes, Logistic Regression, Random Forest
-results/
-   ├── model_comparison.md        ## Generated baseline comparison table (markdown)
-   └── comparison.png             ## Generated accuracy bar chart
-
-.gitattributes
-app.py
-hero_img.svg
-LICENSE
-Readme.md
-requirements.txt
 ```
 
 ## ⚙️ Installation & Setup
