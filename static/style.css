@@ -1403,3 +1403,72 @@ body.dark .summary-box p { color: var(--text-secondary-dark); }
     transform: none !important; /* remove overlapping translation */
     margin-top: 0; /* spacing handled by gap */
 }
+
+/*About us*/
+.about-card {
+  background: var(--card-light);
+  border-radius: 1.5rem;
+  box-shadow: var(--shadow-light);
+  padding: 2rem;
+  margin: 3rem auto;
+  max-width: 900px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+body.dark .about-card {
+  background: var(--card-dark);
+  box-shadow: var(--shadow-dark);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.about-card h2 {
+  color: #6c5ce7;
+  font-size: 2rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.about-card h3 {
+  color: var(--text-primary-light);
+  font-size: 1.25rem;
+  margin-top: 1.5rem;
+}
+.about-card p {
+  color: var(--text-secondary-light);
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.about-card {
+  background: var(--card-light);
+  border-radius: 1.5rem;
+  box-shadow: var(--shadow-light);
+  padding: 2rem;
+  margin: 3rem auto;
+  max-width: 900px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+body.dark .about-card {
+  background: var(--card-dark);
+  box-shadow: var(--shadow-dark);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.about-card h2 {
+  color: #6c5ce7;
+  font-size: 2rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.about-card h3 {
+  color: var(--text-primary-light);
+  font-size: 1.25rem;
+  margin-top: 1.5rem;
+}
+.about-card p {
+  color: var(--text-secondary-light);
+  line-height: 1.6;
+  font-size: 1rem;
+}
