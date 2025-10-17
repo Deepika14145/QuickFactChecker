@@ -19,7 +19,7 @@
     COPIED: "Result copied to clipboard!",
     COPY_FAILED: "Failed to copy result",
     SHARED: "Result shared successfully!",
-    ANALYSIS_ERROR: "Error analyzing text. Please try again.",
+    ANALYSIS_ERROR: "Sorry, something went wrong. Please try again later.",
     CHARACTER_COUNT: (count) => `${count} character${count !== 1 ? 's' : ''}`,
   };
 
@@ -216,16 +216,34 @@
     showResult();
 
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), CONFIG.API_TIMEOUT);
+
       const response = await fetch('/predict', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text })
+        body: JSON.stringify({ text }),
+        signal: controller.signal
       });
 
-      const result = await response.json();
+      clearTimeout(timeoutId);
 
-      if (result.error) {
-        displayResult('Error', result.error, 'error');
+      if (!response.ok) {
+        displayResult('Error', STRINGS.ANALYSIS_ERROR, 'error');
+        return;
+      }
+
+      let result;
+      try {
+        result = await response.json();
+      } catch (parseError) {
+        displayResult('Error', STRINGS.ANALYSIS_ERROR, 'error');
+        console.error('Failed to parse response JSON:', parseError);
+        return;
+      }
+
+      if (result && result.error) {
+        displayResult('Error', STRINGS.ANALYSIS_ERROR, 'error');
       } else {
         const message = result.analysis || result.message || `Prediction: ${result.prediction}`;
         const resultType = result.prediction === 1 ? 'success' : 'error';
