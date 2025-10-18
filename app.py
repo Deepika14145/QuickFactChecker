@@ -57,6 +57,15 @@ def home():
 def dashboard():
     return render_template('dashboard.html')
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+
 
 def index():
     """Main route with language detection"""
