@@ -8,8 +8,11 @@ QuickFactChecker is a **machine learning–based web app** that helps detect whe
 It uses different models (e.g., Naive Bayes, LSTM) trained on the **LIAR dataset** to evaluate credibility and assist users in identifying potentially misleading information.
 
 ---
-## 🌟GSSoc 
-![GSSoC Logo](https://github.com/dimpal-yadav/QuickFactChecker/blob/add-gssoc-banner/GSSoC.png)
+## 🌟GSSoC 
+<img 
+  src="GSSoC.png" 
+  style="filter: drop-shadow(rgba(0, 0, 0, 0.15) 0px 0px 4px) drop-shadow(rgba(255, 255, 255, 0.8) 0px 0px 12px) drop-shadow(rgba(0, 0, 0, 0.15) 0px 4px 12px);"
+/>
 🌟 **Exciting News...**
 
 🚀 This project is now an official part of GirlScript Summer of Code – GSSoC'25! 💻 We're thrilled to welcome contributors from all over India and beyond to collaborate, build, and grow *QuickFactChecker!* Let’s make learning and career development smarter – together! 🌟
