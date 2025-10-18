@@ -50,7 +50,12 @@
     confidenceText: document.getElementById('confidence-text'),
     mobileMenuBtn: document.getElementById('mobile-menu-btn'),
     mobileMenu: document.getElementById('mobile-menu'),
-    homeLogo: document.getElementById('home-logo')
+    homeLogo: document.getElementById('home-logo'),
+    loginGithub: document.getElementById('login-github'),
+    userMenu: document.getElementById('user-menu'),
+    userAvatar: document.getElementById('user-avatar'),
+    userName: document.getElementById('user-name'),
+    logoutBtn: document.getElementById('logout-btn')
   };
 
   // State
@@ -72,6 +77,7 @@
     // Initial setup
     updateCharCount();
     updateHistoryDisplay();
+    refreshAuthUI();
     
     console.log('Quick Fact Checker initialized');
   }
@@ -111,6 +117,7 @@
     elements.copyBtn?.addEventListener('click', copyResult);
     elements.shareBtn?.addEventListener('click', shareResult);
     elements.retryBtn?.addEventListener('click', retryAnalysis);
+    elements.logoutBtn?.addEventListener('click', handleLogout);
     
     // Mobile menu toggle
     elements.mobileMenuBtn?.addEventListener('click', toggleMobileMenu);
@@ -133,6 +140,39 @@
     localStorage.setItem(CONFIG.THEME_STORAGE_KEY, newTheme);
     updateThemeIcon(newTheme);
     showToast(`Switched to ${newTheme} mode`);
+  }
+  async function refreshAuthUI() {
+    try {
+      const res = await fetch('/api/me', { credentials: 'same-origin' });
+      const data = await res.json();
+      if (data && data.authenticated && data.user) {
+        if (elements.loginGithub) elements.loginGithub.style.display = 'none';
+        if (elements.userMenu) elements.userMenu.style.display = 'inline-flex';
+        if (elements.userName) elements.userName.textContent = data.user.name || data.user.login || 'User';
+        if (elements.userAvatar) {
+          elements.userAvatar.src = data.user.avatar_url || '';
+          elements.userAvatar.style.display = data.user.avatar_url ? 'inline' : 'none';
+        }
+      } else {
+        if (elements.loginGithub) elements.loginGithub.style.display = 'inline-flex';
+        if (elements.userMenu) elements.userMenu.style.display = 'none';
+      }
+    } catch (e) {
+      if (elements.loginGithub) elements.loginGithub.style.display = 'inline-flex';
+      if (elements.userMenu) elements.userMenu.style.display = 'none';
+    }
+  }
+
+  async function handleLogout(e) {
+    e.preventDefault();
+    try {
+      await fetch('/logout', { method: 'POST', headers: { 'Content-Type': 'application/json' } });
+    } catch (e) {
+      // ignore
+    } finally {
+      await refreshAuthUI();
+      showToast('Signed out');
+    }
   }
 
   function updateThemeIcon(theme) {

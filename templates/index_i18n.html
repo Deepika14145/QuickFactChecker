@@ -6,6 +6,9 @@
     <title>AI-Powered Enhanced Quick Fact Checker with Modern UI</title>
     <meta name="description" content="Free AI tool to verify news articles and claims.">
     <meta name="keywords" content="fact check, news verification, AI, fake news detection">
+
+    <link rel="stylesheet" href="styles.css">
+    <!-- <link rel="stylesheet" href="css/i18n.css"> -->
     
     <!-- Open Graph Tags -->
     <meta property="og:title" content="Quick Fact Checker">
@@ -22,14 +25,15 @@
     
     <!-- PWA -->
     <link rel="manifest" href="/manifest.json">
+    <!-- <link rel="stylesheet" href="/static/css/i18n.css"> -->
+
     <meta name="theme-color" content="#4f46e5">
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     
     <!-- CSS -->
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="css/i18n.css">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer">
     
     <!-- Chart.js -->
@@ -65,6 +69,15 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
                     </svg>
                 </button>
+                <a id="login-github" class="btn-secondary" href="/login/github" style="display:inline-flex;align-items:center;gap:8px">
+                    <img src="https://github.githubassets.com/favicons/favicon.svg" alt="GitHub" width="16" height="16"/>
+                    <span data-i18n="auth.login_github">Sign in with GitHub</span>
+                </a>
+                <div id="user-menu" class="user-menu" style="display:none">
+                    <img id="user-avatar" alt="avatar" width="24" height="24" style="border-radius:50%"/>
+                    <span id="user-name"></span>
+                    <button id="logout-btn" class="btn-link" data-i18n="auth.logout">Logout</button>
+                </div>
             </div>
         </div>
     </header>
