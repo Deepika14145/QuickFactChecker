@@ -1,4 +1,6 @@
-# 📰 QuickFactChecker – Fake News Detection
+<h1 align = "center">
+   <img src = "QuickFactDetector.png" alt = "Logo Banner" width = "100%">
+</h1>
 
 ## 🚀 Live Demo
 **Try it now:** [https://quickfactchecker.onrender.com/](https://quickfactchecker.onrender.com/)
