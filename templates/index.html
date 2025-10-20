@@ -220,9 +220,9 @@
         <div class="sample-inputs">
           <p>Try these examples:</p>
           <div class="sample-buttons">
-            <button type="button" class="sample-btn" data-sample="Holding your breath for more than 15 seconds is a valid self-test for COVID-19. If you can do it without coughing, you don't have the virus.">💉 COVID-19 Climate Vaccine Claim</button>
-            <button type="button" class="sample-btn" data-sample="An AI system called AlphaFold successfully predicted the 3D structures of over 200 million proteins, a breakthrough that could dramatically accelerate biological research.">🤖 AI Capabilities</button>
-            <button type="button" class="sample-btn" data-sample="With more than 968 million eligible voters in its 2024 general election, India remains the world's largest democracy by population.">🗳️ Political Speech Fact</button>
+            <button type="button" class="sample-btn" aria-label="Use sample: COVID-19 claim about breath self-test" data-sample="Holding your breath for more than 15 seconds is a valid self-test for COVID-19. If you can do it without coughing, you don't have the virus.">💉 COVID-19 Climate Vaccine Claim</button>
+            <button type="button" class="sample-btn" aria-label="Use sample: AlphaFold predicts protein structures" data-sample="An AI system called AlphaFold successfully predicted the 3D structures of over 200 million proteins, a breakthrough that could dramatically accelerate biological research.">🤖 AI Capabilities</button>
+            <button type="button" class="sample-btn" aria-label="Use sample: Indian election voter count fact" data-sample="With more than 968 million eligible voters in its 2024 general election, India remains the world's largest democracy by population.">🗳️ Political Speech Fact</button>
           </div>
         </div>
 
@@ -241,7 +241,7 @@
       </form>
 
       <!-- Prediction Result -->
-      <div id="prediction-result" class="prediction-result" role="status" aria-live="polite" aria-atomic="true">
+      <div id="prediction-result" class="prediction-result" role="status" aria-live="polite" aria-atomic="true" tabindex="-1" aria-busy="false">
         <div class="result-icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -252,7 +252,7 @@
         </div>
         <div class="result-content">
           <div class="result-title" id="result-title">Analysis Result</div>
-          <div id="result-message">Processing your text...</div>
+          <div id="result-message" aria-live="polite" aria-atomic="true">Processing your text...</div>
           <div class="confidence-bar" id="confidence-bar" style="display: none;">
             <div class="confidence-fill" id="confidence-fill"></div>
           </div>
