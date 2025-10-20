@@ -78,6 +78,9 @@ def home():
 def dashboard():
     return render_template('dashboard.html')
 
+@app.route('/privacy')
+def privacy():
+    return render_template('privacy.html')
 @app.route('/about')
 def about():
     return render_template('about.html')
