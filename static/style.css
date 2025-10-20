@@ -821,6 +821,17 @@ body.dark .prediction-result.warning {
     background: var(--warning-bg-dark);
 }
 
+.prediction-result.loading {
+    background: rgba(79, 70, 229, 0.1);
+    color: var(--primary-color);
+    border-color: rgba(79, 70, 229, 0.3);
+    box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.2);
+}
+body.dark .prediction-result.loading {
+    background: rgba(79, 70, 229, 0.2);
+    color: var(--primary-light);
+}
+
 .result-icon {
     flex-shrink: 0;
     width: 48px;
@@ -839,6 +850,9 @@ body.dark .prediction-result.warning {
 }
 .prediction-result.warning .result-icon {
     background: rgba(217, 119, 6, 0.2);
+}
+.prediction-result.loading .result-icon {
+    background: rgba(79, 70, 229, 0.2);
 }
 @keyframes pulse {
     0%, 100% { transform: scale(1); }
@@ -893,6 +907,29 @@ body.dark .prediction-result.warning {
 .action-btn:hover {
     background: rgba(255, 255, 255, 0.3);
     transform: translateY(-1px);
+}
+
+.retry-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: none;
+    margin-top: 1rem;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+.retry-btn:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4);
+}
+.retry-btn:active {
+    transform: translateY(0);
 }
 
 /* History Card */

@@ -20,6 +20,11 @@
     COPY_FAILED: "Failed to copy result",
     SHARED: "Result shared successfully!",
     ANALYSIS_ERROR: "Error analyzing text. Please try again.",
+    NETWORK_ERROR: "Network error. Please check your internet connection and try again.",
+    TIMEOUT_ERROR: "Request timed out. Please check your connection and try again.",
+    API_ERROR: "Service temporarily unavailable. Please try again later.",
+    GENERIC_ERROR: "Sorry, something went wrong. Please try again later.",
+    LOADING_MESSAGE: "Analyzing your text...",
     CHARACTER_COUNT: (count) => `${count} character${count !== 1 ? 's' : ''}`,
   };
 
@@ -213,28 +218,93 @@
 
     setLoading(true);
     showResult();
+    
+    // Show loading message
+    displayResult('Processing', STRINGS.LOADING_MESSAGE, 'loading');
 
     try {
-      const response = await fetch('/predict', {
+      // Create timeout promise
+      const timeoutPromise = new Promise((_, reject) => {
+        setTimeout(() => reject(new Error('Request timeout')), CONFIG.API_TIMEOUT);
+      });
+
+      // Make the API request with timeout
+      const fetchPromise = fetch('/predict', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text })
       });
 
+      const response = await Promise.race([fetchPromise, timeoutPromise]);
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
       const result = await response.json();
 
+      // Handle different types of errors from service worker or API
       if (result.error) {
-        displayResult('Error', result.error, 'error');
-      } else {
-        const message = result.analysis || result.message || `Prediction: ${result.prediction}`;
-        const resultType = result.prediction === 1 ? 'success' : 'error';
-        displayResult('Analysis Result', message, resultType, result.confidence);
-        addToHistory(text, message);
-        if (result.prediction === 1) launchConfetti();
+        let errorMessage = STRINGS.GENERIC_ERROR;
+        let errorTitle = 'Error';
+        
+        // Check if it's a service worker error response
+        if (result.errorType) {
+          switch (result.errorType) {
+            case 'timeout_error':
+              errorMessage = STRINGS.TIMEOUT_ERROR;
+              errorTitle = 'Request Timeout';
+              break;
+            case 'network_error':
+              errorMessage = STRINGS.NETWORK_ERROR;
+              errorTitle = 'Network Error';
+              break;
+            case 'api_error':
+              errorMessage = STRINGS.API_ERROR;
+              errorTitle = 'Service Error';
+              break;
+            default:
+              errorMessage = result.message || STRINGS.GENERIC_ERROR;
+              errorTitle = 'Error';
+          }
+        } else {
+          // Handle API error responses
+          errorMessage = result.error;
+          errorTitle = 'Analysis Error';
+        }
+        
+        displayResult(errorTitle, errorMessage, 'error');
+        showRetryButton();
+        return;
       }
+
+      // Success case
+      const message = result.analysis || result.message || `Prediction: ${result.prediction}`;
+      const resultType = result.prediction === 1 ? 'success' : 'warning';
+      displayResult('Analysis Result', message, resultType, result.confidence);
+      addToHistory(text, message);
+      if (result.prediction === 1) launchConfetti();
+      
     } catch (error) {
-      displayResult('Error', STRINGS.ANALYSIS_ERROR, 'error');
       console.error('Request failed:', error);
+      
+      let errorMessage = STRINGS.GENERIC_ERROR;
+      let errorTitle = 'Error';
+      
+      // Determine error type based on error message
+      if (error.message.includes('timeout')) {
+        errorMessage = STRINGS.TIMEOUT_ERROR;
+        errorTitle = 'Request Timeout';
+      } else if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+        errorMessage = STRINGS.NETWORK_ERROR;
+        errorTitle = 'Network Error';
+      } else if (error.message.includes('HTTP')) {
+        errorMessage = STRINGS.API_ERROR;
+        errorTitle = 'Service Error';
+      }
+      
+      displayResult(errorTitle, errorMessage, 'error');
+      showRetryButton();
     } finally {
       setLoading(false);
     }
@@ -279,6 +349,16 @@
       elements.predictionResult.className = `prediction-result show ${type}`;
     }
 
+    // Handle loading state
+    if (type === 'loading') {
+      // Hide confidence elements during loading
+      if (elements.confidenceBar) elements.confidenceBar.style.display = 'none';
+      if (elements.confidenceText) elements.confidenceText.style.display = 'none';
+      // Hide retry button during loading
+      if (elements.retryBtn) elements.retryBtn.style.display = 'none';
+      return;
+    }
+
     // Show confidence bar and percentage
     if (confidence && elements.confidenceBar && elements.confidenceFill && elements.confidenceText) {
       const percentage = Math.round(confidence * 100);
@@ -301,6 +381,17 @@
       // Hide confidence elements if no confidence provided
       if (elements.confidenceBar) elements.confidenceBar.style.display = 'none';
       if (elements.confidenceText) elements.confidenceText.style.display = 'none';
+    }
+  }
+
+  function showRetryButton() {
+    if (elements.retryBtn) {
+      elements.retryBtn.style.display = 'inline-block';
+      elements.retryBtn.onclick = () => {
+        // Hide retry button and retry the form submission
+        elements.retryBtn.style.display = 'none';
+        handleFormSubmit(new Event('submit'));
+      };
     }
   }
 
