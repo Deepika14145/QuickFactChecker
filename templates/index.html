@@ -18,6 +18,7 @@
     <link rel="manifest" href="/static/manifest.json">
     <meta name="theme-color" content="#4f46e5">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="/static/style.css"
     <title>Enhanced Quick Fact Checker with Modern UI/UX</title>
 
   <meta charset="UTF-8">
@@ -96,7 +97,7 @@
       
       <div class="nav-center">
         <ul class="nav-links">
-          <li><a href="/#about" class="nav-link">About</a></li>
+          <li><a href="/about" class="nav-link">About</a></li>
           <li><a href="/#how-it-works" class="nav-link">How It Works</a></li>
           <li><a href="/#blog" class="nav-link">Blog</a></li>
           <a href="/dashboard" class="nav-dashboard">Dashboard</a>
@@ -360,8 +361,8 @@
           <div class="footer-column">
             <h4 class="footer-title">Company</h4>
             <ul class="footer-list">
-              <li><a href="#about" class="footer-link">About Us</a></li>
-              <li><a href="#contact" class="footer-link">Contact</a></li>
+              <li><a href="/about" class="footer-link">About Us</a></li>
+              <li><a href="/contact" class="footer-link">Contact</a></li>
             </ul>
           </div>
           
@@ -421,5 +422,20 @@
 
   <!-- Scripts -->
   <script src="script.js"></script>
+  
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/static/sw.js')
+          .then((registration) => {
+            console.log('Service Worker registered successfully:', registration.scope);
+          })
+          .catch((error) => {
+            console.log('Service Worker registration failed:', error);
+          });
+      });
+    }
+  </script>
 </body>
 </html>  

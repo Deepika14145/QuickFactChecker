@@ -3,13 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Model Performance Dashboard</title>
+  <title>About Us - Quick Fact Checker</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  <link rel="stylesheet" href="/static/style.css">
-  <script src="{{ url_for('static', filename='script.js') }}" defer></script>
 </head>
 <body>
- <!-- Navigation Bar -->
+  <!-- Navbar (reuse your existing one exactly as it is in other pages) -->
   <nav class="navbar">
     <div class="nav-container">
       <div class="nav-left">
@@ -74,54 +72,46 @@
       </div>
       </nav>
 
-  <!-- 🧠 Dashboard Section -->
-   <div style="height: 7rem;"></div>
-  <main class="dashboard-page">
-    <section class="dashboard-container">
-      <h1 class="dashboard-title">Model Performance Dashboard</h1>
 
-      <div class="dashboard-filters">
-        <label for="model-select">Choose Models:</label>
-        <select id="model-select">
-          <option value="logreg">Logistic Regression</option>
-          <option value="rf">Random Forest</option>
-          <option value="lstm">LSTM</option>
-        </select>
+  <!-- About Content -->
+  <main class="container">
+    <section class="about-card">
+      <h2>About Quick Fact Checker</h2>
+      <p>
+        QuickFactChecker is a machine learning–based web app that helps detect whether a news article is real or fake. It uses different models (e.g., Naive Bayes, LSTM) trained on the LIAR dataset to evaluate credibility and assist users in identifying potentially misleading information.<br>
+    This project is now an official part of GirlScript Summer of Code – GSSoC'25! <br>
+    💻 We're thrilled to welcome contributors from all over India and beyond to collaborate, build, and grow QuickFactChecker!<br>
+    Let’s make learning and career development smarter – together! 🌟<br>
 
-        <label for="dataset-select">Dataset:</label>
-        <select id="dataset-select">
-          <option value="train">Train</option>
-          <option value="test" selected>Test</option>
-          <option value="valid">Validation</option>
-        </select>
+        👩‍💻 GSSoC is one of India’s largest 3-month-long open-source programs that encourages developers of all levels to contribute to real-world projects 🌍 while learning, collaborating, and growing together. 🌱<br>
 
-        <label for="metric-select">Metric:</label>
-        <select id="metric-select">
-          <option value="accuracy">Accuracy</option>
-          <option value="precision">Precision</option>
-          <option value="recall">Recall</option>
-          <option value="f1">F1-Score</option>
-        </select>
-      </div>
+        🌈 With mentorship, community support, and collaborative coding, it's the perfect platform for developers to:<br>
 
-      <div class="chart-box">
-        <canvas id="dashboard-chart" height="300"></canvas>
-      </div>
+        ✨ Improve their skills<br>
+        🤝 Contribute to impactful projects<br>
+        🏆 Get recognized for their work<br>
+        📜 Receive certificates and swag!<br>
+</p>
 
-      <div class="charts">
-        <canvas id="confusion-matrix-chart"></canvas>
-        <canvas id="roc-curve-chart"></canvas>
-      </div>
+      <h3>Our Mission</h3>
+      <p>
+        We aim to empower individuals to make informed decisions in an era of rapid information sharing.
+      </p>
 
-      <div class="summary-box" id="summary-box">
-        <h3>Summary Insights</h3>
-        <p id="summary-text">Select a model to see insights...</p>
-      </div>
+      <h3>Features</h3>
+      <p>
+        ✅ Fake news classification using ML models (Naive Bayes, Logistic Regression, Random Forest, and LSTM).<br>
+        ✅ Interactive web app built with Flask and HTML templates.<br>
+        ✅ Automated NLTK Setup to prevent missing resource errors.<br>
+        ✅ Preprocessed dataset included (train.tsv, test.tsv, valid.tsv).<br>
+        ✅ Notebooks for data analysis & experimentation (liar-data-analysis.ipynb, dataset.ipynb).<br>
+        ✅ Easy setup with requirements.txt.<br>
+      </p>
     </section>
   </main>
 
-  <!-- ⚙️ Footer -->
- <footer class="footer">
+  <!-- Footer -->
+  <footer class="footer">
     <div class="footer-container">
       <div class="footer-content">
         <!-- Footer Logo & Description -->

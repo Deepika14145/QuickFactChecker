@@ -3,13 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Model Performance Dashboard</title>
+  <title>About Us - Quick Fact Checker</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  <link rel="stylesheet" href="/static/style.css">
-  <script src="{{ url_for('static', filename='script.js') }}" defer></script>
 </head>
 <body>
- <!-- Navigation Bar -->
+  <!-- Navbar (reuse your existing one exactly as it is in other pages) -->
   <nav class="navbar">
     <div class="nav-container">
       <div class="nav-left">
@@ -74,54 +72,45 @@
       </div>
       </nav>
 
-  <!-- 🧠 Dashboard Section -->
-   <div style="height: 7rem;"></div>
-  <main class="dashboard-page">
-    <section class="dashboard-container">
-      <h1 class="dashboard-title">Model Performance Dashboard</h1>
 
-      <div class="dashboard-filters">
-        <label for="model-select">Choose Models:</label>
-        <select id="model-select">
-          <option value="logreg">Logistic Regression</option>
-          <option value="rf">Random Forest</option>
-          <option value="lstm">LSTM</option>
-        </select>
+  <!-- Contact Us Content -->
+<div style="height: 7rem;"></div>
+  <main class="contact-section">
+    <div class="contact-container">
+      <div class="contact-form-box">
+        <h1>Contact Us</h1>
+        <p>We’d love to hear from you! Please share your feedback, ideas, or questions.</p>
+        
+        <form action="#" method="post" class="contact-form">
+          <div class="form-group">
+            <label for="email">Your Email Address</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+          </div>
 
-        <label for="dataset-select">Dataset:</label>
-        <select id="dataset-select">
-          <option value="train">Train</option>
-          <option value="test" selected>Test</option>
-          <option value="valid">Validation</option>
-        </select>
+          <div class="form-group">
+            <label for="message">Your Message</label>
+            <textarea id="message" name="message" rows="4" placeholder="Write your message here..." required></textarea>
+          </div>
 
-        <label for="metric-select">Metric:</label>
-        <select id="metric-select">
-          <option value="accuracy">Accuracy</option>
-          <option value="precision">Precision</option>
-          <option value="recall">Recall</option>
-          <option value="f1">F1-Score</option>
-        </select>
+          <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+        <div class="github-link">
+          <a href="https://github.com/Deepika14145/QuickFactChecker.git" target="_blank" class="github-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 .5C5.648.5.5 5.648.5 12c0 5.086 3.292 9.395 7.865 10.916.575.104.785-.25.785-.554 0-.274-.011-1.175-.016-2.131-3.199.696-3.876-1.538-3.876-1.538-.523-1.33-1.277-1.683-1.277-1.683-1.045-.714.08-.699.08-.699 1.156.081 1.764 1.187 1.764 1.187 1.028 1.761 2.695 1.253 3.352.958.105-.745.402-1.253.731-1.541-2.553-.291-5.238-1.277-5.238-5.686 0-1.257.449-2.285 1.186-3.09-.119-.29-.514-1.462.112-3.048 0 0 .965-.309 3.166 1.18A10.97 10.97 0 0 1 12 6.839a10.9 10.9 0 0 1 2.885.389c2.2-1.489 3.164-1.18 3.164-1.18.627 1.586.232 2.758.113 3.048.738.805 1.186 1.833 1.186 3.09 0 4.42-2.688 5.391-5.251 5.674.414.355.783 1.057.783 2.132 0 1.54-.014 2.78-.014 3.155 0 .308.207.662.792.548C20.213 21.392 23.5 17.084 23.5 12c0-6.352-5.148-11.5-11.5-11.5z"/>
+            </svg>
+            View Us on GitHub
+          </a>
+        </div>
       </div>
 
-      <div class="chart-box">
-        <canvas id="dashboard-chart" height="300"></canvas>
+      <div class="contact-image">
+        <img src="{{ url_for('static', filename='images/contact-side.jpg') }}" alt="Contact illustration">
       </div>
-
-      <div class="charts">
-        <canvas id="confusion-matrix-chart"></canvas>
-        <canvas id="roc-curve-chart"></canvas>
-      </div>
-
-      <div class="summary-box" id="summary-box">
-        <h3>Summary Insights</h3>
-        <p id="summary-text">Select a model to see insights...</p>
-      </div>
-    </section>
+    </div>
   </main>
-
-  <!-- ⚙️ Footer -->
- <footer class="footer">
+      <!--Footer-->
+      <footer class="footer">
     <div class="footer-container">
       <div class="footer-content">
         <!-- Footer Logo & Description -->

@@ -1,5 +1,5 @@
 from utils.fetch_url import get_text_from_url
-from flask import Flask, request, jsonify, render_template, g
+from flask import Flask, request, jsonify, render_template, g, session, redirect, url_for
 from flask_cors import CORS
 import os
 import math
@@ -7,6 +7,8 @@ import json
 from typing import Dict, Any, List
 from dotenv import load_dotenv
 load_dotenv()   # loads variables from .env into os.environ
+
+
 
 # Try to import optional heavy deps lazily; if missing, we'll gracefully fall back
 try:  # joblib for sklearn/xgb pipelines
@@ -24,6 +26,25 @@ pad_sequences = None  # type: ignore
 # Serve static from /static to prevent it from shadowing API routes like /predict_all
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all do
+
+app.secret_key = os.environ.get('SECRET_KEY', 'dev-secret-change-me')
+
+# OAuth (GitHub) setup
+_oauth = None
+try:
+    from authlib.integrations.flask_client import OAuth  # type: ignore
+    _oauth = OAuth(app)
+    _oauth.register(
+        name='github',
+        client_id=os.environ.get('GITHUB_CLIENT_ID'),
+        client_secret=os.environ.get('GITHUB_CLIENT_SECRET'),
+        access_token_url='https://github.com/login/oauth/access_token',
+        authorize_url='https://github.com/login/oauth/authorize',
+        api_base_url='https://api.github.com/',
+        client_kwargs={'scope': 'read:user user:email'}
+    )
+except Exception as _e:  # pragma: no cover - optional dependency
+    print(f"[oauth] Authlib not available or failed to init: {_e}")
 
 
 # Supported languages
@@ -60,6 +81,13 @@ def dashboard():
 @app.route('/privacy')
 def privacy():
     return render_template('privacy.html')
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
 
 
 
@@ -85,6 +113,53 @@ def get_translations(lang_code):
     except Exception as e:
         print(f"Error loading translations for {lang_code}: {e}")
         return jsonify({'error': 'Failed to load translations'}), 500
+@app.route('/login/github')
+def login_github():
+    if _oauth is None:
+        return jsonify({'error': 'OAuth is not configured on server'}), 501
+    redirect_uri = url_for('auth_github_callback', _external=True)
+    return _oauth.github.authorize_redirect(redirect_uri)
+
+@app.route('/auth/github/callback')
+def auth_github_callback():
+    if _oauth is None:
+        return redirect(url_for('index'))
+    try:
+        token = _oauth.github.authorize_access_token()
+        resp = _oauth.github.get('user', token=token)
+        profile = resp.json() if resp is not None else {}
+        # Get primary email if needed
+        email = profile.get('email')
+        if not email:
+            try:
+                emails_resp = _oauth.github.get('user/emails', token=token)
+                if emails_resp and emails_resp.ok:
+                    emails = emails_resp.json()
+                    primary = next((e for e in emails if e.get('primary')), None)
+                    email = primary.get('email') if primary else None
+            except Exception:
+                pass
+        session['user'] = {
+            'id': profile.get('id'),
+            'login': profile.get('login'),
+            'name': profile.get('name') or profile.get('login'),
+            'avatar_url': profile.get('avatar_url'),
+            'email': email,
+            'provider': 'github'
+        }
+    except Exception as e:
+        print(f"[auth] GitHub callback error: {e}")
+    return redirect(url_for('index'))
+
+@app.route('/logout', methods=['POST'])
+def logout():
+    session.pop('user', None)
+    return jsonify({'ok': True})
+
+@app.route('/api/me')
+def api_me():
+    user = session.get('user')
+    return jsonify({'authenticated': bool(user), 'user': user})
 
 @app.route('/api/languages')
 def get_supported_languages():
