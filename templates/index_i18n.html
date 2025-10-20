@@ -118,9 +118,9 @@
                 <div class="sample-inputs">
                     <p data-i18n="form.examples">Try these examples:</p>
                     <div class="sample-buttons">
-                        <button type="button" class="sample-btn" data-sample="Scientists have discovered a new planet that is completely made of diamonds and is only 10 light years away from Earth." data-i18n="form.example1">Example 1</button>
-                        <button type="button" class="sample-btn" data-sample="A recent study published in Nature shows that drinking 8 glasses of water daily significantly improves cognitive function in adults." data-i18n="form.example2">Example 2</button>
-                        <button type="button" class="sample-btn" data-sample="Local government announces new infrastructure project to improve city transportation with $50 million budget allocation." data-i18n="form.example3">Example 3</button>
+                        <button type="button" class="sample-btn" aria-label="Use example 1" data-sample="Scientists have discovered a new planet that is completely made of diamonds and is only 10 light years away from Earth." data-i18n="form.example1">Example 1</button>
+                        <button type="button" class="sample-btn" aria-label="Use example 2" data-sample="A recent study published in Nature shows that drinking 8 glasses of water daily significantly improves cognitive function in adults." data-i18n="form.example2">Example 2</button>
+                        <button type="button" class="sample-btn" aria-label="Use example 3" data-sample="Local government announces new infrastructure project to improve city transportation with $50 million budget allocation." data-i18n="form.example3">Example 3</button>
                     </div>
                 </div>
 
@@ -140,7 +140,7 @@
             </form>
 
             <!-- Results Section -->
-            <div id="prediction-result" class="prediction-result" role="status" aria-live="polite" aria-atomic="true">
+            <div id="prediction-result" class="prediction-result" role="status" aria-live="polite" aria-atomic="true" tabindex="-1" aria-busy="false">
                 <div class="result-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="result-icon-svg">
                         <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
@@ -149,7 +149,7 @@
                 </div>
                 <div class="result-content">
                     <div class="result-title" id="result-title" data-i18n="results.title">Analysis Result</div>
-                    <div id="result-message" data-i18n="results.processing">Processing your text...</div>
+                    <div id="result-message" aria-live="polite" aria-atomic="true" data-i18n="results.processing">Processing your text...</div>
                     <div class="confidence-bar" id="confidence-bar" style="display: none;">
                         <div class="confidence-fill" id="confidence-fill"></div>
                     </div>

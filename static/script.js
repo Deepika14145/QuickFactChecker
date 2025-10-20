@@ -347,6 +347,14 @@
     
     if (elements.predictionResult) {
       elements.predictionResult.className = `prediction-result show ${type}`;
+      // Manage ARIA busy state for screen readers during updates
+      if (type === 'loading') {
+        elements.predictionResult.setAttribute('aria-busy', 'true');
+      } else {
+        elements.predictionResult.setAttribute('aria-busy', 'false');
+        // Move focus to result container so the live region is announced
+        elements.predictionResult.focus();
+      }
     }
 
     // Handle loading state
