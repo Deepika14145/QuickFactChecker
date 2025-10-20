@@ -15,6 +15,30 @@ It uses different models (e.g., Naive Bayes, LSTM 🧠) trained on the **LIAR da
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
+
+## 🌍 Vision
+
+Build a more informed internet by making fact‑checking fast, accessible, and trustworthy for everyone.
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+
+## 🎯 Mission
+
+- ⚡ Speed: deliver quick, reliable fake‑vs‑real assessments
+- 🔎 Clarity: present results with confidence and clear cues
+- 🧠 Learning: support multiple models and continuous improvement
+- 🌐 Access: keep the app simple to use across devices
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+
+## 🤔 Why QuickFactChecker?
+
+- 🧭 One‑place check: paste text or URL and get a verdict fast
+- 🧮 Multiple models: Naive Bayes, Logistic Regression, Random Forest, LSTM
+- 📊 Transparent output: result + confidence to judge reliability
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+
 ## 🧭 Project Flowchart
 
 ```mermaid
@@ -162,6 +186,16 @@ QuickFactChecker/
 ```bash
 python scripts/setup_nltk.py
 ```
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
+
+## �️ Troubleshooting
+
+- ⛔ NLTK resource errors: run `python scripts/setup_nltk.py` again; check internet connection
+- 📦 Import errors: ensure virtualenv is active and `pip install -r requirements.txt` ran without errors
+- 🌐 CORS or fetch failures for URLs: verify the target site is reachable; try plain text input
+- 🧪 Notebook issues: update Jupyter and restart kernel; ensure correct interpreter (venv)
+- 🔌 Port in use: stop prior app instance or use a different port
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
