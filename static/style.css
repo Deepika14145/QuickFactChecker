@@ -1403,3 +1403,68 @@ body.dark .summary-box p { color: var(--text-secondary-dark); }
     transform: none !important; /* remove overlapping translation */
     margin-top: 0; /* spacing handled by gap */
 }
+
+
+.privacy-section {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+}
+
+.privacy-container {
+  max-width: 900px;
+  width: 100%;
+  background: white;
+  border-radius: 1.5rem;
+  box-shadow: var(--shadow-light);
+  padding: 2.5rem;
+  backdrop-filter: blur(10px);
+}
+
+.privacy-container h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #6c5ce7;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.privacy-container h2 {
+  font-size: 1.3rem;
+  color: var(--text-primary-light);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.privacy-container p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-secondary-light);
+}
+
+.privacy-container .intro-text {
+  margin-bottom: 1.5rem;
+}
+
+.privacy-container a {
+  color: #6c5ce7;
+  text-decoration: none;
+}
+
+.privacy-container a:hover {
+  text-decoration: underline;
+}
+
+.effective-date {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: gray;
+  text-align: right;
+}
+
+body.dark .privacy-container {
+  background: rgba(31, 41, 55, 0.6);
+  box-shadow: var(--shadow-dark);
+}
+
+

@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Model Performance Dashboard</title>
+  <title>Privacy Policy | Quick Fact Checker</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  <script src="{{ url_for('static', filename='script.js') }}" defer></script>
 </head>
+
 <body>
- <!-- Navigation Bar -->
-  <nav class="navbar">
+  <!-- Navbar -->
+   <nav class="navbar">
     <div class="nav-container">
       <div class="nav-left">
         <a href="/" class="nav-logo" id="home-logo">
@@ -73,54 +73,63 @@
       </div>
       </nav>
 
-  <!-- 🧠 Dashboard Section -->
-   <div style="height: 7rem;"></div>
-  <main class="dashboard-page">
-    <section class="dashboard-container">
-      <h1 class="dashboard-title">Model Performance Dashboard</h1>
+  <!-- Privacy Policy Section -->
+  <main class="privacy-section">
+    <div class="privacy-container">
+      <h1>Privacy Policy</h1>
+      <p class="intro-text">
+        At <strong>Quick Fact Checker</strong>, your privacy is important to us. This Privacy Policy outlines
+        how we collect, use, and protect your personal information when you use our platform.
+      </p>
 
-      <div class="dashboard-filters">
-        <label for="model-select">Choose Models:</label>
-        <select id="model-select">
-          <option value="logreg">Logistic Regression</option>
-          <option value="rf">Random Forest</option>
-          <option value="lstm">LSTM</option>
-        </select>
+      <h2>1. Information We Collect</h2>
+      <p>
+        We may collect limited personal information such as your email address when you contact us or subscribe
+        to updates. Additionally, we collect anonymous analytical data to improve user experience and performance.
+      </p>
 
-        <label for="dataset-select">Dataset:</label>
-        <select id="dataset-select">
-          <option value="train">Train</option>
-          <option value="test" selected>Test</option>
-          <option value="valid">Validation</option>
-        </select>
+      <h2>2. How We Use Your Information</h2>
+      <p>
+        The information we collect is used solely for communication, service improvement, and maintaining the
+        functionality of Quick Fact Checker. We do not sell, rent, or trade your personal data.
+      </p>
 
-        <label for="metric-select">Metric:</label>
-        <select id="metric-select">
-          <option value="accuracy">Accuracy</option>
-          <option value="precision">Precision</option>
-          <option value="recall">Recall</option>
-          <option value="f1">F1-Score</option>
-        </select>
-      </div>
+      <h2>3. Cookies</h2>
+      <p>
+        Our website may use cookies to enhance your browsing experience. You can choose to disable cookies through
+        your browser settings, but some features of the site may not function properly.
+      </p>
 
-      <div class="chart-box">
-        <canvas id="dashboard-chart" height="300"></canvas>
-      </div>
+      <h2>4. Data Protection</h2>
+      <p>
+        We implement industry-standard security measures to safeguard your personal data against unauthorized
+        access, alteration, or disclosure.
+      </p>
 
-      <div class="charts">
-        <canvas id="confusion-matrix-chart"></canvas>
-        <canvas id="roc-curve-chart"></canvas>
-      </div>
+      <h2>5. Third-Party Links</h2>
+      <p>
+        Our website may contain links to third-party sites. We are not responsible for their privacy practices and
+        encourage you to review their privacy policies before sharing personal data.
+      </p>
 
-      <div class="summary-box" id="summary-box">
-        <h3>Summary Insights</h3>
-        <p id="summary-text">Select a model to see insights...</p>
-      </div>
-    </section>
+      <h2>6. Updates to This Policy</h2>
+      <p>
+        We may update this Privacy Policy periodically. Any changes will be posted on this page with the updated
+        effective date.
+      </p>
+
+      <h2>7. Contact Us</h2>
+      <p>
+        If you have any questions or concerns about this Privacy Policy, please contact us through the 
+        <a href="/contact">Contact Page</a>.
+      </p>
+
+      <p class="effective-date"><em>Effective Date: October 15, 2025</em></p>
+    </div>
   </main>
 
-  <!-- ⚙️ Footer -->
- <footer class="footer">
+  <!-- Footer -->
+  <footer class="footer">
     <div class="footer-container">
       <div class="footer-content">
         <!-- Footer Logo & Description -->

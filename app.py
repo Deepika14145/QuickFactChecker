@@ -57,6 +57,11 @@ def home():
 def dashboard():
     return render_template('dashboard.html')
 
+@app.route('/privacy')
+def privacy():
+    return render_template('privacy.html')
+
+
 
 def index():
     """Main route with language detection"""
