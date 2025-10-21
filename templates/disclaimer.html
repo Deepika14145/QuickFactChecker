@@ -1,13 +1,15 @@
+<!-- templates/disclaimer.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Us - Quick Fact Checker</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disclaimer | Quick Fact Checker</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <!-- Navbar (reuse your existing one exactly as it is in other pages) -->
+
+    <!--navbar-->
   <nav class="navbar">
     <div class="nav-container">
       <div class="nav-left">
@@ -72,42 +74,30 @@
       </div>
       </nav>
 
+      <!--diclaimer-->
+      <div style="height: 3rem"></div>
 
-  <!-- About Content -->
-  <main class="container">
-    <section class="about-card">
-      <h2>About Quick Fact Checker</h2>
-      <p>
-        QuickFactChecker is a machine learning–based web app that helps detect whether a news article is real or fake. It uses different models (e.g., Naive Bayes, LSTM) trained on the LIAR dataset to evaluate credibility and assist users in identifying potentially misleading information.<br>
-    This project is now an official part of GirlScript Summer of Code – GSSoC'25! <br>
-    💻 We're thrilled to welcome contributors from all over India and beyond to collaborate, build, and grow QuickFactChecker!<br>
-    Let’s make learning and career development smarter – together! 🌟<br>
+  <main class="disclaimer-container">
+     <h1>Disclaimer</h1>
+   <div class="disclaimer-hero">
+  <img src="{{ url_for('static', filename='images/disclaimer-illustration.jpg') }}" alt="Disclaimer Illustration">
+</div>
 
-        👩‍💻 GSSoC is one of India’s largest 3-month-long open-source programs that encourages developers of all levels to contribute to real-world projects 🌍 while learning, collaborating, and growing together. 🌱<br>
 
-        🌈 With mentorship, community support, and collaborative coding, it's the perfect platform for developers to:<br>
+   
+    
+    <p>The information provided by <strong>Quick Fact Checker</strong> is for general informational purposes only. All information on this site is provided in good faith; however, we make no representation or warranty of any kind regarding the accuracy, adequacy, validity, reliability, or completeness of any information.</p>
 
-        ✨ Improve their skills<br>
-        🤝 Contribute to impactful projects<br>
-        🏆 Get recognized for their work<br>
-        📜 Receive certificates and swag!<br>
-</p>
+    <h2>External Links Disclaimer</h2>
+    <p>Our website may contain links to other websites or content belonging to third parties. Such external links are not investigated, monitored, or checked for accuracy by us. We do not warrant or endorse any information found on external sites.</p>
 
-      <h3>Our Mission</h3>
-      <p>
-        We aim to empower individuals to make informed decisions in an era of rapid information sharing.
-      </p>
+    <h2>Professional Disclaimer</h2>
+    <p>The information provided by Quick Fact Checker should not be considered professional or expert advice. Always verify information through multiple reliable sources before making decisions based on it.</p>
 
-      <h3>Features</h3>
-      <p>
-        ✅ Fake news classification using ML models (Naive Bayes, Logistic Regression, Random Forest, and LSTM).<br>
-        ✅ Interactive web app built with Flask and HTML templates.<br>
-        ✅ Automated NLTK Setup to prevent missing resource errors.<br>
-        ✅ Preprocessed dataset included (train.tsv, test.tsv, valid.tsv).<br>
-        ✅ Notebooks for data analysis & experimentation (liar-data-analysis.ipynb, dataset.ipynb).<br>
-        ✅ Easy setup with requirements.txt.<br>
-      </p>
-    </section>
+    <h2>Fair Use Disclaimer</h2>
+    <p>Some content on this site may include copyrighted material used under fair use for educational and informational purposes. If you believe any material infringes your copyright, please contact us for removal.</p>
+
+    <p>By using this site, you agree that Quick Fact Checker and its creators are not liable for any damages arising from your use of the information provided.</p>
   </main>
 
   <!-- Footer -->
@@ -201,4 +191,5 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 

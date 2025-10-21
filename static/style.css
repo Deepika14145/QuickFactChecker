@@ -1692,3 +1692,54 @@ body.dark .about-card {
 .privacy-container h3 {
   color: #6c5ce7; /* purple tone consistent with site theme */
 }
+
+/* ================================
+   Disclaimer Page Styling
+================================ */
+.disclaimer-container {
+  max-width: 800px;
+  margin: 4rem auto;
+  padding: 2rem;
+  background: var(--card-light);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-light);
+  line-height: 1.7;
+}
+
+body.dark .disclaimer-container {
+  background: var(--card-dark);
+  box-shadow: var(--shadow-dark);
+}
+
+.disclaimer-container h1 {
+    font-size: 2rem;
+  font-weight: 800;
+  color: #6c5ce7; /* purple to match Quick Fact Checker title */
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.disclaimer-container h2 {
+  color: #6c5ce7;
+  margin-top: 1.5rem;
+}
+
+.disclaimer-container p {
+  color: var(--text-secondary-light);
+  margin: 0.75rem 0;
+}
+
+body.dark .disclaimer-container p {
+  color: var(--text-secondary-dark);
+}
+
+.disclaimer-hero {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.disclaimer-hero img {
+  max-width: 300px;
+  height: auto;
+  opacity: 0.9;
+}
