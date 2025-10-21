@@ -1,11 +1,11 @@
-<!-- templates/disclaimer.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Disclaimer | Quick Fact Checker</title>
+  <title>Blog | Quick Fact Checker</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://unpkg.com/lucide-icons@latest"></script>
 </head>
 <body>
 
@@ -74,32 +74,102 @@
       </div>
       </nav>
 
-      <!--diclaimer-->
-      <div style="height: 3rem"></div>
+      <!--blog-->
 
-  <main class="disclaimer-container">
-     <h1>Disclaimer</h1>
-   <div class="disclaimer-hero">
-  <img src="{{ url_for('static', filename='images/disclaimer-illustration.jpg') }}" alt="Disclaimer Illustration">
-</div>
+      <div style="height: 4rem;"></div>
+  <main class="blog-main">
+    <h1 class="blog-page-title">Model Insights Blog</h1>
+    <p class="blog-page-subtitle">Dive deeper into the models driving Quick Fact Checker</p>
 
+    <div class="blog-wrapper">
 
-   
-    
-    <p>The information provided by <strong>Quick Fact Checker</strong> is for general informational purposes only. All information on this site is provided in good faith; however, we make no representation or warranty of any kind regarding the accuracy, adequacy, validity, reliability, or completeness of any information.</p>
+      <!-- Navigation arrows -->
+       <!-- Navigation Arrows -->
+      <button class="nav-arrow left" id="prev-btn">
+        <i data-lucide="chevron-left"></i>
+      </button>
 
-    <h2>External Links Disclaimer</h2>
-    <p>Our website may contain links to other websites or content belonging to third parties. Such external links are not investigated, monitored, or checked for accuracy by us. We do not warrant or endorse any information found on external sites.</p>
+      <div class="blog-content" id="blog-content">
+        
+        <!-- Logistic Regression -->
+        <article class="blog-post active">
+          <img src="{{ url_for('static', filename='images/logreg-icon.png') }}" alt="Logistic Regression" class="blog-img">
+          <h2>Logistic Regression – A Simple but Strong Start</h2>
 
-    <h2>Professional Disclaimer</h2>
-    <p>The information provided by Quick Fact Checker should not be considered professional or expert advice. Always verify information through multiple reliable sources before making decisions based on it.</p>
+          <h3>What It Is</h3>
+          <p>Logistic Regression is one of the simplest machine learning models for classification. It helps determine if a claim is likely true or false based on patterns in the data.</p>
 
-    <h2>Fair Use Disclaimer</h2>
-    <p>Some content on this site may include copyrighted material used under fair use for educational and informational purposes. If you believe any material infringes your copyright, please contact us for removal.</p>
+          <h3>Why It Matters</h3>
+          <p>Despite its simplicity, it gives fast, interpretable predictions. It shows which words or features influence the result, helping you understand the logic behind each decision.</p>
 
-    <p>By using this site, you agree that Quick Fact Checker and its creators are not liable for any damages arising from your use of the information provided.</p>
+          <h3>How We Use It</h3>
+          <p>In Quick Fact Checker, we use Logistic Regression as our baseline model. It gives reliable performance on short claims and helps compare the impact of more complex models.</p>
+
+          <h3>What’s Next</h3>
+          <p>Ideal for those new to machine learning. Start with this model to learn what works, then move to more advanced systems.</p>
+        </article>
+
+        <!-- Random Forest -->
+        <article class="blog-post">
+          <img src="{{ url_for('static', filename='images/randomforest-icon.png') }}" alt="Random Forest" class="blog-img">
+          <h2>Random Forest – The Ensemble Powerhouse</h2>
+
+          <h3>What It Is</h3>
+          <p>Random Forest is a collection of decision trees working together. Each tree gives its vote, and the forest averages the results.</p>
+
+          <h3>Why It Matters</h3>
+          <p>This model is more robust and handles noisy data better than individual models. It reduces overfitting and increases accuracy.</p>
+
+          <h3>How We Use It</h3>
+          <p>Quick Fact Checker uses Random Forest to detect misleading claims. It captures subtle signals from word frequency and structure, helping uncover hidden misinformation.</p>
+
+          <h3>What’s Next</h3>
+          <p>Use this model when you want more accuracy without sacrificing interpretability. A great step up from logistic regression.</p>
+        </article>
+
+        <!-- LSTM -->
+        <article class="blog-post">
+          <img src="{{ url_for('static', filename='images/lstm-icon.png') }}" alt="LSTM" class="blog-img">
+          <h2>LSTM – Deep Context Understanding</h2>
+
+          <h3>What It Is</h3>
+          <p>LSTM (Long Short-Term Memory) is a neural network that understands sequences. It looks at words in context — not just in isolation.</p>
+
+          <h3>Why It Matters</h3>
+          <p>LSTM can detect tone, intent, and sentence structure — giving a deeper view of a claim’s truthfulness. Great for longer or complex sentences.</p>
+
+          <h3>How We Use It</h3>
+          <p>LSTM helps Quick Fact Checker understand flow and meaning. It’s key in spotting misinformation that simpler models might miss.</p>
+
+          <h3>What’s Next</h3>
+          <p>If you're handling nuanced claims or contextual clues, LSTM is the model for the job. It enables deep NLP insight.</p>
+        </article>
+
+        <!-- Naive Bayes -->
+        <article class="blog-post">
+          <img src="{{ url_for('static', filename='images/naivebayes-icon.png') }}" alt="Naive Bayes" class="blog-img">
+          <h2>Naive Bayes – Fast & Probabilistic Classifier</h2>
+
+          <h3>What It Is</h3>
+          <p>Naive Bayes calculates the probability that a statement is true based on the presence of certain words. It assumes all words are independent — even if they aren’t in reality.</p>
+
+          <h3>Why It Matters</h3>
+          <p>It’s incredibly fast and surprisingly accurate on small or clean datasets. Plus, it’s easy to explain to others.</p>
+
+          <h3>How We Use It</h3>
+          <p>Quick Fact Checker uses Naive Bayes as a lightweight screener. It quickly flags potentially false claims for deeper analysis.</p>
+
+          <h3>What’s Next</h3>
+          <p>Perfect for rapid prototyping or when you need results on low-resource devices. A solid utility model in your toolkit.</p>
+        </article>
+
+      </div>
+
+      <button class="nav-arrow right" id="next-btn">
+        <i data-lucide="chevron-right"></i>
+      </button>
+    </div>
   </main>
-
   <!-- Footer -->
   <footer class="footer">
     <div class="footer-container">
@@ -189,7 +259,12 @@
 
   <!-- Scripts -->
   <script src="script.js"></script>
+<script src="{{ url_for('static', filename='blog.js') }}"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    lucide.createIcons();
+  });
+</script>
 </body>
 </html>
-
-

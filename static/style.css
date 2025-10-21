@@ -1743,3 +1743,139 @@ body.dark .disclaimer-container p {
   height: auto;
   opacity: 0.9;
 }
+
+/* ===== BLOG PAGE (Slideshow Style) ===== */
+.blog-main {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+  text-align: center;
+}
+
+.blog-page-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #6c5ce7;
+  margin-bottom: 0.5rem;
+}
+
+.blog-page-subtitle {
+  color: var(--text-secondary-light);
+  margin-bottom: 2rem;
+}
+body.dark .blog-page-subtitle {
+  color: var(--text-secondary-dark);
+}
+
+.blog-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blog-content {
+  width: 100%;
+  overflow: hidden;
+}
+
+.blog-post {
+  display: none;
+  background: var(--card-light);
+  padding: 2rem;
+  border-radius: 1.5rem;
+  box-shadow: var(--shadow-light);
+  animation: fadeIn 0.4s ease;
+}
+body.dark .blog-post {
+  background: var(--card-dark);
+  box-shadow: var(--shadow-dark);
+}
+
+.blog-post.active {
+  display: block;
+}
+
+.blog-post h2 {
+  color: #6c5ce7;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.blog-post h3 {
+  font-size: 1.1rem;
+  font-weight: 500; /* 💡 This makes it lighter than default (usually 600-700) */
+  color: var(--text-primary-light);
+  margin-top: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+body.dark .blog-post h3 {
+  color: var(--text-primary-dark);
+}
+
+
+.blog-post p {
+  font-size: 1rem;
+  color: var(--text-secondary-light);
+  line-height: 1.6;
+}
+body.dark .blog-post p {
+  color: var(--text-secondary-dark);
+}
+
+.blog-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #f3f0ff;
+  padding: 10px;
+  margin-bottom: 1rem;
+}
+
+.nav-arrow {
+  background: rgba(108, 92, 231, 0.15);
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  color: #6c5ce7;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+.nav-arrow:hover {
+  background: rgba(108, 92, 231, 0.25);
+  color: #8e7dff;
+}
+
+.nav-arrow.left {
+  left: -60px;
+}
+.nav-arrow.right {
+  right: -60px;
+}
+
+
+@media (max-width: 768px) {
+  .nav-arrow.left { left: 10px; }
+  .nav-arrow.right { right: 10px; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .nav-arrow.left { left: 10px; }
+  .nav-arrow.right { right: 10px; }
+}
+
