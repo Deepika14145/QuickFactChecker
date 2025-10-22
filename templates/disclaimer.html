@@ -1,13 +1,15 @@
+<!-- templates/disclaimer.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Us - Quick Fact Checker</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disclaimer | Quick Fact Checker</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <!-- Navbar (reuse your existing one exactly as it is in other pages) -->
+
+    <!--navbar-->
   <nav class="navbar">
     <div class="nav-container">
       <div class="nav-left">
@@ -72,45 +74,34 @@
       </div>
       </nav>
 
+      <!--diclaimer-->
+      <div style="height: 3rem"></div>
 
-  <!-- Contact Us Content -->
-<div style="height: 7rem;"></div>
-  <main class="contact-section">
-    <div class="contact-container">
-      <div class="contact-form-box">
-        <h1>Contact Us</h1>
-        <p>We’d love to hear from you! Please share your feedback, ideas, or questions.</p>
-        
-        <form action="#" method="post" class="contact-form">
-          <div class="form-group">
-            <label for="email">Your Email Address</label>
-            <input type="email" id="email" name="email" placeholder="you@example.com" required>
-          </div>
+  <main class="disclaimer-container">
+     <h1>Disclaimer</h1>
+   <div class="disclaimer-hero">
+  <img src="{{ url_for('static', filename='images/disclaimer-illustration.jpg') }}" alt="Disclaimer Illustration">
+</div>
 
-          <div class="form-group">
-            <label for="message">Your Message</label>
-            <textarea id="message" name="message" rows="4" placeholder="Write your message here..." required></textarea>
-          </div>
 
-          <button type="submit" class="submit-btn">Send Message</button>
-        </form>
-        <div class="github-link">
-          <a href="https://github.com/Deepika14145/QuickFactChecker.git" target="_blank" class="github-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 .5C5.648.5.5 5.648.5 12c0 5.086 3.292 9.395 7.865 10.916.575.104.785-.25.785-.554 0-.274-.011-1.175-.016-2.131-3.199.696-3.876-1.538-3.876-1.538-.523-1.33-1.277-1.683-1.277-1.683-1.045-.714.08-.699.08-.699 1.156.081 1.764 1.187 1.764 1.187 1.028 1.761 2.695 1.253 3.352.958.105-.745.402-1.253.731-1.541-2.553-.291-5.238-1.277-5.238-5.686 0-1.257.449-2.285 1.186-3.09-.119-.29-.514-1.462.112-3.048 0 0 .965-.309 3.166 1.18A10.97 10.97 0 0 1 12 6.839a10.9 10.9 0 0 1 2.885.389c2.2-1.489 3.164-1.18 3.164-1.18.627 1.586.232 2.758.113 3.048.738.805 1.186 1.833 1.186 3.09 0 4.42-2.688 5.391-5.251 5.674.414.355.783 1.057.783 2.132 0 1.54-.014 2.78-.014 3.155 0 .308.207.662.792.548C20.213 21.392 23.5 17.084 23.5 12c0-6.352-5.148-11.5-11.5-11.5z"/>
-            </svg>
-            View Us on GitHub
-          </a>
-        </div>
-      </div>
+   
+    
+    <p>The information provided by <strong>Quick Fact Checker</strong> is for general informational purposes only. All information on this site is provided in good faith; however, we make no representation or warranty of any kind regarding the accuracy, adequacy, validity, reliability, or completeness of any information.</p>
 
-      <div class="contact-image">
-        <img src="{{ url_for('static', filename='images/contact-side.jpg') }}" alt="Contact illustration">
-      </div>
-    </div>
+    <h2>External Links Disclaimer</h2>
+    <p>Our website may contain links to other websites or content belonging to third parties. Such external links are not investigated, monitored, or checked for accuracy by us. We do not warrant or endorse any information found on external sites.</p>
+
+    <h2>Professional Disclaimer</h2>
+    <p>The information provided by Quick Fact Checker should not be considered professional or expert advice. Always verify information through multiple reliable sources before making decisions based on it.</p>
+
+    <h2>Fair Use Disclaimer</h2>
+    <p>Some content on this site may include copyrighted material used under fair use for educational and informational purposes. If you believe any material infringes your copyright, please contact us for removal.</p>
+
+    <p>By using this site, you agree that Quick Fact Checker and its creators are not liable for any damages arising from your use of the information provided.</p>
   </main>
-      <!--Footer-->
-      <footer class="footer">
+
+  <!-- Footer -->
+  <footer class="footer">
     <div class="footer-container">
       <div class="footer-content">
         <!-- Footer Logo & Description -->
@@ -200,4 +191,5 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 

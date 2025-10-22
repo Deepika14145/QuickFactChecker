@@ -89,6 +89,15 @@ def about():
 def contact():
     return render_template('contact.html')
 
+@app.route("/disclaimer")
+def disclaimer():
+    return render_template("disclaimer.html")
+
+@app.route("/blog")
+def blog():
+    return render_template("blog.html")
+
+
 
 
 def index():
