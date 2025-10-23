@@ -1,10 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Essential Meta Tags -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Us - Quick Fact Checker</title>
+  <meta name="description" content="Learn about Quick Fact Checker - an AI-powered fact-checking tool that uses machine learning models to detect fake news and verify news articles. Part of GSSoC'25 program.">
+  <meta name="keywords" content="about quick fact checker, AI fact checking, machine learning, fake news detection, GSSoC, open source, fact verification tool">
+  <meta name="author" content="Quick Fact Checker Team">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://quickfactchecker.com/about" />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="About Quick Fact Checker - AI-Powered News Verification Tool">
+  <meta property="og:description" content="Learn about Quick Fact Checker - an AI-powered fact-checking tool that uses machine learning models to detect fake news and verify news articles. Part of GSSoC'25 program.">
+  <meta property="og:image" content="https://quickfactchecker.com/static/images/og-about.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="About Quick Fact Checker - AI-Powered News Verification">
+  <meta property="og:url" content="https://quickfactchecker.com/about">
+  <meta property="og:site_name" content="Quick Fact Checker">
+  <meta property="og:locale" content="en_US">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@QuickFactChecker">
+  <meta name="twitter:creator" content="@QuickFactChecker">
+  <meta name="twitter:title" content="About Quick Fact Checker - AI-Powered News Verification Tool">
+  <meta name="twitter:description" content="Learn about Quick Fact Checker - an AI-powered fact-checking tool that uses machine learning models to detect fake news and verify news articles.">
+  <meta name="twitter:image" content="https://quickfactchecker.com/static/images/twitter-about.png">
+  <meta name="twitter:image:alt" content="About Quick Fact Checker - AI-Powered News Verification">
+  
+  <!-- Additional SEO Meta Tags -->
+  <meta name="theme-color" content="#4f46e5">
+  <meta name="msapplication-TileColor" content="#4f46e5">
+  <meta name="application-name" content="Quick Fact Checker">
+  <meta name="apple-mobile-web-app-title" content="Quick Fact Checker">
+  
+  <!-- Favicon and Icons -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+  <link rel="manifest" href="/static/manifest.json">
+  
+  <!-- Preconnect to external domains -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+  
+  <!-- Title -->
+  <title>About Quick Fact Checker - AI-Powered News Verification Tool | GSSoC'25</title>
+  
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+      "@context": "https://schema.org",
+      "@type": "AboutPage",
+      "name": "About Quick Fact Checker",
+      "description": "Learn about Quick Fact Checker - an AI-powered fact-checking tool that uses machine learning models to detect fake news and verify news articles",
+      "url": "https://quickfactchecker.com/about",
+      "mainEntity": {
+          "@type": "WebApplication",
+          "name": "Quick Fact Checker",
+          "description": "AI-powered fact-checking tool to verify news articles and claims using machine learning models",
+          "applicationCategory": "WebApplication",
+          "operatingSystem": "Web Browser",
+          "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+          },
+          "creator": {
+              "@type": "Organization",
+              "name": "Quick Fact Checker Team",
+              "url": "https://quickfactchecker.com"
+          },
+          "featureList": [
+              "AI-powered fact checking",
+              "Fake news detection",
+              "News verification",
+              "Machine learning analysis",
+              "Multiple ML models (LSTM, Random Forest, Logistic Regression)",
+              "GSSoC'25 participation"
+          ]
+      },
+      "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+              {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://quickfactchecker.com/"
+              },
+              {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "About",
+                  "item": "https://quickfactchecker.com/about"
+              }
+          ]
+      }
+  }
+  </script>
 </head>
 <body>
   <!-- Navbar (reuse your existing one exactly as it is in other pages) -->
