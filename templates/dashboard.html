@@ -1,12 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Essential Meta Tags -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Model Performance Dashboard</title>
+  <meta name="description" content="Model Performance Dashboard for Quick Fact Checker - Analyze and compare machine learning models (LSTM, Random Forest, Logistic Regression) performance metrics for fake news detection.">
+  <meta name="keywords" content="model performance dashboard, machine learning metrics, LSTM performance, random forest accuracy, logistic regression results, fake news detection models, AI model comparison">
+  <meta name="author" content="Quick Fact Checker Team">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://quickfactchecker.com/dashboard" />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Model Performance Dashboard - Quick Fact Checker Analytics">
+  <meta property="og:description" content="Analyze and compare machine learning models performance metrics for fake news detection. View accuracy, precision, recall, and F1-scores for LSTM, Random Forest, and Logistic Regression models.">
+  <meta property="og:image" content="https://quickfactchecker.com/static/images/og-dashboard.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Model Performance Dashboard - Quick Fact Checker Analytics">
+  <meta property="og:url" content="https://quickfactchecker.com/dashboard">
+  <meta property="og:site_name" content="Quick Fact Checker">
+  <meta property="og:locale" content="en_US">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@QuickFactChecker">
+  <meta name="twitter:creator" content="@QuickFactChecker">
+  <meta name="twitter:title" content="Model Performance Dashboard - Quick Fact Checker Analytics">
+  <meta name="twitter:description" content="Analyze and compare machine learning models performance metrics for fake news detection. View accuracy, precision, recall, and F1-scores.">
+  <meta property="twitter:image" content="https://quickfactchecker.com/static/images/twitter-dashboard.png">
+  <meta name="twitter:image:alt" content="Model Performance Dashboard - Quick Fact Checker Analytics">
+  
+  <!-- Additional SEO Meta Tags -->
+  <meta name="theme-color" content="#4f46e5">
+  <meta name="msapplication-TileColor" content="#4f46e5">
+  <meta name="application-name" content="Quick Fact Checker">
+  <meta name="apple-mobile-web-app-title" content="Quick Fact Checker">
+  
+  <!-- Favicon and Icons -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+  <link rel="manifest" href="/static/manifest.json">
+  
+  <!-- Preconnect to external domains -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+  
+  <!-- Title -->
+  <title>Model Performance Dashboard - Quick Fact Checker Analytics | ML Model Comparison</title>
+  
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  <link rel="stylesheet" href="/static/style.css">
+  
+  <!-- Scripts -->
   <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+  
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Model Performance Dashboard",
+      "description": "Analyze and compare machine learning models performance metrics for fake news detection",
+      "url": "https://quickfactchecker.com/dashboard",
+      "mainEntity": {
+          "@type": "WebApplication",
+          "name": "Quick Fact Checker Dashboard",
+          "description": "Model Performance Dashboard for analyzing machine learning models used in fake news detection",
+          "applicationCategory": "WebApplication",
+          "operatingSystem": "Web Browser",
+          "featureList": [
+              "Model performance comparison",
+              "Accuracy metrics visualization",
+              "Precision and recall analysis",
+              "F1-score evaluation",
+              "LSTM model performance",
+              "Random Forest analysis",
+              "Logistic Regression results"
+          ]
+      },
+      "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+              {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://quickfactchecker.com/"
+              },
+              {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Dashboard",
+                  "item": "https://quickfactchecker.com/dashboard"
+              }
+          ]
+      }
+  }
+  </script>
 </head>
 <body>
  <!-- Navigation Bar -->
