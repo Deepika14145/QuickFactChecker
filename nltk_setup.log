@@ -7,3 +7,12 @@
 2025-09-30 22:34:14,365 - INFO - Processing: omw-1.4
 2025-09-30 22:34:14,424 - INFO - 
 2025-09-30 22:34:14,426 - INFO - If you still encounter 'LookupError', ensure NLTK is installed correctly and your Python environment is active.
+2025-10-26 11:34:35,614 - INFO - Processing: punkt
+2025-10-26 11:34:41,027 - INFO - 
+2025-10-26 11:34:41,027 - INFO - Processing: stopwords
+2025-10-26 11:34:41,245 - INFO - 
+2025-10-26 11:34:41,245 - INFO - Processing: wordnet
+2025-10-26 11:34:44,608 - INFO - 
+2025-10-26 11:34:44,610 - INFO - Processing: omw-1.4
+2025-10-26 11:34:54,269 - INFO - 
+2025-10-26 11:34:54,269 - INFO - If you still encounter 'LookupError', ensure NLTK is installed correctly and your Python environment is active.
