@@ -1,0 +1,95 @@
+{
+  "meta": {
+    "title": "AI駆動の高度な高速ファクトチェッカー モダンUI付き",
+    "description": "ニュース記事や主張を検証するための無料AIツール。",
+    "og_title": "高速ファクトチェッカー",
+    "og_description": "AI駆動の分析でニュースの真実性を検証。"
+  },
+  "header": {
+    "title": "高速ファクトチェッカー",
+    "subtitle": "AI駆動の分析でニュース記事や主張を検証",
+    "theme_toggle": "テーマ切替"
+  },
+  "form": {
+    "label": "分析するテキストを入力",
+    "placeholder": "ファクトチェック用の記事、ニュース、または主張をここに貼り付けてください...",
+    "submit": "テキストを分析",
+    "analyzing": "分析中...",
+    "clear": "テキストをクリア",
+    "character_count": "{count} 文字",
+    "character_limit": "文字制限: {limit}",
+    "examples": "これらの例を試してみてください:",
+    "example1": "例 1",
+    "example2": "例 2",
+    "example3": "例 3"
+  },
+  "results": {
+    "title": "分析結果",
+    "processing": "テキストを処理中...",
+    "true": "このテキストは真実である可能性があります",
+    "false": "このテキストは偽である可能性があります",
+    "confidence": "信頼度: {percentage}%",
+    "copy": "結果をコピー",
+    "share": "共有",
+    "retry": "再試行",
+    "copied": "結果をクリップボードにコピーしました！",
+    "copy_failed": "結果のコピーに失敗しました",
+    "shared": "結果の共有に成功しました！",
+    "share_failed": "結果の共有に失敗しました",
+    "link_copied": "共有リンクをクリップボードにコピーしました！"
+  },
+  "history": {
+    "title": "最近のチェック ({count})",
+    "empty": "最近のチェックはありません",
+    "clear_all": "すべてクリア"
+  },
+  "dashboard": {
+    "title": "モデルパフォーマンスダッシュボード",
+    "model_label": "モデル選択:",
+    "dataset_label": "データセット:",
+    "metric_label": "メトリック:",
+    "datasets": {
+      "train": "訓練",
+      "test": "テスト",
+      "valid": "検証"
+    },
+    "metrics": {
+      "accuracy": "精度",
+      "precision": "適合率",
+      "recall": "再現率",
+      "f1": "F1スコア"
+    },
+    "models": {
+      "logreg": "ロジスティック回帰",
+      "rf": "ランダムフォレスト",
+      "lstm": "LSTM"
+    },
+    "summary": "インサイト要約",
+    "summary_default": "インサイトを表示するモデルを選択してください..."
+  },
+  "errors": {
+    "empty_input": "分析するテキストを入力してください。",
+    "analysis_error": "テキストの分析でエラーが発生しました。再試行してください。",
+    "network_error": "ネットワークエラー。接続を確認してください。",
+    "server_error": "サーバーエラー。後でもう一度お試しください。"
+  },
+  "accessibility": {
+    "analysis_completed": "分析完了: \"{text}\"",
+    "skip_to_content": "コンテンツにスキップ",
+    "main_content": "メインコンテンツ"
+  },
+  "languages": {
+    "en": "English",
+    "es": "Español",
+    "fr": "Français",
+    "de": "Deutsch",
+    "pt": "Português",
+    "it": "Italiano",
+    "ru": "Русский",
+    "ja": "日本語",
+    "ko": "한국어",
+    "zh": "中文",
+    "ar": "العربية",
+    "hi": "हिन्दी"
+  }
+}

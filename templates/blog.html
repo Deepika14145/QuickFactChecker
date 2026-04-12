@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — Quick Fact Checker</title>
+  <meta name="description" content="Deep dives into the ML models powering Quick Fact Checker." />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  {% include '_navbar.html' %}
+
+  <main id="main-content">
+    <div class="page-hero">
+      <div class="page-hero-inner">
+        <div class="page-hero-icon" aria-hidden="true">📖</div>
+        <h1 class="page-hero-title">Model Insights Blog</h1>
+        <p class="page-hero-subtitle">Dive deeper into the models driving Quick Fact Checker</p>
+      </div>
+    </div>
+
+    <div class="page-container">
+      <div class="blog-grid">
+
+        <!-- Logistic Regression -->
+        <article class="blog-card">
+          <div class="blog-card-img-wrap">
+            <img src="{{ url_for('static', filename='images/logreg-icon.png') }}" alt="Logistic Regression" class="blog-card-img" />
+          </div>
+          <div class="blog-card-body">
+            <span class="blog-tag">Baseline Model</span>
+            <h2 class="blog-card-title">Logistic Regression</h2>
+            <p class="blog-card-subtitle">A Simple but Strong Start</p>
+            <p class="blog-card-text">Despite its simplicity, Logistic Regression gives fast, interpretable predictions. It shows which words or features influence the result — making it the perfect baseline for understanding what works before moving to more complex models.</p>
+            <div class="blog-card-meta">
+              <span class="blog-meta-item">⚡ Fast inference</span>
+              <span class="blog-meta-item">🔍 Interpretable</span>
+              <span class="blog-meta-item">📊 87% accuracy</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Random Forest -->
+        <article class="blog-card">
+          <div class="blog-card-img-wrap" style="background:linear-gradient(135deg,rgba(124,58,237,0.08),rgba(139,92,246,0.04))">
+            <img src="{{ url_for('static', filename='images/randomforest-icon.png') }}" alt="Random Forest" class="blog-card-img" />
+          </div>
+          <div class="blog-card-body">
+            <span class="blog-tag" style="background:rgba(124,58,237,0.1);color:#7c3aed;border-color:rgba(124,58,237,0.2)">Ensemble</span>
+            <h2 class="blog-card-title">Random Forest</h2>
+            <p class="blog-card-subtitle">The Ensemble Powerhouse</p>
+            <p class="blog-card-text">A collection of decision trees working together. Each tree votes, and the forest averages the results — reducing overfitting and capturing subtle signals from word frequency and structure to uncover hidden misinformation.</p>
+            <div class="blog-card-meta">
+              <span class="blog-meta-item">🌲 Ensemble method</span>
+              <span class="blog-meta-item">🛡️ Robust</span>
+              <span class="blog-meta-item">📊 89% accuracy</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- LSTM -->
+        <article class="blog-card">
+          <div class="blog-card-img-wrap" style="background:linear-gradient(135deg,rgba(6,182,212,0.08),rgba(34,211,238,0.04))">
+            <img src="{{ url_for('static', filename='images/lstm-icon.png') }}" alt="LSTM" class="blog-card-img" />
+          </div>
+          <div class="blog-card-body">
+            <span class="blog-tag" style="background:rgba(6,182,212,0.1);color:#0891b2;border-color:rgba(6,182,212,0.2)">Deep Learning</span>
+            <h2 class="blog-card-title">LSTM</h2>
+            <p class="blog-card-subtitle">Deep Context Understanding</p>
+            <p class="blog-card-text">Long Short-Term Memory networks understand sequences — looking at words in context, not just in isolation. LSTM detects tone, intent, and sentence structure, giving a deeper view of a claim's truthfulness for complex sentences.</p>
+            <div class="blog-card-meta">
+              <span class="blog-meta-item">🧠 Neural network</span>
+              <span class="blog-meta-item">📝 Context-aware</span>
+              <span class="blog-meta-item">📊 91% accuracy</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Naive Bayes -->
+        <article class="blog-card">
+          <div class="blog-card-img-wrap" style="background:linear-gradient(135deg,rgba(5,150,105,0.08),rgba(16,185,129,0.04))">
+            <img src="{{ url_for('static', filename='images/naivebayes-icon.png') }}" alt="Naive Bayes" class="blog-card-img" />
+          </div>
+          <div class="blog-card-body">
+            <span class="blog-tag" style="background:rgba(5,150,105,0.1);color:#059669;border-color:rgba(5,150,105,0.2)">Probabilistic</span>
+            <h2 class="blog-card-title">Naive Bayes</h2>
+            <p class="blog-card-subtitle">Fast &amp; Probabilistic Classifier</p>
+            <p class="blog-card-text">Calculates the probability that a statement is true based on the presence of certain words. Incredibly fast and surprisingly accurate on clean datasets — perfect as a lightweight screener that quickly flags potentially false claims.</p>
+            <div class="blog-card-meta">
+              <span class="blog-meta-item">🚀 Ultra-fast</span>
+              <span class="blog-meta-item">📐 Probabilistic</span>
+              <span class="blog-meta-item">💡 Explainable</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="cta-row" style="margin-top:2rem">
+        <a href="/" class="btn-primary" style="display:inline-flex;align-items:center;gap:0.5rem;text-decoration:none;width:auto;padding:0.85rem 2rem">
+          Try the Fact Checker →
+        </a>
+        <a href="/dashboard" class="btn-outline">View Performance Dashboard</a>
+      </div>
+    </div>
+  </main>
+
+  {% include '_footer.html' %}
+  {% include '_auth_modal.html' %}
+
+  <div class="toast" id="toast" role="alert" aria-live="assertive" aria-atomic="true"></div>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

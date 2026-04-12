@@ -1,0 +1,95 @@
+{
+  "meta": {
+    "title": "AI-Gestützte Erweiterte Schnellprüfung mit Moderner UI",
+    "description": "Kostenloses AI-Tool zur Überprüfung von Nachrichtenartikeln und Behauptungen.",
+    "og_title": "Schnelle Faktenprüfung",
+    "og_description": "Überprüfen Sie Nachrichten mit AI-gestützter Analyse auf Wahrhaftigkeit."
+  },
+  "header": {
+    "title": "Schnelle Faktenprüfung",
+    "subtitle": "Überprüfen Sie Nachrichtenartikel und Behauptungen mit AI-gestützter Analyse",
+    "theme_toggle": "Theme umschalten"
+  },
+  "form": {
+    "label": "Text zur Analyse eingeben",
+    "placeholder": "Fügen Sie hier Ihren Artikel, Nachrichtenbericht oder Behauptung zur Faktenprüfung ein...",
+    "submit": "Text analysieren",
+    "analyzing": "Analysiere...",
+    "clear": "Text löschen",
+    "character_count": "{count} Zeichen",
+    "character_limit": "Zeichenlimit: {limit}",
+    "examples": "Probieren Sie diese Beispiele aus:",
+    "example1": "Beispiel 1",
+    "example2": "Beispiel 2",
+    "example3": "Beispiel 3"
+  },
+  "results": {
+    "title": "Analyseergebnis",
+    "processing": "Verarbeite Ihren Text...",
+    "true": "Dieser Text ist wahrscheinlich wahr",
+    "false": "Dieser Text ist wahrscheinlich falsch",
+    "confidence": "Vertrauen: {percentage}%",
+    "copy": "Ergebnis kopieren",
+    "share": "Teilen",
+    "retry": "Erneut versuchen",
+    "copied": "Ergebnis in Zwischenablage kopiert!",
+    "copy_failed": "Kopieren des Ergebnisses fehlgeschlagen",
+    "shared": "Ergebnis erfolgreich geteilt!",
+    "share_failed": "Teilen des Ergebnisses fehlgeschlagen",
+    "link_copied": "Freigabelink in Zwischenablage kopiert!"
+  },
+  "history": {
+    "title": "Kürzliche Prüfungen ({count})",
+    "empty": "Keine kürzlichen Prüfungen",
+    "clear_all": "Alle löschen"
+  },
+  "dashboard": {
+    "title": "Modellleistungs-Dashboard",
+    "model_label": "Modellauswahl:",
+    "dataset_label": "Datensatz:",
+    "metric_label": "Metrik:",
+    "datasets": {
+      "train": "Training",
+      "test": "Test",
+      "valid": "Validierung"
+    },
+    "metrics": {
+      "accuracy": "Genauigkeit",
+      "precision": "Präzision",
+      "recall": "Recall",
+      "f1": "F1-Score"
+    },
+    "models": {
+      "logreg": "Logistische Regression",
+      "rf": "Random Forest",
+      "lstm": "LSTM"
+    },
+    "summary": "Zusammenfassung der Erkenntnisse",
+    "summary_default": "Wählen Sie ein Modell, um Erkenntnisse zu sehen..."
+  },
+  "errors": {
+    "empty_input": "Bitte geben Sie Text zur Analyse ein.",
+    "analysis_error": "Fehler beim Analysieren des Textes. Bitte versuchen Sie es erneut.",
+    "network_error": "Netzwerkfehler. Bitte überprüfen Sie Ihre Verbindung.",
+    "server_error": "Serverfehler. Bitte versuchen Sie es später erneut."
+  },
+  "accessibility": {
+    "analysis_completed": "Analyse abgeschlossen für: \"{text}\"",
+    "skip_to_content": "Zum Inhalt springen",
+    "main_content": "Hauptinhalt"
+  },
+  "languages": {
+    "en": "English",
+    "es": "Español",
+    "fr": "Français",
+    "de": "Deutsch",
+    "pt": "Português",
+    "it": "Italiano",
+    "ru": "Русский",
+    "ja": "日本語",
+    "ko": "한국어",
+    "zh": "中文",
+    "ar": "العربية",
+    "hi": "हिन्दी"
+  }
+}

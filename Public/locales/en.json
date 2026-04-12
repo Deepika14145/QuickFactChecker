@@ -1,0 +1,95 @@
+{
+  "meta": {
+    "title": "Enhanced Quick Fact Checker with Modern UI/UX",
+    "description": "Free AI-powered tool to verify news articles and claims.",
+    "og_title": "Quick Fact Checker",
+    "og_description": "Verify news authenticity with AI-powered analysis."
+  },
+  "header": {
+    "title": "Quick Fact Checker",
+    "subtitle": "Verify the authenticity of news articles and claims with AI-powered analysis",
+    "theme_toggle": "Toggle theme"
+  },
+  "form": {
+    "label": "Enter text to analyze",
+    "placeholder": "Paste your article, news story, or claim here for fact-checking...",
+    "submit": "Analyze Text",
+    "analyzing": "Analyzing...",
+    "clear": "Clear text",
+    "character_count": "{count} character{plural}",
+    "character_limit": "Character limit: {limit}",
+    "examples": "Try these examples:",
+    "example1": "Example 1",
+    "example2": "Example 2", 
+    "example3": "Example 3"
+  },
+  "results": {
+    "title": "Analysis Result",
+    "processing": "Processing your text...",
+    "true": "This text is likely TRUE",
+    "false": "This text is likely FAKE",
+    "confidence": "Confidence: {percentage}%",
+    "copy": "Copy Result",
+    "share": "Share",
+    "retry": "Retry",
+    "copied": "Result copied to clipboard!",
+    "copy_failed": "Failed to copy result",
+    "shared": "Result shared successfully!",
+    "share_failed": "Failed to share result",
+    "link_copied": "Share link copied to clipboard!"
+  },
+  "history": {
+    "title": "Recent Checks ({count})",
+    "empty": "No recent checks",
+    "clear_all": "Clear All"
+  },
+  "dashboard": {
+    "title": "Model Performance Dashboard",
+    "model_label": "Choose Models:",
+    "dataset_label": "Dataset:",
+    "metric_label": "Metric:",
+    "datasets": {
+      "train": "Train",
+      "test": "Test",
+      "valid": "Validation"
+    },
+    "metrics": {
+      "accuracy": "Accuracy",
+      "precision": "Precision",
+      "recall": "Recall",
+      "f1": "F1-Score"
+    },
+    "models": {
+      "logreg": "Logistic Regression",
+      "rf": "Random Forest", 
+      "lstm": "LSTM"
+    },
+    "summary": "Summary Insights",
+    "summary_default": "Select a model to see insights..."
+  },
+  "errors": {
+    "empty_input": "Please enter some text to analyze.",
+    "analysis_error": "Error analyzing text. Please try again.",
+    "network_error": "Network error. Please check your connection.",
+    "server_error": "Server error. Please try again later."
+  },
+  "accessibility": {
+    "analysis_completed": "Analysis completed for: \"{text}\"",
+    "skip_to_content": "Skip to content",
+    "main_content": "Main content"
+  },
+  "languages": {
+    "en": "English",
+    "es": "Español", 
+    "fr": "Français",
+    "de": "Deutsch",
+    "pt": "Português",
+    "it": "Italiano",
+    "ru": "Русский",
+    "ja": "日本語",
+    "ko": "한국어",
+    "zh": "中文",
+    "ar": "العربية",
+    "hi": "हिन्दी"
+  }
+}

@@ -1,0 +1,88 @@
+<div id="auth-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+  <div class="modal">
+    <button class="modal-close" id="modal-close" aria-label="Close">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+        fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+    <div class="modal-logo" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14,2 14,8 20,8"/>
+        <line x1="16" y1="13" x2="8" y2="13"/>
+        <line x1="16" y1="17" x2="8" y2="17"/>
+      </svg>
+    </div>
+    <div class="modal-tabs" role="tablist">
+      <button class="modal-tab active" id="tab-login" role="tab" aria-selected="true" aria-controls="panel-login" type="button">Sign In</button>
+      <button class="modal-tab" id="tab-register" role="tab" aria-selected="false" aria-controls="panel-register" type="button">Create Account</button>
+    </div>
+    <div id="panel-login" role="tabpanel" aria-labelledby="tab-login">
+      <h2 class="modal-title" id="modal-title">Welcome back</h2>
+      <p class="modal-subtitle">Sign in to save your fact-check history</p>
+      <form id="login-form" novalidate>
+        <div class="modal-field">
+          <label for="login-username">Username</label>
+          <div class="input-wrap">
+            <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <input type="text" id="login-username" name="username" placeholder="your_username" autocomplete="username" required />
+          </div>
+        </div>
+        <div class="modal-field">
+          <label for="login-password">Password</label>
+          <div class="input-wrap">
+            <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <input type="password" id="login-password" name="password" placeholder="••••••••" autocomplete="current-password" required />
+            <button type="button" class="toggle-pw" aria-label="Show password" data-target="login-password">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="modal-error" id="login-error" role="alert" hidden></div>
+        <button type="submit" class="modal-submit" id="login-submit">
+          <span class="modal-submit-text">Sign In</span>
+          <span class="modal-submit-spinner" aria-hidden="true"></span>
+        </button>
+      </form>
+      <p class="modal-switch">Don't have an account? <button type="button" class="modal-switch-btn" data-switch="register">Create one</button></p>
+    </div>
+    <div id="panel-register" role="tabpanel" aria-labelledby="tab-register" hidden>
+      <h2 class="modal-title">Create account</h2>
+      <p class="modal-subtitle">Join to track and save your analyses</p>
+      <form id="register-form" novalidate>
+        <div class="modal-field">
+          <label for="reg-name">Full Name</label>
+          <div class="input-wrap">
+            <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <input type="text" id="reg-name" name="name" placeholder="Jane Doe" autocomplete="name" required />
+          </div>
+        </div>
+        <div class="modal-field">
+          <label for="reg-username">Username</label>
+          <div class="input-wrap">
+            <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"/><polygon points="18,2 22,6 12,16 8,16 8,12"/></svg>
+            <input type="text" id="reg-username" name="username" placeholder="jane_doe" autocomplete="username" required />
+          </div>
+        </div>
+        <div class="modal-field">
+          <label for="reg-password">Password <span class="field-hint">min. 6 characters</span></label>
+          <div class="input-wrap">
+            <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <input type="password" id="reg-password" name="password" placeholder="••••••••" autocomplete="new-password" required />
+            <button type="button" class="toggle-pw" aria-label="Show password" data-target="reg-password">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="modal-error" id="register-error" role="alert" hidden></div>
+        <button type="submit" class="modal-submit" id="register-submit">
+          <span class="modal-submit-text">Create Account</span>
+          <span class="modal-submit-spinner" aria-hidden="true"></span>
+        </button>
+      </form>
+      <p class="modal-switch">Already have an account? <button type="button" class="modal-switch-btn" data-switch="login">Sign in</button></p>
+    </div>
+  </div>
+</div>

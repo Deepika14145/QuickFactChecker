@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us — Quick Fact Checker</title>
+  <meta name="description" content="Learn about Quick Fact Checker, an AI-powered fake news detection tool." />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=3" />
+</head>
+<body>
+  {% include '_navbar.html' %}
+
+  <main id="main-content">
+
+    <!-- ── Hero ── -->
+    <div class="page-hero about-hero">
+      <div class="page-hero-inner">
+        <div class="about-hero-badge">Open Source · GSSoC'25</div>
+        <h1 class="page-hero-title">About Quick Fact Checker</h1>
+        <p class="page-hero-subtitle">An AI-powered tool that helps you cut through misinformation — built in the open, for everyone.</p>
+        <div class="about-hero-cta">
+          <a href="/" class="btn-primary" style="display:inline-flex;align-items:center;gap:0.5rem;text-decoration:none;width:auto;padding:0.8rem 1.75rem;font-size:0.95rem">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            Try It Now
+          </a>
+          <a href="https://github.com/Deepika14145/QuickFactChecker" target="_blank" rel="noopener noreferrer" class="btn-outline" style="font-size:0.95rem">
+            View on GitHub ↗
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-container">
+
+      <!-- ── Stats row ── -->
+      <div class="about-stats">
+        <div class="about-stat">
+          <div class="about-stat-value">4+</div>
+          <div class="about-stat-label">ML Models</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-value">91%</div>
+          <div class="about-stat-label">Best Accuracy</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-value">9</div>
+          <div class="about-stat-label">Languages</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-value">LIAR</div>
+          <div class="about-stat-label">Dataset</div>
+        </div>
+      </div>
+
+      <!-- ── What it is ── -->
+      <div class="content-card highlight-card">
+        <div class="content-card-header">
+          <span class="content-card-icon" aria-hidden="true">🎯</span>
+          <h2>What Is Quick Fact Checker?</h2>
+        </div>
+        <p>QuickFactChecker is a machine learning–based web app that helps detect whether a news article is real or fake. It uses models like <strong>Naive Bayes, Logistic Regression, Random Forest, and LSTM</strong> — trained on the LIAR dataset — to evaluate credibility and help users identify potentially misleading information.</p>
+        <p style="margin-top:0.75rem">We aim to empower individuals to make informed decisions in an era of rapid information sharing.</p>
+      </div>
+
+      <!-- ── Models overview ── -->
+      <div class="content-card">
+        <div class="content-card-header">
+          <span class="content-card-icon" aria-hidden="true">🤖</span>
+          <h2>Models Under the Hood</h2>
+        </div>
+        <div class="about-models-grid">
+          <div class="about-model-chip" style="--chip-color:#4f46e5">
+            <span class="about-model-dot"></span>
+            <div>
+              <div class="about-model-name">Logistic Regression</div>
+              <div class="about-model-acc">87% accuracy</div>
+            </div>
+          </div>
+          <div class="about-model-chip" style="--chip-color:#7c3aed">
+            <span class="about-model-dot"></span>
+            <div>
+              <div class="about-model-name">Random Forest</div>
+              <div class="about-model-acc">89% accuracy</div>
+            </div>
+          </div>
+          <div class="about-model-chip" style="--chip-color:#06b6d4">
+            <span class="about-model-dot"></span>
+            <div>
+              <div class="about-model-name">LSTM (Deep Learning)</div>
+              <div class="about-model-acc">91% accuracy</div>
+            </div>
+          </div>
+          <div class="about-model-chip" style="--chip-color:#059669">
+            <span class="about-model-dot"></span>
+            <div>
+              <div class="about-model-name">Naive Bayes</div>
+              <div class="about-model-acc">Fast screener</div>
+            </div>
+          </div>
+        </div>
+        <p style="margin-top:1rem;font-size:0.85rem">All models are trained on the <strong>LIAR dataset</strong> — a benchmark corpus of 12,836 labeled political statements. <a href="/blog" class="footer-link" style="font-weight:600">Read the model blog →</a></p>
+      </div>
+
+      <!-- ── GSSoC ── -->
+      <div class="content-card gssoc-card">
+        <div class="gssoc-header">
+          <div class="gssoc-badge-wrap">
+            <span class="gssoc-emoji" aria-hidden="true">🌟</span>
+          </div>
+          <div>
+            <h2 style="font-size:1.15rem;font-weight:800;color:var(--text-primary);margin:0 0 0.25rem">GirlScript Summer of Code — GSSoC'25</h2>
+            <p style="font-size:0.875rem;color:var(--text-secondary);margin:0">Official open-source program · 3 months · India &amp; beyond</p>
+          </div>
+        </div>
+        <p style="margin:1rem 0;color:var(--text-secondary);font-size:0.9rem;line-height:1.7">This project is an official part of <strong>GSSoC'25</strong> — one of India's largest open-source programs encouraging developers of all levels to contribute to real-world projects while learning, collaborating, and growing together.</p>
+        <div class="feature-grid">
+          <div class="feature-item"><span>✨</span><span>Improve your skills</span></div>
+          <div class="feature-item"><span>🤝</span><span>Contribute to impactful projects</span></div>
+          <div class="feature-item"><span>🏆</span><span>Get recognized for your work</span></div>
+          <div class="feature-item"><span>📜</span><span>Receive certificates &amp; swag</span></div>
+        </div>
+      </div>
+
+      <!-- ── Features ── -->
+      <div class="content-card">
+        <div class="content-card-header">
+          <span class="content-card-icon" aria-hidden="true">⚡</span>
+          <h2>Features</h2>
+        </div>
+        <div class="features-two-col">
+          <div class="feature-check-item">
+            <div class="fci-icon" style="background:rgba(79,70,229,0.1);color:var(--primary)">🧠</div>
+            <div><strong>Multi-Model Analysis</strong><br><span>Naive Bayes, Logistic Regression, Random Forest &amp; LSTM</span></div>
+          </div>
+          <div class="feature-check-item">
+            <div class="fci-icon" style="background:rgba(6,182,212,0.1);color:#0891b2">🌐</div>
+            <div><strong>9 Languages</strong><br><span>Full i18n support including Arabic, Hindi, Japanese &amp; more</span></div>
+          </div>
+          <div class="feature-check-item">
+            <div class="fci-icon" style="background:rgba(5,150,105,0.1);color:var(--success)">🔗</div>
+            <div><strong>URL Fetching</strong><br><span>Paste a URL and we extract &amp; analyze the article text</span></div>
+          </div>
+          <div class="feature-check-item">
+            <div class="fci-icon" style="background:rgba(124,58,237,0.1);color:var(--secondary)">📊</div>
+            <div><strong>Performance Dashboard</strong><br><span>Compare model accuracy, precision, recall &amp; F1 interactively</span></div>
+          </div>
+          <div class="feature-check-item">
+            <div class="fci-icon" style="background:rgba(217,119,6,0.1);color:var(--warning)">📱</div>
+            <div><strong>PWA Ready</strong><br><span>Installable as a Progressive Web App on any device</span></div>
+          </div>
+          <div class="feature-check-item">
+            <div class="fci-icon" style="background:rgba(220,38,38,0.1);color:var(--error)">🔒</div>
+            <div><strong>Auth System</strong><br><span>Register &amp; sign in to save your fact-check history</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── CTA ── -->
+      <div class="about-cta-card">
+        <div class="about-cta-text">
+          <h2>Ready to check a fact?</h2>
+          <p>Paste any news article or claim and get an AI-powered verdict in seconds.</p>
+        </div>
+        <div class="cta-row" style="flex-shrink:0">
+          <a href="/" class="btn-primary" style="display:inline-flex;align-items:center;gap:0.5rem;text-decoration:none;width:auto;padding:0.85rem 2rem">
+            Try Fact Checker →
+          </a>
+          <a href="/contact" class="btn-outline">Contact Us</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  {% include '_footer.html' %}
+  {% include '_auth_modal.html' %}
+
+  <div class="toast" id="toast" role="alert" aria-live="assertive" aria-atomic="true"></div>
+  <script src="{{ url_for('static', filename='script.js') }}?v=3"></script>
+</body>
+</html>

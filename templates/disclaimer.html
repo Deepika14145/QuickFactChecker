@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Disclaimer — Quick Fact Checker</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  {% include '_navbar.html' %}
+
+  <main id="main-content">
+    <div class="page-hero">
+      <div class="page-hero-inner">
+        <div class="page-hero-icon" aria-hidden="true">⚠️</div>
+        <h1 class="page-hero-title">Disclaimer</h1>
+        <p class="page-hero-subtitle">Please read this before using Quick Fact Checker</p>
+      </div>
+    </div>
+
+    <div class="page-container">
+      <div class="legal-layout">
+        <nav class="legal-toc" aria-label="Table of contents">
+          <p class="toc-title">Contents</p>
+          <ol class="toc-list">
+            <li><a href="#general" class="toc-link">General Disclaimer</a></li>
+            <li><a href="#external" class="toc-link">External Links</a></li>
+            <li><a href="#professional" class="toc-link">Professional Advice</a></li>
+            <li><a href="#fair-use" class="toc-link">Fair Use</a></li>
+            <li><a href="#liability" class="toc-link">Liability</a></li>
+          </ol>
+        </nav>
+
+        <div class="legal-content">
+          <div class="content-card highlight-card" id="general">
+            <div class="content-card-header"><span class="content-card-icon">📢</span><h2>General Disclaimer</h2></div>
+            <p>The information provided by <strong>Quick Fact Checker</strong> is for general informational purposes only. All information on this site is provided in good faith; however, we make no representation or warranty of any kind regarding the accuracy, adequacy, validity, reliability, or completeness of any information.</p>
+          </div>
+
+          <div class="content-card" id="external">
+            <div class="content-card-header"><span class="content-card-icon">🔗</span><h2>External Links Disclaimer</h2></div>
+            <p>Our website may contain links to other websites or content belonging to third parties. Such external links are not investigated, monitored, or checked for accuracy by us. We do not warrant or endorse any information found on external sites.</p>
+          </div>
+
+          <div class="content-card" id="professional">
+            <div class="content-card-header"><span class="content-card-icon">👨‍💼</span><h2>Professional Disclaimer</h2></div>
+            <p>The information provided by Quick Fact Checker should not be considered professional or expert advice. Always verify information through multiple reliable sources before making decisions based on it.</p>
+          </div>
+
+          <div class="content-card" id="fair-use">
+            <div class="content-card-header"><span class="content-card-icon">⚖️</span><h2>Fair Use Disclaimer</h2></div>
+            <p>Some content on this site may include copyrighted material used under fair use for educational and informational purposes. If you believe any material infringes your copyright, please contact us for removal.</p>
+          </div>
+
+          <div class="content-card" id="liability">
+            <div class="content-card-header"><span class="content-card-icon">🛡️</span><h2>Limitation of Liability</h2></div>
+            <p>By using this site, you agree that Quick Fact Checker and its creators are not liable for any damages arising from your use of the information provided.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  {% include '_footer.html' %}
+  {% include '_auth_modal.html' %}
+
+  <div class="toast" id="toast" role="alert" aria-live="assertive" aria-atomic="true"></div>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

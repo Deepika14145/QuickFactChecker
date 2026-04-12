@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Model Performance Dashboard — Quick Fact Checker</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  {% include '_navbar.html' %}
+
+  <main id="main-content">
+    <div class="page-hero">
+      <div class="page-hero-inner">
+        <div class="page-hero-icon" aria-hidden="true">📊</div>
+        <h1 class="page-hero-title">Model Performance Dashboard</h1>
+        <p class="page-hero-subtitle">Compare accuracy, precision, recall and F1 across all models</p>
+      </div>
+    </div>
+
+    <div class="page-container">
+      <!-- Reuse the same dashboard card component from index -->
+      <div class="dashboard-card" aria-labelledby="dashboard-title">
+        <div class="dashboard-header">
+          <div class="dashboard-title-group">
+            <div class="dashboard-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/>
+                <line x1="6" y1="20" x2="6" y2="14"/>
+              </svg>
+            </div>
+            <h2 id="dashboard-title">Model Performance</h2>
+          </div>
+          <span class="dashboard-badge">Live Stats</span>
+        </div>
+
+        <div class="dashboard-filters">
+          <div class="filter-group">
+            <span class="filter-label">Models</span>
+            <div class="pill-group" id="model-pill-group" role="group" aria-label="Select models">
+              <button class="pill active" data-value="logreg" type="button">
+                <span class="pill-dot" style="background:#4f46e5"></span>Logistic Regression
+              </button>
+              <button class="pill active" data-value="rf" type="button">
+                <span class="pill-dot" style="background:#7c3aed"></span>Random Forest
+              </button>
+              <button class="pill active" data-value="lstm" type="button">
+                <span class="pill-dot" style="background:#06b6d4"></span>LSTM
+              </button>
+            </div>
+          </div>
+          <div class="filter-row">
+            <div class="filter-group">
+              <span class="filter-label">Dataset</span>
+              <div class="segmented" id="dataset-segmented" role="group" aria-label="Select dataset">
+                <button class="seg-btn" data-value="train" type="button">Train</button>
+                <button class="seg-btn active" data-value="test" type="button">Test</button>
+                <button class="seg-btn" data-value="valid" type="button">Validation</button>
+              </div>
+            </div>
+            <div class="filter-group">
+              <span class="filter-label">Metric</span>
+              <div class="segmented" id="metric-segmented" role="group" aria-label="Select metric">
+                <button class="seg-btn active" data-value="accuracy" type="button">Accuracy</button>
+                <button class="seg-btn" data-value="precision" type="button">Precision</button>
+                <button class="seg-btn" data-value="recall" type="button">Recall</button>
+                <button class="seg-btn" data-value="f1" type="button">F1</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stat-cards" id="stat-cards"></div>
+
+        <div class="chart-box">
+          <canvas id="dashboard-chart" aria-label="Model performance chart" role="img"></canvas>
+        </div>
+        <div class="chart-legend" id="chart-legend" aria-hidden="true"></div>
+
+        <div class="summary-box" id="summary-box">
+          <div class="summary-icon" aria-hidden="true">💡</div>
+          <div>
+            <h3>Insight</h3>
+            <p id="summary-text">Select models above to compare performance.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  {% include '_footer.html' %}
+  {% include '_auth_modal.html' %}
+
+  <div class="toast" id="toast" role="alert" aria-live="assertive" aria-atomic="true"></div>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+{
+  "meta": {
+    "title": "Verificador de Fatos Rápido AI com Interface Moderna",
+    "description": "Ferramenta gratuita de IA para verificar artigos de notícias e alegações.",
+    "og_title": "Verificador de Fatos Rápido",
+    "og_description": "Verifique a veracidade das notícias com análise baseada em IA."
+  },
+  "header": {
+    "title": "Verificador de Fatos Rápido",
+    "subtitle": "Verifique artigos de notícias e alegações com análise baseada em IA",
+    "theme_toggle": "Alternar tema"
+  },
+  "form": {
+    "label": "Digite o texto para análise",
+    "placeholder": "Cole aqui seu artigo, notícia ou alegação para verificação de fatos...",
+    "submit": "Analisar texto",
+    "analyzing": "Analisando...",
+    "clear": "Limpar texto",
+    "character_count": "{count} caracteres",
+    "character_limit": "Limite de caracteres: {limit}",
+    "examples": "Experimente estes exemplos:",
+    "example1": "Exemplo 1",
+    "example2": "Exemplo 2",
+    "example3": "Exemplo 3"
+  },
+  "results": {
+    "title": "Resultado da Análise",
+    "processing": "Processando seu texto...",
+    "true": "Este texto é provavelmente verdadeiro",
+    "false": "Este texto é provavelmente falso",
+    "confidence": "Confiança: {percentage}%",
+    "copy": "Copiar resultado",
+    "share": "Compartilhar",
+    "retry": "Tentar novamente",
+    "copied": "Resultado copiado para a área de transferência!",
+    "copy_failed": "Falha ao copiar resultado",
+    "shared": "Resultado compartilhado com sucesso!",
+    "share_failed": "Falha ao compartilhar resultado",
+    "link_copied": "Link de compartilhamento copiado para a área de transferência!"
+  },
+  "history": {
+    "title": "Verificações Recentes ({count})",
+    "empty": "Nenhuma verificação recente",
+    "clear_all": "Limpar todas"
+  },
+  "dashboard": {
+    "title": "Painel de Performance do Modelo",
+    "model_label": "Seleção de Modelos:",
+    "dataset_label": "Conjunto de Dados:",
+    "metric_label": "Métrica:",
+    "datasets": {
+      "train": "Treinamento",
+      "test": "Teste",
+      "valid": "Validação"
+    },
+    "metrics": {
+      "accuracy": "Precisão",
+      "precision": "Exatidão",
+      "recall": "Recall",
+      "f1": "Pontuação F1"
+    },
+    "models": {
+      "logreg": "Regressão Logística",
+      "rf": "Floresta Aleatória",
+      "lstm": "LSTM"
+    },
+    "summary": "Resumo de Insights",
+    "summary_default": "Selecione um modelo para ver insights..."
+  },
+  "errors": {
+    "empty_input": "Por favor, insira texto para análise.",
+    "analysis_error": "Erro ao analisar o texto. Tente novamente.",
+    "network_error": "Erro de rede. Verifique sua conexão.",
+    "server_error": "Erro do servidor. Tente novamente mais tarde."
+  },
+  "accessibility": {
+    "analysis_completed": "Análise concluída para: \"{text}\"",
+    "skip_to_content": "Pular para o conteúdo",
+    "main_content": "Conteúdo principal"
+  },
+  "languages": {
+    "en": "English",
+    "es": "Español",
+    "fr": "Français",
+    "de": "Deutsch",
+    "pt": "Português",
+    "it": "Italiano",
+    "ru": "Русский",
+    "ja": "日本語",
+    "ko": "한국어",
+    "zh": "中文",
+    "ar": "العربية",
+    "hi": "हिन्दी"
+  }
+}

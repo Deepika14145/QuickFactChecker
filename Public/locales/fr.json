@@ -1,0 +1,95 @@
+{
+  "meta": {
+    "title": "Vérificateur de Faits Rapide Amélioré avec UI/UX Moderne",
+    "description": "Outil gratuit alimenté par l'IA pour vérifier les articles de presse et les affirmations.",
+    "og_title": "Vérificateur de Faits Rapide",
+    "og_description": "Vérifiez l'authenticité des nouvelles avec une analyse alimentée par l'IA."
+  },
+  "header": {
+    "title": "Vérificateur de Faits Rapide",
+    "subtitle": "Vérifiez l'authenticité des articles de presse et des affirmations avec une analyse alimentée par l'IA",
+    "theme_toggle": "Basculer le thème"
+  },
+  "form": {
+    "label": "Entrez le texte à analyser",
+    "placeholder": "Collez votre article, histoire d'actualité ou affirmation ici pour vérification...",
+    "submit": "Analyser le Texte",
+    "analyzing": "Analyse en cours...",
+    "clear": "Effacer le texte",
+    "character_count": "{count} caractère{plural}",
+    "character_limit": "Limite de caractères: {limit}",
+    "examples": "Essayez ces exemples:",
+    "example1": "Exemple 1",
+    "example2": "Exemple 2",
+    "example3": "Exemple 3"
+  },
+  "results": {
+    "title": "Résultat de l'Analyse",
+    "processing": "Traitement de votre texte...",
+    "true": "Ce texte est probablement VRAI",
+    "false": "Ce texte est probablement FAUX",
+    "confidence": "Confiance: {percentage}%",
+    "copy": "Copier le Résultat",
+    "share": "Partager",
+    "retry": "Réessayer",
+    "copied": "Résultat copié dans le presse-papiers!",
+    "copy_failed": "Échec de la copie du résultat",
+    "shared": "Résultat partagé avec succès!",
+    "share_failed": "Échec du partage du résultat",
+    "link_copied": "Lien de partage copié dans le presse-papiers!"
+  },
+  "history": {
+    "title": "Vérifications Récentes ({count})",
+    "empty": "Aucune vérification récente",
+    "clear_all": "Tout Effacer"
+  },
+  "dashboard": {
+    "title": "Tableau de Bord de Performance du Modèle",
+    "model_label": "Choisir les Modèles:",
+    "dataset_label": "Jeu de Données:",
+    "metric_label": "Métrique:",
+    "datasets": {
+      "train": "Entraînement",
+      "test": "Test",
+      "valid": "Validation"
+    },
+    "metrics": {
+      "accuracy": "Précision",
+      "precision": "Exactitude",
+      "recall": "Rappel",
+      "f1": "Score F1"
+    },
+    "models": {
+      "logreg": "Régression Logistique",
+      "rf": "Forêt Aléatoire",
+      "lstm": "LSTM"
+    },
+    "summary": "Résumé des Informations",
+    "summary_default": "Sélectionnez un modèle pour voir les informations..."
+  },
+  "errors": {
+    "empty_input": "Veuillez entrer du texte à analyser.",
+    "analysis_error": "Erreur lors de l'analyse du texte. Veuillez réessayer.",
+    "network_error": "Erreur réseau. Veuillez vérifier votre connexion.",
+    "server_error": "Erreur serveur. Veuillez réessayer plus tard."
+  },
+  "accessibility": {
+    "analysis_completed": "Analyse terminée pour: \"{text}\"",
+    "skip_to_content": "Aller au contenu",
+    "main_content": "Contenu principal"
+  },
+  "languages": {
+    "en": "English",
+    "es": "Español",
+    "fr": "Français",
+    "de": "Deutsch",
+    "pt": "Português",
+    "it": "Italiano",
+    "ru": "Русский",
+    "ja": "日本語",
+    "ko": "한국어",
+    "zh": "中文",
+    "ar": "العربية",
+    "hi": "हिन्दी"
+  }
+}
