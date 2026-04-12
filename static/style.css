@@ -142,6 +142,8 @@ textarea:focus-visible {
   border-bottom: 1px solid rgba(0,0,0,0.08);
   z-index: 1000;
   transition: background var(--transition), border-color var(--transition);
+  /* needed so absolute mobile-menu positions relative to navbar */
+  overflow: visible;
 }
 body.dark .navbar {
   background: rgba(17,24,39,0.95);
@@ -299,7 +301,8 @@ body.dark .navbar {
   width: 24px; height: 2px;
   background: var(--text-primary);
   border-radius: 2px;
-  transition: transform var(--transition), opacity var(--transition);
+  transition: transform 0.3s ease, opacity 0.3s ease, background var(--transition);
+  transform-origin: center;
 }
 
 /* Mobile dropdown */
@@ -1323,50 +1326,121 @@ body.dark .footer {
 @media (max-width: 768px) {
   :root { --navbar-h: 60px; }
 
+  /* ── Navbar ── */
   .nav-center { display: none; }
+  .nav-right { gap: 0.5rem; }
   .nav-right .btn-secondary { display: none; }
   .nav-right .user-menu { display: none !important; }
   .mobile-menu-btn { display: flex; }
 
-  .container { padding-top: calc(var(--navbar-h) + 1.5rem); padding-left: 1rem; padding-right: 1rem; }
+  /* Hamburger spans — visible in both themes */
+  .mobile-menu-btn span { background: var(--text-primary); }
 
+  /* Mobile dropdown full-width */
+  .mobile-menu {
+    position: absolute;
+    top: var(--navbar-h);
+    left: 0; right: 0;
+    z-index: 999;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1),
+                opacity 0.3s ease;
+    opacity: 0;
+    display: block !important; /* override JS show/hide */
+    border-top: none;
+    padding: 0;
+  }
+  .mobile-menu.show {
+    max-height: 400px;
+    opacity: 1;
+    border-top: 1px solid var(--border);
+    padding: 0.75rem 1rem 1.25rem;
+  }
+  body.dark .mobile-menu { background: rgba(17,24,39,0.98); }
+
+  .mobile-nav-links { gap: 0.15rem; }
+  .mobile-nav-link {
+    padding: 0.7rem 0.85rem;
+    font-size: 0.95rem;
+    border-radius: var(--radius-sm);
+  }
+
+  /* ── Layout ── */
+  .container {
+    padding-top: calc(var(--navbar-h) + 1.5rem);
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* ── Hero ── */
+  .hero-header { margin-bottom: 1.5rem; }
   .hero-title { font-size: clamp(2rem, 10vw, 3rem); }
   .hero-subtitle { font-size: 1rem; padding: 0 0.5rem; }
 
+  /* ── Cards ── */
   .main-card,
   .history-card,
-  .dashboard-card { padding: 1.25rem; }
+  .dashboard-card { padding: 1.25rem; border-radius: var(--radius); }
 
-  .steps-grid { grid-template-columns: 1fr; gap: 1rem; }
+  /* ── Sample buttons ── */
+  .sample-buttons { flex-direction: column; }
+  .sample-btn { width: 100%; text-align: left; border-radius: var(--radius-sm); }
 
+  /* ── Steps ── */
+  .steps-grid { grid-template-columns: 1fr; gap: 0.85rem; }
+
+  /* ── Result ── */
   .result-actions { flex-direction: column; }
+  .prediction-result { flex-direction: column; }
+  .result-icon { width: 36px; height: 36px; }
 
-  .footer-content { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
-  .footer-links { grid-template-columns: repeat(3, 1fr); }
-  .footer-social { justify-content: center; }
-  .footer-bottom { flex-direction: column; text-align: center; }
-
+  /* ── Dashboard ── */
   .dashboard-filters { flex-direction: column; }
-  .filter-group select { min-width: 100%; }
-  .filter-row { flex-direction: column; }
-  .segmented { width: 100%; justify-content: stretch; }
-  .seg-btn { flex: 1; }
+  .filter-row { flex-direction: column; gap: 0.85rem; }
+  .segmented { width: 100%; }
+  .seg-btn { flex: 1; font-size: 0.78rem; padding: 0.35rem 0.5rem; }
+  .pill-group { gap: 0.35rem; }
+  .pill { font-size: 0.78rem; padding: 0.35rem 0.75rem; }
+  .stat-cards { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+  .chart-box { height: 200px; }
 
-  .toast { left: 1rem; right: 1rem; max-width: none; }
+  /* ── Footer ── */
+  .footer-content { grid-template-columns: 1fr; gap: 1.5rem; text-align: center; }
+  .footer-links { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .footer-social { justify-content: center; }
+  .footer-bottom { flex-direction: column; gap: 0.75rem; text-align: center; }
+
+  /* ── Toast ── */
+  .toast { left: 1rem; right: 1rem; max-width: none; bottom: 1rem; }
+
+  /* ── Auth modal ── */
+  .modal { margin: 0.75rem; padding: 1.5rem 1.25rem; }
 }
 
 /* ==============================
    RESPONSIVE — SMALL MOBILE (≤ 480px)
    ============================== */
 @media (max-width: 480px) {
+  :root { --navbar-h: 56px; }
+
+  .logo-text { font-size: 1rem; }
+
   .hero-title { font-size: clamp(1.75rem, 12vw, 2.5rem); }
+  .hero-subtitle { font-size: 0.9rem; }
 
-  .sample-buttons { flex-direction: column; }
-  .sample-btn { width: 100%; text-align: left; }
+  .main-card { padding: 1rem; }
 
-  .footer-links { grid-template-columns: 1fr; gap: 1.5rem; }
+  .btn-primary { font-size: 0.95rem; padding: 0.85rem 1rem; }
 
-  .btn-primary { font-size: 1rem; padding: 0.85rem 1rem; }
+  .footer-links { grid-template-columns: 1fr; gap: 1.25rem; }
+  .footer-title { font-size: 0.75rem; }
+
+  .stat-cards { grid-template-columns: 1fr 1fr; }
+  .stat-card-value { font-size: 1.4rem; }
+
+  /* Segmented controls scroll horizontally on tiny screens */
+  .segmented { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 }
 
 /* ==============================

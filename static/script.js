@@ -506,11 +506,13 @@
     el.mobileMenu.classList.add('show');
     el.mobileMenu.setAttribute('aria-hidden', 'false');
     el.mobileMenuBtn.setAttribute('aria-expanded', 'true');
+    // Animate hamburger → X
     const spans = el.mobileMenuBtn.querySelectorAll('span');
     if (spans.length >= 3) {
-      spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+      spans[0].style.transform = 'rotate(45deg) translate(5px, 6px)';
       spans[1].style.opacity = '0';
-      spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+      spans[1].style.transform = 'scaleX(0)';
+      spans[2].style.transform = 'rotate(-45deg) translate(5px, -6px)';
     }
   }
 
@@ -519,10 +521,12 @@
     el.mobileMenu.classList.remove('show');
     el.mobileMenu.setAttribute('aria-hidden', 'true');
     el.mobileMenuBtn.setAttribute('aria-expanded', 'false');
+    // Animate X → hamburger
     const spans = el.mobileMenuBtn.querySelectorAll('span');
     if (spans.length >= 3) {
       spans[0].style.transform = 'none';
       spans[1].style.opacity = '1';
+      spans[1].style.transform = 'none';
       spans[2].style.transform = 'none';
     }
   }
