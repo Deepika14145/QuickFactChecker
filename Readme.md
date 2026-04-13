@@ -5,7 +5,7 @@
 </h1>
 
 ## 🚀 Live Demo
-**Try it now 🔗:** [https://quickfactchecker.onrender.com/](https://quickfactchecker.onrender.com/)
+**Try it now 🔗:** [Go Live](https://quickfactchecker01.onrender.com/)
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
