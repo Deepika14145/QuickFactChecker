@@ -267,7 +267,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) and follow our [Code of Conduct](
 
 ## 📦 Deployment
 
-The application is deployed on **Render** ☁️ and accessible at: [https://quickfactchecker.onrender.com/](https://quickfactchecker.onrender.com/)
+The application is deployed on **Render** ☁️ and accessible at: [Go Live](https://quickfactchecker01.onrender.com/)
 
 ### Deployment Features:
 - ✅ **Free hosting** on Render 💸
