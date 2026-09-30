@@ -4,24 +4,6 @@
    <img src = "QuickFactDetector.png" alt = "Logo Banner" width = "100%">
 </h1>
 
-
-<!--Line-->
-<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="900">
-<div>
-  <h2 align="center"><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Red%20Heart.png" width="35" height="35"> Our Contributors</h2>
-  <div align="center">
-    <h3>Thank you for contributing to our repository</h3
-
-
-<p align="center">
-      <a href="https://github.com/Deepika14145/QuickFactChecker/graphs/contributors">
-        <img src="https://api.vaunt.dev/v1/github/entities/Deepika14145/repositories/QuickFactChecker/contributors?format=svg&limit=54" width="700" height="250" />
-      </a>
-    </p>
-<a href="https://github.com/Deepika14145/QuickFactChecker/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Deepika14145/QuickFactChecker&max=300" />
-</a>
-
 ## 🚀 Live Demo
 **Try it now 🔗:** [Go Live](https://quickfactchecker01.onrender.com/)
 
@@ -326,6 +308,23 @@ Your contributions—whether it’s code, design, testing, or documentation—ar
   <img src="https://contrib.rocks/image?repo=Deepika14145/QuickFactChecker" />
 </a>
 
+
+<!--Line-->
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="900">
+<div>
+  <h2 align="center"><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Red%20Heart.png" width="35" height="35"> Our Contributors</h2>
+  <div align="center">
+    <h3>Thank you for contributing to our repository</h3
+
+
+<p align="center">
+      <a href="https://github.com/Deepika14145/QuickFactChecker/graphs/contributors">
+        <img src="https://api.vaunt.dev/v1/github/entities/Deepika14145/repositories/QuickFactChecker/contributors?format=svg&limit=54" width="700" height="250" />
+      </a>
+    </p>
+<a href="https://github.com/Deepika14145/QuickFactChecker/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Deepika14145/QuickFactChecker&max=300" />
+</a>
 
 See full list of contribution from contributor [Contributor Graph](https://github.com/Deepika14145/QuickFactChecker/graphs/contributors)
 
